@@ -9,10 +9,10 @@ Subject: [PATCH] (UI) "unofficial client user" peer type icon
  2 files changed, 4 insertions(+)
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index dbe251ddd5..f801212715 100644
+index f109f2659a..c82364baa1 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
-@@ -150,6 +150,8 @@ std::optional<style::icon> ChatTypeIcon(HistoryItem *item) {
+@@ -152,6 +152,8 @@ std::optional<style::icon> ChatTypeIcon(HistoryItem *item) {
  				return st::msgNameDeletedIcon;
  			} else if (user->isBot() && !user->isSupport() && !user->isRepliesChat()) {
  				return st::msgNameBotIcon;
