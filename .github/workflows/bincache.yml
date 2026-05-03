@@ -182,7 +182,7 @@ jobs:
           set -exuo pipefail
           echo NIX_PATH=nixpkgs=$(nix-shell -I nixpkgs=channel:nixos-unstable -E 'with import <nixpkgs> {}; mkShellNoCC { packages = [npins]; }' --run 'npins get-path nixpkgs') >> $GITHUB_ENV
 
-      - name: Fetch everything from caches
+      - name: Fetch dependencies from caches
         run: |
           set -exuo pipefail
           nix-build -A packages.default -j0 --keep-going || true
@@ -193,6 +193,11 @@ jobs:
           set -exuo pipefail
           nix-build -E 'with import <nixpkgs> {}; closureInfo { rootPaths = [ (import ./. {}).packages.default ]; }'
 
+      - name: Filter out substitutable paths
+        run: |
+          set -exuo pipefail
+          comm -13 paths-from-nixos-cache.txt result/store-paths >built-paths
+
       - name: Convert private key
         env:
           NIX_BINARY_CACHE_KEY: ${{ secrets.NIX_BINARY_CACHE_KEY }}
@@ -201,10 +206,6 @@ jobs:
           echo "$NIX_BINARY_CACHE_KEY" > bincache-key.priv
           nix --extra-experimental-features nix-command key convert-secret-to-public < bincache-key.priv > bincache-key.pub
 
-      - name: Collect built paths
-        run: |
-          set -exuo pipefail
-          comm -13 paths-from-nixos-cache.txt result/store-paths >built-paths
 
       - name: Create local binary cache
         run: |
