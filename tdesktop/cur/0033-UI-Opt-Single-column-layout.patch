@@ -5,12 +5,12 @@ Subject: [PATCH] (UI)(Opt) Single-column layout
 
 ---
  Telegram/CMakeLists.txt                            |  2 ++
- Telegram/SourceFiles/mainwidget.cpp                |  3 ++-
- Telegram/SourceFiles/window/window_adaptive.cpp    |  3 ++-
+ Telegram/SourceFiles/mainwidget.cpp                |  4 +++-
+ Telegram/SourceFiles/window/window_adaptive.cpp    |  1 +
  .../window/window_session_controller.cpp           |  2 ++
  .../yukigram/settings/force_mobile_layout.cpp      | 14 ++++++++++++++
  .../yukigram/settings/force_mobile_layout.h        |  5 +++++
- 6 files changed, 27 insertions(+), 2 deletions(-)
+ 6 files changed, 27 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/force_mobile_layout.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/force_mobile_layout.h
 
@@ -28,7 +28,7 @@ index ec3425f4e6..6048ecf83e 100644
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
 diff --git a/Telegram/SourceFiles/mainwidget.cpp b/Telegram/SourceFiles/mainwidget.cpp
-index beac8028dd..3928beb9e2 100644
+index beac8028dd..829760c61a 100644
 --- a/Telegram/SourceFiles/mainwidget.cpp
 +++ b/Telegram/SourceFiles/mainwidget.cpp
 @@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -39,7 +39,15 @@ index beac8028dd..3928beb9e2 100644
  #include "window/window_connecting_widget.h"
  #include "window/window_top_bar_wrap.h"
  #include "window/notifications_manager.h"
-@@ -2866,7 +2867,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
+@@ -335,6 +336,7 @@ MainWidget::MainWidget(
+ 		});
+ 	};
+ 	rpl::merge(
++		Yukigram::Settings::ForceMobileLayout->changes() | rpl::to_empty,
+ 		Core::App().settings().dialogsWithChatWidthRatioChanges(
+ 		) | filter(true) | rpl::to_empty,
+ 		Core::App().settings().dialogsNoChatWidthRatioChanges(
+@@ -2866,7 +2868,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
  
  	// Check if we are in a single-column layout in a wide enough window
  	// for the normal layout. If so, switch to the normal layout.
@@ -49,7 +57,7 @@ index beac8028dd..3928beb9e2 100644
  		//if (session().settings().tabbedSelectorSectionEnabled()
  		//	&& chatWidth >= _history->minimalWidthForTabbedSelectorSection()) {
 diff --git a/Telegram/SourceFiles/window/window_adaptive.cpp b/Telegram/SourceFiles/window/window_adaptive.cpp
-index 784164db99..6586692775 100644
+index 784164db99..198efb8f88 100644
 --- a/Telegram/SourceFiles/window/window_adaptive.cpp
 +++ b/Telegram/SourceFiles/window/window_adaptive.cpp
 @@ -8,6 +8,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -60,15 +68,6 @@ index 784164db99..6586692775 100644
  #include "data/data_media_types.h"
  #include "data/data_session.h"
  #include "core/application.h"
-@@ -18,7 +19,7 @@ namespace Window {
- Adaptive::Adaptive() = default;
- 
- void Adaptive::setWindowLayout(WindowLayout value) {
--	_layout = value;
-+	_layout = (Yukigram::Settings::ForceMobileLayout->current() ? WindowLayout::OneColumn : value);
- }
- 
- void Adaptive::setChatLayout(ChatLayout value) {
 diff --git a/Telegram/SourceFiles/window/window_session_controller.cpp b/Telegram/SourceFiles/window/window_session_controller.cpp
 index 9f1fa45258..897ed90b28 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.cpp
