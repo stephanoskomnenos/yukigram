@@ -3,15 +3,14 @@
     "nixpak": {
       "type": "Git",
       "repository": {
-        "type": "Forgejo",
-        "server": "https://codeberg.org/",
+        "type": "GitHub",
         "owner": "sylfn",
         "repo": "nixpak"
       },
       "branch": "local",
       "submodules": false,
       "revision": "279e466362550891de667d14be983f73c97343ea",
-      "url": "https://codeberg.org/sylfn/nixpak/archive/279e466362550891de667d14be983f73c97343ea.tar.gz",
+      "url": "https://github.com/sylfn/nixpak/archive/279e466362550891de667d14be983f73c97343ea.tar.gz",
       "hash": "sha256-qDowU0QgUZBNRlflxzflrriqyvd2d6kNDShLcQ30Q2E="
     },
     "nixpkgs": {
