@@ -6,6 +6,9 @@ on:
       - "!v*-*"
   workflow_dispatch:
     inputs:
+      override_github_pages:
+        description: 'Override Pages artifact with this run (dangerous!)'
+        type: boolean
       short_run:
         description: 'Do a short run instead of normal one (10 minutes)'
         type: boolean
@@ -252,7 +255,7 @@ jobs:
           path: out
 
   website:
-    if: github.event_name != 'workflow_dispatch'
+    if: github.event_name != 'workflow_dispatch' || inputs.override_github_pages
     name: Website for hosting the repositories
     needs: [binary, flatpak, nixos]
     runs-on: ubuntu-latest
