@@ -63,7 +63,7 @@ index c7044ad8d1..5b40c8a346 100644
  	} else if (_sendAs) {
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp b/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp
 new file mode 100644
-index 0000000000..753c989745
+index 0000000000..b27a901e41
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp
 @@ -0,0 +1,14 @@
@@ -73,9 +73,9 @@ index 0000000000..753c989745
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *HideSendAs = Yukigram::Options::make(kOptionHideSendAs, {
-+    .name = "Hide Send As button",
-+    .keywords = { u"yukigram"_q, u"send"_q, u"channels"_q },
-+    .category = "compose",
++	.name = "Hide Send As button",
++	.keywords = { u"yukigram"_q, u"send"_q, u"channels"_q },
++	.category = "compose",
 +});
 +
 +const char kOptionHideSendAs[] = "hide-send-as";

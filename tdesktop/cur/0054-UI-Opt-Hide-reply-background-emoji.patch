@@ -48,7 +48,7 @@ index 02d79e12a3..fce66ff5ad 100644
  			colorCollectible,
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_reply_background_emoji.cpp b/Telegram/SourceFiles/yukigram/settings/hide_reply_background_emoji.cpp
 new file mode 100644
-index 0000000000..717d73a9ef
+index 0000000000..282b76202d
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/hide_reply_background_emoji.cpp
 @@ -0,0 +1,14 @@
@@ -58,9 +58,9 @@ index 0000000000..717d73a9ef
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *HideReplyBackgroundEmoji = Yukigram::Options::make(kOptionHideReplyBackgroundEmoji, {
-+    .name = "Hide reply background emoji",
-+    .keywords = { u"yukigram"_q, u"reply"_q, u"emoji"_q, u"background"_q },
-+    .category = "history",
++	.name = "Hide reply background emoji",
++	.keywords = { u"yukigram"_q, u"reply"_q, u"emoji"_q, u"background"_q },
++	.category = "history",
 +});
 +
 +const char kOptionHideReplyBackgroundEmoji[] = "hide-reply-background-emoji";

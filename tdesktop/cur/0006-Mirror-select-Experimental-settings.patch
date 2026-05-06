@@ -23,7 +23,7 @@ index 5123820b45..7e9e20bb16 100644
      config.h
 diff --git a/Telegram/SourceFiles/yukigram/settings/mirrored.cpp b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 new file mode 100644
-index 0000000000..0dec88996c
+index 0000000000..6f9120ef60
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 @@ -0,0 +1,61 @@
@@ -38,53 +38,53 @@ index 0000000000..0dec88996c
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *TabbedPanelShowOnClick = Yukigram::Options::make(ChatHelpers::kOptionTabbedPanelShowOnClick, {
-+    .name = "Click to show stickers/emoji panel",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"tabbed"_q, u"panel"_q, u"stickers"_q, u"gifs"_q, u"emoji"_q, u"hover"_q },
-+    .category = "compose",
-+    .mirrorExperimental = true,
++	.name = "Click to show stickers/emoji panel",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"tabbed"_q, u"panel"_q, u"stickers"_q, u"gifs"_q, u"emoji"_q, u"hover"_q },
++	.category = "compose",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *UnlimitedRecentStickers = Yukigram::Options::make(ChatHelpers::kOptionUnlimitedRecentStickers, {
-+    .name = "Unlimited recent stickers",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"stickers"_q, u"limit"_q, u"unlimited"_q },
-+    .category = "compose",
-+    .mirrorExperimental = true,
++	.name = "Unlimited recent stickers",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"stickers"_q, u"limit"_q, u"unlimited"_q },
++	.category = "compose",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *ForumHideChatsList = Yukigram::Options::make(Dialogs::kOptionForumHideChatsList, {
-+    .name = "Hide narrow column chat list in forums",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"forums"_q, u"chat list"_q, u"column"_q },
-+    .category = "dialogs",
-+    .mirrorExperimental = true,
++	.name = "Hide narrow column chat list in forums",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"forums"_q, u"chat list"_q, u"column"_q },
++	.category = "dialogs",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *ShowPeerIdBelowAbout = Yukigram::Options::make(Info::Profile::kOptionShowPeerIdBelowAbout, {
-+    .name = "Show peer ID",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"peer"_q, u"id"_q },
-+    .category = "interface",
-+    .mirrorExperimental = true,
++	.name = "Show peer ID",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"peer"_q, u"id"_q },
++	.category = "interface",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *ShowChannelJoinedBelowAbout = Yukigram::Options::make(Info::Profile::kOptionShowChannelJoinedBelowAbout, {
-+    .name = "Show channel join date",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"channel"_q, u"join"_q, u"date"_q },
-+    .category = "interface",
-+    .mirrorExperimental = true,
++	.name = "Show channel join date",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"channel"_q, u"join"_q, u"date"_q },
++	.category = "interface",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *ViewProfileInChatsListContextMenu = Yukigram::Options::make(Window::kOptionViewProfileInChatsListContextMenu, {
-+    .name = "View profile button in context menu",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"profile"_q, u"chat list"_q, u"context"_q, u"menu"_q },
-+    .category = "dialogs",
-+    .mirrorExperimental = true,
++	.name = "View profile button in context menu",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"profile"_q, u"chat list"_q, u"context"_q, u"menu"_q },
++	.category = "dialogs",
++	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *UseSmallMsgBubbleRadius = Yukigram::Options::make(Ui::kOptionUseSmallMsgBubbleRadius, {
-+    .name = "Use small message bubble radius",
-+    .keywords = { u"yukigram"_q, u"experimental"_q, u"round"_q, u"radius"_q, u"corner"_q, u"bubble"_q },
-+    .category = "history",
-+    .restartRequired = true,
-+    .mirrorExperimental = true,
++	.name = "Use small message bubble radius",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"round"_q, u"radius"_q, u"corner"_q, u"bubble"_q },
++	.category = "history",
++	.restartRequired = true,
++	.mirrorExperimental = true,
 +});
 +
 +}
