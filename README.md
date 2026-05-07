@@ -79,6 +79,7 @@ use `1.` as list marker to make diffs shorter in case of drops or reorders
 1. (UI, optional) Show inferred peer DC
 1. (UI, optional) Hide Star reaction button when no stars are sent
 1. (UI, optional) Hide Star reaction count completely
+1. (UI, optional) Hide message bubble tail
 
 Some patches originate from [64Gram], [Forkgram] and [Kotatogram].
 
