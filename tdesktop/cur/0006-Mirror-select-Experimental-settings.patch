@@ -5,8 +5,8 @@ Subject: [PATCH] Mirror select Experimental settings
 
 ---
  Telegram/CMakeLists.txt                       |  1 +
- .../yukigram/settings/mirrored.cpp            | 61 +++++++++++++++++++
- 2 files changed, 62 insertions(+)
+ .../yukigram/settings/mirrored.cpp            | 69 +++++++++++++++++++
+ 2 files changed, 70 insertions(+)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
@@ -23,15 +23,16 @@ index 5123820b45..7e9e20bb16 100644
      config.h
 diff --git a/Telegram/SourceFiles/yukigram/settings/mirrored.cpp b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 new file mode 100644
-index 0000000000..6f9120ef60
+index 0000000000..1270c7f933
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,69 @@
 +#include "yukigram/options.h"
 +#include "chat_helpers/tabbed_panel.h"
 +#include "chat_helpers/stickers_list_widget.h"
 +#include "dialogs/dialogs_widget.h"
 +#include "info/profile/info_profile_actions.h"
++#include "mainwidget.h"
 +#include "window/window_peer_menu.h"
 +#include "ui/chat/chat_style_radius.h"
 +
@@ -68,6 +69,13 @@ index 0000000000..6f9120ef60
 +rpl::variable<bool> *ShowChannelJoinedBelowAbout = Yukigram::Options::make(Info::Profile::kOptionShowChannelJoinedBelowAbout, {
 +	.name = "Show channel join date",
 +	.keywords = { u"yukigram"_q, u"experimental"_q, u"channel"_q, u"join"_q, u"date"_q },
++	.category = "interface",
++	.mirrorExperimental = true,
++});
++
++rpl::variable<bool> *ForceComposeSearchOneColumn = Yukigram::Options::make(kForceComposeSearchOneColumn, {
++	.name = "Embedded search in single-column",
++	.keywords = { u"yukigram"_q, u"experimental"_q, u"embedded"_q, u"search"_q, u"chat"_q, u"column"_q, u"layout"_q, u"mobile"_q, u"phone"_q },
 +	.category = "interface",
 +	.mirrorExperimental = true,
 +});
