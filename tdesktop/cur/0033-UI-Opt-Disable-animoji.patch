@@ -13,10 +13,10 @@ Subject: [PATCH] (UI)(Opt) Disable animoji
  create mode 100644 Telegram/SourceFiles/yukigram/settings/disable_animoji.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 6326c8d908..fea3ee4a11 100644
+index cc8e26eb69..0ca12b6c77 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1895,6 +1895,8 @@ PRIVATE
+@@ -1907,6 +1907,8 @@ PRIVATE
      yukigram/options_database.h
      yukigram/options_runtime.h
      yukigram/options.h
@@ -26,18 +26,18 @@ index 6326c8d908..fea3ee4a11 100644
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
 diff --git a/Telegram/SourceFiles/history/view/history_view_element.cpp b/Telegram/SourceFiles/history/view/history_view_element.cpp
-index 1b595c77a8..e22dea7cf1 100644
+index fc1edbf1bd..304f7d8fda 100644
 --- a/Telegram/SourceFiles/history/view/history_view_element.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_element.cpp
-@@ -39,6 +39,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
- #include "chat_helpers/stickers_emoji_pack.h"
+@@ -40,6 +40,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "payments/payments_reaction_process.h" // TryAddingPaidReaction.
+ #include "window/section_widget.h"
  #include "window/window_session_controller.h"
 +#include "yukigram/settings/disable_animoji.h"
  #include "ui/chat/chat_style.h"
  #include "ui/effects/glare.h"
  #include "ui/effects/path_shift_gradient.h"
-@@ -1544,7 +1545,7 @@ void Element::refreshMedia(Element *replacing) {
+@@ -1542,7 +1543,7 @@ void Element::refreshMedia(Element *replacing) {
  		const auto emoji = isolatedEmoji();
  		const auto emojiStickers = &history()->session().emojiStickersPack();
  		const auto skipPremiumEffect = false;

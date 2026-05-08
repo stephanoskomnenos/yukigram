@@ -17,10 +17,10 @@ Original author: c0re100 <corehusky@gmail.com>
  create mode 100644 Telegram/SourceFiles/yukigram/settings/show_message_id.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 76e0f8cb8d..a4e3741723 100644
+index 27b21cce82..82e272aa78 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1908,6 +1908,8 @@ PRIVATE
+@@ -1920,6 +1920,8 @@ PRIVATE
      yukigram/settings/mpris_call_hangup.h
      yukigram/settings/right_action_comments.cpp
      yukigram/settings/right_action_comments.h
@@ -74,10 +74,10 @@ index ef3d261c86..81e2f918b2 100644
  		int64 tonStake = 0;
  		int stars = 0;
 diff --git a/Telegram/SourceFiles/history/view/history_view_element.cpp b/Telegram/SourceFiles/history/view/history_view_element.cpp
-index 26f63b109f..284bf79f2c 100644
+index 71a0108e0c..3118f84a0e 100644
 --- a/Telegram/SourceFiles/history/view/history_view_element.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_element.cpp
-@@ -700,6 +700,9 @@ QString DateTooltipText(not_null<Element*> view) {
+@@ -698,6 +698,9 @@ QString DateTooltipText(not_null<Element*> view) {
  	if (const auto stars = item->out() ? item->starsPaid() : 0) {
  		dateText += '\n' + tr::lng_you_paid_stars(tr::now, lt_count, stars);
  	}

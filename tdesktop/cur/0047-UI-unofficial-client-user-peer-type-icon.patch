@@ -9,7 +9,7 @@ Subject: [PATCH] (UI) "unofficial client user" peer type icon
  2 files changed, 4 insertions(+)
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index f109f2659a..c82364baa1 100644
+index 8b48f0c0cd..25501f5945 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -152,6 +152,8 @@ std::optional<style::icon> ChatTypeIcon(HistoryItem *item) {
@@ -22,10 +22,10 @@ index f109f2659a..c82364baa1 100644
  		}
  	}
 diff --git a/Telegram/SourceFiles/ui/chat/chat.style b/Telegram/SourceFiles/ui/chat/chat.style
-index a8d7910fbb..cf6e0ce8bf 100644
+index 5946685f5e..a49d6289d2 100644
 --- a/Telegram/SourceFiles/ui/chat/chat.style
 +++ b/Telegram/SourceFiles/ui/chat/chat.style
-@@ -770,6 +770,8 @@ msgNameDeletedIcon: icon {{ "dialogs/dialogs_sending", attentionButtonFg, point(
+@@ -765,6 +765,8 @@ msgNameDeletedIcon: icon {{ "dialogs/dialogs_sending", attentionButtonFg, point(
  msgNameDeletedIconSelected: icon {{ "dialogs/dialogs_sending", attentionButtonFgOver, point(4px, 4px) }};
  msgNameForumIcon: icon {{ "dialogs/dialogs_forum", historyPeer4NameFg, point(1px, 4px) }};
  msgNameForumIconSelected: icon {{ "dialogs/dialogs_forum", historyPeer4NameFgSelected, point(1px, 4px) }};

@@ -27,10 +27,10 @@ index 471ad10c1a..77fd8d23c6 100644
  	if (user) {
  		const auto isSelf = user->isSelf();
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 687920f1c3..b331604e38 100644
+index f0ff050ef8..829a5398ce 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -2722,6 +2722,17 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+@@ -2724,6 +2724,17 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
  				}
  			}
  		}
@@ -49,7 +49,7 @@ index 687920f1c3..b331604e38 100644
  	const auto addPhotoActions = [&](not_null<PhotoData*> photo, HistoryItem *item) {
  		const auto media = photo->activeMediaView();
 diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
-index 3bc816d385..b2218bb316 100644
+index dbaed5f6bc..1d00a329a2 100644
 --- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
 @@ -446,6 +446,27 @@ void AddForwardAction(
@@ -80,7 +80,7 @@ index 3bc816d385..b2218bb316 100644
  bool AddSendNowSelectedAction(
  		not_null<Ui::PopupMenu*> menu,
  		const ContextMenuRequest &request,
-@@ -1061,6 +1082,7 @@ void AddMessageActions(
+@@ -1062,6 +1083,7 @@ void AddMessageActions(
  		not_null<ListWidget*> list) {
  	AddPostLinkAction(menu, request);
  	AddForwardAction(menu, request, list);
@@ -89,7 +89,7 @@ index 3bc816d385..b2218bb316 100644
  	AddDeleteAction(menu, request, list);
  	AddDownloadFilesAction(menu, request, list);
 diff --git a/Telegram/SourceFiles/window/window_session_controller.h b/Telegram/SourceFiles/window/window_session_controller.h
-index bead50cbe1..9b07770e4a 100644
+index 9ff7406eb2..2889697f8a 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.h
 +++ b/Telegram/SourceFiles/window/window_session_controller.h
 @@ -10,6 +10,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -101,7 +101,7 @@ index bead50cbe1..9b07770e4a 100644
  #include "data/data_report.h"
  #include "dialogs/dialogs_key.h"
  #include "mtproto/sender.h"
-@@ -305,6 +307,15 @@ public:
+@@ -308,6 +310,15 @@ public:
  		Dialogs::Key inChat,
  		PeerData *searchFrom = nullptr);
  

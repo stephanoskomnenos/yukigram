@@ -8,7 +8,7 @@ Subject: [PATCH] (Feature) Open group from peer info
  1 file changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp b/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
-index 26693dcead..9b12ceea27 100644
+index 8a4a2ca931..43a5df9c24 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
 @@ -745,7 +745,12 @@ void TopBar::setupActions(not_null<Window::SessionController*> controller) {

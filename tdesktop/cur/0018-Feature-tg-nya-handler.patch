@@ -8,10 +8,10 @@ Subject: [PATCH] (Feature) tg://nya handler
  1 file changed, 12 insertions(+)
 
 diff --git a/Telegram/SourceFiles/core/local_url_handlers.cpp b/Telegram/SourceFiles/core/local_url_handlers.cpp
-index b3ea2eedb6..9c5e311d25 100644
+index 1bfe866421..6dc9dfcf20 100644
 --- a/Telegram/SourceFiles/core/local_url_handlers.cpp
 +++ b/Telegram/SourceFiles/core/local_url_handlers.cpp
-@@ -1634,6 +1634,14 @@ bool ResolveOAuth(
+@@ -1672,6 +1672,14 @@ bool ResolveOAuth(
  	return true;
  }
  
@@ -26,7 +26,7 @@ index b3ea2eedb6..9c5e311d25 100644
  } // namespace
  
  bool TryRouterForLocalUrl(
-@@ -1644,6 +1652,10 @@ bool TryRouterForLocalUrl(
+@@ -1682,6 +1690,10 @@ bool TryRouterForLocalUrl(
  
  const std::vector<LocalUrlHandler> &LocalUrlHandlers() {
  	static auto Result = std::vector<LocalUrlHandler>{

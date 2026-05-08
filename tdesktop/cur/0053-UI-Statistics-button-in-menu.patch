@@ -8,10 +8,10 @@ Subject: [PATCH] (UI) Statistics button in menu
  1 file changed, 1 insertion(+)
 
 diff --git a/Telegram/SourceFiles/window/window_peer_menu.cpp b/Telegram/SourceFiles/window/window_peer_menu.cpp
-index 0478833e40..4e65246021 100644
+index f823565a74..917f9bbf4b 100644
 --- a/Telegram/SourceFiles/window/window_peer_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_peer_menu.cpp
-@@ -1762,6 +1762,7 @@ void Filler::fillHistoryActions() {
+@@ -1761,6 +1761,7 @@ void Filler::fillHistoryActions() {
  	addInfo();
  	addViewAsTopics();
  	addManageChat();
