@@ -6,7 +6,7 @@
 (telegram-desktop.override {
   pname = "yukigram";
 }).overrideAttrs (final: prev: {
-  unwrapped = telegram-desktop.unwrapped.overrideAttrs (final: prev: {
+  unwrapped = prev.unwrapped.overrideAttrs (final: prev: {
     name = "yukigram-unwrapped";
     version = "6.8.1";
     src = prev.src.overrideAttrs {
