@@ -70,13 +70,10 @@ jobs:
           popd
 
       - name: Apply patches
-        env:
-          GIT_COMMITTER_NAME: "Automated builder commit"
-          GIT_COMMITTER_EMAIL: "<noreply@example.com>"
         run: |
           set -exuo pipefail
           pushd yukigram-worktree
-          git am ../yukigram/tdesktop
+          cat ../yukigram/tdesktop/cur/*.patch | patch -p1
           popd
 
       - name: Use .devel appId
