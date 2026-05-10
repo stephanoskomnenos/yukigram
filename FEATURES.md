@@ -37,7 +37,6 @@ use `1.` as list marker to make diffs shorter in case of drops or reorders
 1. (Feature) tg://openmessage and tg://user links support
 1. (Feature) Show sticker/emoji pack owner
 1. (Feature) Shortcuts for forward (Alt+F), copy (Alt+C) and copy media only (Alt+Shift+C)
-    (only works if "select recepient" is used, not "open chat with settings")
 1. (Feature) Show channel/group member join date
 1. (Feature) Clickable links in user bio
 1. (Feature) Hide "similar channels" section on channel join message by default

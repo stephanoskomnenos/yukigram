@@ -10,9 +10,9 @@ Subject: [PATCH] (Feature) Forward/Copy/Steal shortcuts
  .../history/history_inner_widget.h            |  1 +
  .../SourceFiles/history/history_widget.cpp    |  4 +--
  Telegram/SourceFiles/history/history_widget.h |  2 +-
- .../SourceFiles/window/window_peer_menu.cpp   | 17 ++++++---
+ .../SourceFiles/window/window_peer_menu.cpp   | 20 +++++++----
  .../SourceFiles/window/window_peer_menu.h     |  9 +++--
- 8 files changed, 68 insertions(+), 11 deletions(-)
+ 8 files changed, 70 insertions(+), 12 deletions(-)
 
 diff --git a/Telegram/SourceFiles/core/shortcuts.cpp b/Telegram/SourceFiles/core/shortcuts.cpp
 index 09f07e2d5b..d718b6507a 100644
@@ -159,7 +159,7 @@ index 988429865d..ba3b42af06 100644
  	void clearSelected();
  
 diff --git a/Telegram/SourceFiles/window/window_peer_menu.cpp b/Telegram/SourceFiles/window/window_peer_menu.cpp
-index e34c5f661f..f823565a74 100644
+index e34c5f661f..0d12219afd 100644
 --- a/Telegram/SourceFiles/window/window_peer_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_peer_menu.cpp
 @@ -2853,7 +2853,8 @@ base::weak_qptr<Ui::BoxContent> ShowChooseRecipientBox(
@@ -181,7 +181,18 @@ index e34c5f661f..f823565a74 100644
  		});
  		show->showBox(std::move(box));
  		auto state = State{ boxRaw, controllerRaw };
-@@ -3385,21 +3388,25 @@ base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
+@@ -3085,8 +3088,9 @@ base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
+ 	}();
+ 
+ 	{ // Chosen a single.
+-		auto chosen = [show, draft = std::move(draft)](
++		auto chosen = [show, state, draft = std::move(draft)](
+ 				not_null<Data::Thread*> thread) mutable {
++			draft.options = state->box->forwardOptionsData();
+ 			const auto peer = thread->peer();
+ 			if (peer->isSelf()
+ 				&& !draft.ids.empty()
+@@ -3385,21 +3389,25 @@ base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
  base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
  		not_null<Window::SessionNavigation*> navigation,
  		Data::ForwardDraft &&draft,
