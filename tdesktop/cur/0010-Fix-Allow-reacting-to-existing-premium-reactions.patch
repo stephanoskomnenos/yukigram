@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Sun, 10 May 2026 17:10:34 +0300
+Subject: [PATCH] (Fix) Allow reacting to existing premium reactions
+
+---
+ Telegram/SourceFiles/window/section_widget.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/window/section_widget.cpp b/Telegram/SourceFiles/window/section_widget.cpp
+index c3a46cd8da..2da83c438a 100644
+--- a/Telegram/SourceFiles/window/section_widget.cpp
++++ b/Telegram/SourceFiles/window/section_widget.cpp
+@@ -21,6 +21,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "data/data_session.h"
+ #include "data/data_cloud_themes.h"
+ #include "data/data_message_reactions.h"
++#include "data/data_message_reaction_id.h"
+ #include "data/data_peer_values.h"
+ #include "history/history.h"
+ #include "history/history_item.h"
+@@ -627,7 +628,7 @@ bool ShowReactPremiumError(
+ 		ShowReactRestrictionToast(controller);
+ 		return true;
+ 	} else if (controller->session().premium()
+-		|| ranges::contains(item->chosenReactions(), id)
++		|| ranges::contains(item->reactions() | ranges::views::transform(&Data::MessageReaction::id), id)
+ 		|| item->history()->peer->isBroadcast()) {
+ 		return false;
+ 	} else if (!id.custom()) {
+-- 
+2.53.0
+
