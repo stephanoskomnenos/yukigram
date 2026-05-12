@@ -38,7 +38,7 @@ index 22d1fe65da..7ca705b808 100644
      apiwrap.h
      config.h
 diff --git a/Telegram/SourceFiles/data/data_media_types.cpp b/Telegram/SourceFiles/data/data_media_types.cpp
-index 54a66fc16e..99e51da273 100644
+index 06b6b1a5cc..fa784559b3 100644
 --- a/Telegram/SourceFiles/data/data_media_types.cpp
 +++ b/Telegram/SourceFiles/data/data_media_types.cpp
 @@ -9,6 +9,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -49,7 +49,7 @@ index 54a66fc16e..99e51da273 100644
  #include "history/history.h"
  #include "history/history_item.h" // CreateMedia.
  #include "history/history_item_components.h"
-@@ -1031,7 +1032,7 @@ std::unique_ptr<HistoryView::Media> MediaPhoto::createView(
+@@ -1033,7 +1034,7 @@ std::unique_ptr<HistoryView::Media> MediaPhoto::createView(
  					message,
  					_chat,
  					_photo,
@@ -122,7 +122,7 @@ index df218f3915..94abf1d39a 100644
  					}
  					auto widthForDate = maxwidth - st::msgServiceMargin.left() - st::msgServiceMargin.left();
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 180bed825a..ee5223607d 100644
+index 9e6fd25f6f..4204909308 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -13,6 +13,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -133,7 +133,7 @@ index 180bed825a..ee5223607d 100644
  #include "history/view/history_view_cursor_state.h"
  #include "history/history_item_components.h"
  #include "history/history_item_helpers.h"
-@@ -5101,7 +5102,9 @@ QRect Message::countGeometry() const {
+@@ -5096,7 +5097,9 @@ QRect Message::countGeometry() const {
  	//	contentLeft += st::msgPhotoSkip - (hmaxwidth - hwidth);
  	}
  	accumulate_min(contentWidth, maxWidth());
@@ -143,7 +143,7 @@ index 180bed825a..ee5223607d 100644
  	if (mediaWidth < contentWidth) {
  		const auto textualWidth = bubbleTextualWidth();
  		if (mediaWidth < textualWidth
-@@ -5232,8 +5235,10 @@ int Message::resizeContentGetHeight(int newWidth) {
+@@ -5227,8 +5230,10 @@ int Message::resizeContentGetHeight(int newWidth) {
  		}
  	}
  	accumulate_min(contentWidth, maxWidth());
@@ -155,7 +155,7 @@ index 180bed825a..ee5223607d 100644
  	const auto textualWidth = bubbleTextualWidth();
  	if (mediaDisplayed) {
  		media->resizeGetHeight(contentWidth);
-@@ -5306,7 +5311,7 @@ int Message::resizeContentGetHeight(int newWidth) {
+@@ -5301,7 +5306,7 @@ int Message::resizeContentGetHeight(int newWidth) {
  		if (reactionsInBubble) {
  			_reactions->resizeGetHeight(textWidth);
  		}

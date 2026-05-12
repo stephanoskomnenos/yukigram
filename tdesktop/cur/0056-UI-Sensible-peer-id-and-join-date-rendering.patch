@@ -8,7 +8,7 @@ Subject: [PATCH] (UI) Sensible peer id and join date rendering
  1 file changed, 46 insertions(+), 38 deletions(-)
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index 41da53404d..667befb498 100644
+index 2f891c34e3..5696811c3f 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 @@ -213,44 +213,7 @@ base::options::toggle ShowChannelJoinedBelowAbout({

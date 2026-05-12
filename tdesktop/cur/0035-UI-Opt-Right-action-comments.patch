@@ -26,7 +26,7 @@ index 0ca12b6c77..fddafe6cd2 100644
      apiwrap.h
      config.h
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index e3707748ad..180bed825a 100644
+index ad78d8d65a..9e6fd25f6f 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -31,6 +31,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -83,7 +83,7 @@ index e3707748ad..180bed825a 100644
  	_comments->ripple = std::make_unique<Ui::RippleAnimation>(
  		st::defaultRippleAnimation,
  		std::move(mask.image),
-@@ -4571,9 +4575,10 @@ bool Message::displayRightActionComments() const {
+@@ -4566,9 +4570,10 @@ bool Message::displayRightActionComments() const {
  	return !isPinnedContext()
  		&& (context() != Context::SavedSublist)
  		&& data()->repliesAreComments()
@@ -95,7 +95,7 @@ index e3707748ad..180bed825a 100644
  }
  
  std::optional<QSize> Message::rightActionSize() const {
-@@ -5404,7 +5409,7 @@ int Message::resizeContentGetHeight(int newWidth) {
+@@ -5399,7 +5404,7 @@ int Message::resizeContentGetHeight(int newWidth) {
  			newHeight += (bottomInfoHeight - st::msgDateFont->height);
  		}
  

@@ -8,10 +8,10 @@ Subject: [PATCH] (Annoyances) Disable AI message summaries
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 957aa73dcd..e3707748ad 100644
+index bd58518620..ad78d8d65a 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
-@@ -5743,7 +5743,7 @@ const HistoryMessageEdited *Message::displayedEditBadge() const {
+@@ -5738,7 +5738,7 @@ const HistoryMessageEdited *Message::displayedEditBadge() const {
  }
  
  void Message::ensureSummarizeButton() const {
