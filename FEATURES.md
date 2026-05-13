@@ -79,6 +79,7 @@ use `1.` as list marker to make diffs shorter in case of drops or reorders
 1. (UI, optional) Use system emoji font
     (from `emoji` font as defined by fontconfig)
     instead of bundled emoji packs
+1. (UI, optional) Custom monospace font
 
 Some patches originate from [64Gram], [Forkgram] and [Kotatogram].
 
@@ -94,9 +95,6 @@ Contributions welcome!
 - Ban button for join requests
 - Client-side user muting (as in 64Gram)
 - Ability to change font size
-- Ability to change monospace font
-    (or use one from xdg-desktop-portal-gtk)
-    (probably requires submodule patching)
 - Old-style spoilers
     (solid color, as in Telegram X)
     (requires submodule patching)
