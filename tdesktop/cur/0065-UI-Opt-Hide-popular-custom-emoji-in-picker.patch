@@ -49,7 +49,7 @@ index cccfb197ef..f003a8fab6 100644
  			: setId;
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_popular_emoji_picker.cpp b/Telegram/SourceFiles/yukigram/settings/hide_popular_emoji_picker.cpp
 new file mode 100644
-index 0000000000..0144ba9a38
+index 0000000000..5623d8f3e0
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/hide_popular_emoji_picker.cpp
 @@ -0,0 +1,14 @@
@@ -61,7 +61,7 @@ index 0000000000..0144ba9a38
 +rpl::variable<bool> *HidePopularEmojiPicker = Yukigram::Options::make(kOptionHidePopularEmojiPicker, {
 +	.name = "Hide popular animoji from picker",
 +	.keywords = { u"yukigram"_q, u"emoji"_q, u"animoji"_q, u"picker"_q, u"popular"_q },
-+	.category = "compose",
++	.category = "picker",
 +});
 +
 +const char kOptionHidePopularEmojiPicker[] = "hide-popular-emoji-picker";

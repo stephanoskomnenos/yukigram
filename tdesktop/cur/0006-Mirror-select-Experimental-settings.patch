@@ -23,7 +23,7 @@ index ba6a367cef..583adabc79 100644
      config.h
 diff --git a/Telegram/SourceFiles/yukigram/settings/mirrored.cpp b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 new file mode 100644
-index 0000000000..1270c7f933
+index 0000000000..79ce35a5fb
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/mirrored.cpp
 @@ -0,0 +1,69 @@
@@ -39,16 +39,16 @@ index 0000000000..1270c7f933
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *TabbedPanelShowOnClick = Yukigram::Options::make(ChatHelpers::kOptionTabbedPanelShowOnClick, {
-+	.name = "Click to show stickers/emoji panel",
++	.name = "Click to show emoji picker",
 +	.keywords = { u"yukigram"_q, u"experimental"_q, u"tabbed"_q, u"panel"_q, u"stickers"_q, u"gifs"_q, u"emoji"_q, u"hover"_q },
-+	.category = "compose",
++	.category = "picker",
 +	.mirrorExperimental = true,
 +});
 +
 +rpl::variable<bool> *UnlimitedRecentStickers = Yukigram::Options::make(ChatHelpers::kOptionUnlimitedRecentStickers, {
 +	.name = "Unlimited recent stickers",
 +	.keywords = { u"yukigram"_q, u"experimental"_q, u"stickers"_q, u"limit"_q, u"unlimited"_q },
-+	.category = "compose",
++	.category = "picker",
 +	.mirrorExperimental = true,
 +});
 +
