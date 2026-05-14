@@ -7,11 +7,11 @@ Subject: [PATCH] Yukigram options framework
  Telegram/CMakeLists.txt                       |  4 ++
  Telegram/SourceFiles/core/launcher.cpp        |  3 +
  .../settings/settings_experimental.cpp        |  2 +
- Telegram/SourceFiles/yukigram/options.cpp     | 71 +++++++++++++++++++
+ Telegram/SourceFiles/yukigram/options.cpp     | 72 +++++++++++++++++++
  Telegram/SourceFiles/yukigram/options.h       | 26 +++++++
  .../SourceFiles/yukigram/options_database.h   | 27 +++++++
  .../SourceFiles/yukigram/options_runtime.h    | 10 +++
- 7 files changed, 143 insertions(+)
+ 7 files changed, 144 insertions(+)
  create mode 100644 Telegram/SourceFiles/yukigram/options.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/options.h
  create mode 100644 Telegram/SourceFiles/yukigram/options_database.h
@@ -82,10 +82,10 @@ index 31315bdae3..ca702f15b5 100644
  		}
 diff --git a/Telegram/SourceFiles/yukigram/options.cpp b/Telegram/SourceFiles/yukigram/options.cpp
 new file mode 100644
-index 0000000000..3feab7556d
+index 0000000000..3c852bdd1d
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/options.cpp
-@@ -0,0 +1,71 @@
+@@ -0,0 +1,72 @@
 +#include "yukigram/options.h"
 +#include "yukigram/options_database.h"
 +#include "yukigram/options_runtime.h"
@@ -98,6 +98,7 @@ index 0000000000..3feab7556d
 +	{"tweaks", "Tweaks"},
 +	{"dialogs", "Chat list"},
 +	{"history", "Message history"},
++	{"reactions", "Reactions"},
 +	{"compose", "Composing messages"},
 +	{"picker", "Stickers and Emoji picker"},
 +	{"system", "System"},

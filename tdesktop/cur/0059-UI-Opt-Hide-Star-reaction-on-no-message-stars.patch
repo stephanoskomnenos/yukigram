@@ -49,7 +49,7 @@ index 130b8eb778..3f1948e60b 100644
  			? std::move(*i)
 diff --git a/Telegram/SourceFiles/yukigram/settings/star_hide_empty.cpp b/Telegram/SourceFiles/yukigram/settings/star_hide_empty.cpp
 new file mode 100644
-index 0000000000..e213aea473
+index 0000000000..913cc46cab
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/star_hide_empty.cpp
 @@ -0,0 +1,15 @@
@@ -59,9 +59,9 @@ index 0000000000..e213aea473
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *StarHideEmpty = Yukigram::Options::make(kOptionStarHideEmpty, {
-+	.name = "Hide Star reaction on no message stars",
++	.name = "Hide empty stars count",
 +	.keywords = { u"yukigram"_q, u"star"_q, u"reaction"_q },
-+	.category = "history",
++	.category = "reactions",
 +	.restartRequired = true,
 +});
 +
