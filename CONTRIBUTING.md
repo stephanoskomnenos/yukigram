@@ -148,9 +148,10 @@ about submodule directories not being empty.
 
 Patches, except for Yukigram structure ones
 (such as "branding" or "build support"),
-should have categories in their names
-and be placed in their respective category
-if possible.
+should have categories in their names.
+Reordering patches is discouraged
+unless absolutely necessary
+as not to create a lot of empty diffs.
 
 Categorized patches that add user-facing options
 should be marked with `(Opt)`.
