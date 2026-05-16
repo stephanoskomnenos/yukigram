@@ -166,6 +166,8 @@ apk add yukigram yukigram-key
 
 #### direct .apk downloads
 
+Download `yukigram-$ARCH.apk` from releases.
+
 Not really recommended unless for quick checks,
 as automatic updates are unsupported with bare `.apk` files.
 
@@ -180,6 +182,15 @@ as automatic updates are unsupported with bare `.apk` files.
 [APKBUILD]: https://yukigram.github.io/yukigram/pmaports/yukigram/APKBUILD
 
 ### with other package manager
+
+#### from binaries
+
+Download `binary-$ARCH` from releases
+and unpack it to `/usr/local/` or `~/.local/`.
+
+Automatic updates are unsupported with this approach.
+
+#### from source
 
 Check your package manager's manual
 on how to add patches to packages
@@ -202,9 +213,14 @@ and may be used instead of a manual from-source build:
 
 ## Previous versions
 
-Versions of Yukigram up to (and including) 6.4.1.1 are deprecated
-and should no longer be used.
-They were based on 64Gram and developed in a downstream merge-based workflow.
+Versions of Yukigram up to (and including) 6.8.2.1
+published their artifacts only to GitHub Pages and Cachix.
+They may become inaccessible in the future.
+
+Versions of Yukigram up to (and including) 6.4.1.1
+are deprecated and should no longer be used.
+They were based on 64Gram
+and developed in a downstream merge-based workflow.
 
 "Enhanced settings" from 64Gram and Yukigram
 are converted to native "Experimental settings" (in Advanced).

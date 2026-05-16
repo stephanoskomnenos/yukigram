@@ -305,7 +305,7 @@ flatpak-builder --force-clean build io.github.yukigram.yml
 Make a backup of your data!
 Downgrading versions is not supported.
 
-1. Download artifact named `flatpak-x86_64` and unpack
+1. Download release asset `flatpak-x86_64` and unpack
 2. `flatpak install --user .../flatpak-x86_64/ io.github.yukigram`
 
 For development versions, use `io.github.yukigram.devel`
@@ -316,7 +316,7 @@ Do not run non-release nix builds from binary caches
 without using `customNixpakConfig`!
 Doing otherwise may leave your tdata in a corrupted state.
 
-1. Download artifact named `nixos-$arch` and unpack
+1. Download release asset `nixos-$arch` and unpack
 2. `cd .../nixos-$arch && python3 -m http.server`
 3. Add `--extra-substituters http://127.0.0.1:8000` to nix command line
     (don't forget to be a trusted user,
