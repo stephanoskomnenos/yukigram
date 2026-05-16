@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       override_github_pages:
-        description: 'Override Pages artifact with this run (dangerous!)'
+        description: 'Override Pages artifact (dangerous!)'
         type: boolean
       short_run:
-        description: 'Do a short run instead of normal one (10 minutes)'
+        description: 'Short run (10 minutes limit)'
         type: boolean
       push_to_cachix:
         description: 'Push builds to cachix'
