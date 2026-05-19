@@ -28,6 +28,7 @@ on:
         description: 'Mark as pre-release'
         type: boolean
 permissions:
+  attestations: write
   contents: write
   pages: write
   id-token: write
@@ -537,6 +538,11 @@ jobs:
               tar czf ../out/$a.tar.gz *
             popd
           done
+
+      - name: Generate artifact attestations
+        uses: actions/attest@v4
+        with:
+          subject-path: out
 
       - name: Publish
         uses: ncipollo/release-action@v1
