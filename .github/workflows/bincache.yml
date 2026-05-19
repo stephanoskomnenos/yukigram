@@ -538,3 +538,4 @@ jobs:
         with:
           artifacts: "*.tar.gz,*.apk"
           prerelease: ${{ inputs.prerelease }}
+          immutableCreate: true
