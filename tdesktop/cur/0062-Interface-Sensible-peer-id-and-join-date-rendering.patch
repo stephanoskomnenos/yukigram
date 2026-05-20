@@ -8,10 +8,10 @@ Subject: [PATCH] (Interface) Sensible peer id and join date rendering
  1 file changed, 46 insertions(+), 38 deletions(-)
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index 2f891c34e3..5696811c3f 100644
+index d80b631b96..28725b8a7d 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-@@ -213,44 +213,7 @@ base::options::toggle ShowChannelJoinedBelowAbout({
+@@ -230,44 +230,7 @@ base::options::toggle ShowChannelJoinedBelowAbout({
  
  	return AboutValue(
  		peer
@@ -57,7 +57,7 @@ index 2f891c34e3..5696811c3f 100644
  }
  
  [[nodiscard]] bool AreNonTrivialHours(const Data::WorkingHours &hours) {
-@@ -1637,6 +1600,46 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1655,6 +1618,46 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  				}
  			});
  	};
@@ -104,7 +104,7 @@ index 2f891c34e3..5696811c3f 100644
  	if (const auto user = _peer->asUser()) {
  		if (user->session().supportMode()) {
  			addInfoLineGeneric(
-@@ -1707,6 +1710,8 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1738,6 +1741,8 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  			return false;
  		});
  
@@ -113,7 +113,7 @@ index 2f891c34e3..5696811c3f 100644
  		if (!user->isBot()) {
  			tracker.track(result->add(
  				CreateBirthday(result, controller, user),
-@@ -1790,6 +1795,9 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1833,6 +1838,9 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  			});
  		}
  

@@ -15,10 +15,10 @@ Subject: [PATCH] (Compose)(Opt) Hide popular stickers in suggested
  create mode 100644 Telegram/SourceFiles/yukigram/settings/sticker_hide_popular_suggest.cpp
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 02ebd70227..143328d97c 100644
+index 551e99e889..7b53a77758 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1917,6 +1917,8 @@ PRIVATE
+@@ -1953,6 +1953,8 @@ PRIVATE
      yukigram/settings/force_mobile_layout.h
      yukigram/settings/hide_message_tail.cpp
      yukigram/settings/hide_message_tail.h
@@ -28,7 +28,7 @@ index 02ebd70227..143328d97c 100644
      yukigram/settings/hide_reply_background_emoji.h
      yukigram/settings/hide_send_as_premium.cpp
 diff --git a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp b/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
-index 5cc507eab8..f29fad4c8b 100644
+index c3654bc80b..9497d87bf3 100644
 --- a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
 +++ b/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
 @@ -29,6 +29,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -39,7 +39,7 @@ index 5cc507eab8..f29fad4c8b 100644
  #include "core/application.h"
  #include "core/core_settings.h"
  #include "lang/lang_keys.h"
-@@ -430,6 +431,10 @@ FieldAutocomplete::StickerRows FieldAutocomplete::getStickerSuggestions() {
+@@ -429,6 +430,10 @@ FieldAutocomplete::StickerRows FieldAutocomplete::getStickerSuggestions() {
  	const auto list = data->getListByEmoji({ _emoji }, _stickersSeed);
  	auto result = ranges::views::all(
  		list

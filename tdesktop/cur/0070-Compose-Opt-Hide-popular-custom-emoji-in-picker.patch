@@ -13,10 +13,10 @@ Subject: [PATCH] (Compose)(Opt) Hide popular custom emoji in picker
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_popular_emoji_picker.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 143328d97c..85280dff23 100644
+index 7b53a77758..e2dcc6d7be 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1917,6 +1917,8 @@ PRIVATE
+@@ -1953,6 +1953,8 @@ PRIVATE
      yukigram/settings/force_mobile_layout.h
      yukigram/settings/hide_message_tail.cpp
      yukigram/settings/hide_message_tail.h
@@ -26,10 +26,10 @@ index 143328d97c..85280dff23 100644
      yukigram/settings/hide_popular_sticker_suggest.h
      yukigram/settings/hide_reply_background_emoji.cpp
 diff --git a/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp b/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
-index cccfb197ef..f003a8fab6 100644
+index dea062d1e5..dbc12debb3 100644
 --- a/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
 +++ b/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
-@@ -49,6 +49,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -50,6 +50,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "main/main_session.h"
  #include "main/main_session_settings.h"
  #include "mainwidget.h"
@@ -37,7 +37,7 @@ index cccfb197ef..f003a8fab6 100644
  #include "core/core_settings.h"
  #include "core/application.h"
  #include "settings/sections/settings_premium.h"
-@@ -3363,6 +3364,9 @@ void EmojiListWidget::refreshCustom() {
+@@ -3428,6 +3429,9 @@ void EmojiListWidget::refreshCustom() {
  	const auto push = [&](uint64 setId, bool installed) {
  		const auto megagroup = _megagroupSet
  			&& (setId == Data::Stickers::MegagroupSetId);

@@ -13,10 +13,10 @@ Subject: [PATCH] (Style)(Opt) Hide message tail
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_message_tail.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index abf95b4808..6255dc84e1 100644
+index f61cff77f9..a17f9b7215 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1915,6 +1915,8 @@ PRIVATE
+@@ -1951,6 +1951,8 @@ PRIVATE
      yukigram/settings/disable_animoji.h
      yukigram/settings/force_mobile_layout.cpp
      yukigram/settings/force_mobile_layout.h
@@ -26,10 +26,10 @@ index abf95b4808..6255dc84e1 100644
      yukigram/settings/hide_reply_background_emoji.h
      yukigram/settings/hide_send_as_premium.cpp
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 37bc3ed695..2809c2dab4 100644
+index f60b6b8cae..0f1d40b95e 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
-@@ -29,6 +29,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -30,6 +30,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "history/view/history_view_summary_header.h"
  #include "history/view/history_view_view_button.h" // ViewButton.
  #include "history/history.h"
@@ -37,7 +37,7 @@ index 37bc3ed695..2809c2dab4 100644
  #include "boxes/premium_preview_box.h"
  #include "boxes/share_box.h"
  #include "boxes/peers/tag_info_box.h"
-@@ -5187,6 +5188,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
+@@ -5213,6 +5214,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
  	const auto item = data();
  	const auto keyboard = item->inlineReplyKeyboard();
  	const auto skipTail = smallBottom

@@ -13,10 +13,10 @@ Subject: [PATCH] (Compose)(Opt) Show scheduled messages button
  create mode 100644 Telegram/SourceFiles/yukigram/settings/always_show_scheduled.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 7ca705b808..662473fc70 100644
+index 297aff727f..40292d4696 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1907,6 +1907,8 @@ PRIVATE
+@@ -1943,6 +1943,8 @@ PRIVATE
      yukigram/options_database.h
      yukigram/options_runtime.h
      yukigram/options.h
@@ -26,7 +26,7 @@ index 7ca705b808..662473fc70 100644
      yukigram/settings/disable_animoji.h
      yukigram/settings/force_mobile_layout.cpp
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index 363f3708ee..7b5a7e6c8d 100644
+index a5fb9cca5f..26a0ba8fb3 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
 @@ -34,6 +34,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL

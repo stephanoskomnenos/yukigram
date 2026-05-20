@@ -27,10 +27,10 @@ Subject: [PATCH] (Yukigram) AppId
  delete mode 100644 lib/xdg/org.telegram.desktop.service
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 215baeeaf9..3d6f0322a0 100644
+index d1e5e3cd78..e36e34d555 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1900,6 +1900,7 @@ PRIVATE
+@@ -1936,6 +1936,7 @@ PRIVATE
      window/themes/window_themes_embedded.h
      window/themes/window_themes_generate_name.cpp
      window/themes/window_themes_generate_name.h
@@ -38,7 +38,7 @@ index 215baeeaf9..3d6f0322a0 100644
      apiwrap.cpp
      apiwrap.h
      config.h
-@@ -1918,6 +1919,19 @@ PRIVATE
+@@ -1954,6 +1955,19 @@ PRIVATE
      tray.h
  )
  
@@ -58,7 +58,7 @@ index 215baeeaf9..3d6f0322a0 100644
  if (APPLE)
      nice_target_sources(Telegram ${src_loc}
      PRIVATE
-@@ -2327,30 +2341,37 @@ elseif (build_winstore)
+@@ -2373,30 +2387,37 @@ elseif (build_winstore)
      )
  endif()
  
@@ -142,7 +142,7 @@ index 0000000000..9efde8c043
 +  </qresource>
 +</RCC>
 diff --git a/Telegram/SourceFiles/core/launcher.cpp b/Telegram/SourceFiles/core/launcher.cpp
-index f0e5120aa7..9491e5760f 100644
+index 882ba886a4..3865bddae0 100644
 --- a/Telegram/SourceFiles/core/launcher.cpp
 +++ b/Telegram/SourceFiles/core/launcher.cpp
 @@ -18,6 +18,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -153,7 +153,7 @@ index f0e5120aa7..9491e5760f 100644
  
  #include <QtCore/QLoggingCategory>
  #include <QtCore/QStandardPaths>
-@@ -335,7 +336,7 @@ void Launcher::init() {
+@@ -347,7 +348,7 @@ void Launcher::init() {
  	prepareSettings();
  	initQtMessageLogging();
  

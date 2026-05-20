@@ -10,7 +10,7 @@ Original author: c0re100 <corehusky@gmail.com>
  1 file changed, 16 insertions(+)
 
 diff --git a/Telegram/SourceFiles/window/window_peer_menu.cpp b/Telegram/SourceFiles/window/window_peer_menu.cpp
-index 885e42c35d..0d2fd0f00f 100644
+index 6bb17aadcd..d85831ac36 100644
 --- a/Telegram/SourceFiles/window/window_peer_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_peer_menu.cpp
 @@ -313,6 +313,7 @@ private:

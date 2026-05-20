@@ -17,10 +17,10 @@ Subject: [PATCH] (Interface)(Opt) Compact chat list
  create mode 100644 Telegram/SourceFiles/yukigram/settings/compact_chat_list.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 64bcd7ced9..5cee990d8e 100644
+index 69281d8415..34bb06b6d1 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1909,6 +1909,8 @@ PRIVATE
+@@ -1945,6 +1945,8 @@ PRIVATE
      yukigram/options.h
      yukigram/settings/always_show_scheduled.cpp
      yukigram/settings/always_show_scheduled.h
@@ -30,10 +30,10 @@ index 64bcd7ced9..5cee990d8e 100644
      yukigram/settings/disable_animoji.h
      yukigram/settings/force_mobile_layout.cpp
 diff --git a/Telegram/SourceFiles/dialogs/dialogs.style b/Telegram/SourceFiles/dialogs/dialogs.style
-index f7f621e6c3..bced3b36d6 100644
+index 58f39e74ba..11eb8ca12c 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs.style
 +++ b/Telegram/SourceFiles/dialogs/dialogs.style
-@@ -99,6 +99,11 @@ defaultDialogRow: DialogRow {
+@@ -100,6 +100,11 @@ defaultDialogRow: DialogRow {
  	textLeft: 68px;
  	textTop: 34px;
  }
@@ -76,26 +76,26 @@ index 5a6ab2d037..60026a5ec3 100644
  		return false;
  	}
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp b/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
-index 6d60c58b25..80c6c76d2e 100644
+index 3561c14642..34fe4c3cd1 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
-@@ -35,6 +35,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
- #include "ui/painter.h"
+@@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "ui/rect.h"
+ #include "ui/screen_reader_mode.h"
  #include "ui/ui_utility.h"
 +#include "yukigram/settings/compact_chat_list.h"
  #include "data/components/sponsored_messages.h"
  #include "data/data_drafts.h"
  #include "data/data_folder.h"
-@@ -373,6 +374,7 @@ InnerWidget::InnerWidget(
- 	}, lifetime());
+@@ -379,6 +380,7 @@ InnerWidget::InnerWidget(
+ 	Ui::ScheduleThanosEffectWarmUp(&session(), lifetime());
  
  	rpl::merge(
 +		Yukigram::Settings::CompactChatList->changes() | rpl::map_to(true),
  		session().settings().archiveCollapsedChanges() | rpl::map_to(false),
  		session().data().chatsFilters().changed() | rpl::map_to(true),
  		session().data().chatsFilters().tagsEnabledChanges(
-@@ -900,7 +902,9 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
+@@ -906,7 +908,9 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
  			}
  		}
  
@@ -105,7 +105,7 @@ index 6d60c58b25..80c6c76d2e 100644
  
  		auto chatsFilterTags = std::vector<QImage*>();
  		if (context.narrow) {
-@@ -1269,7 +1273,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
+@@ -1275,7 +1279,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
  							? _previewPressed
  							: _previewSelected));
  					Ui::RowPainter::Paint(p, result.get(), {
@@ -114,7 +114,7 @@ index 6d60c58b25..80c6c76d2e 100644
  						.folder = _openedFolder,
  						.forum = _openedForum,
  						.currentBg = currentBg(),
-@@ -1347,7 +1351,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
+@@ -1353,7 +1357,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
  							? _searchedPressed
  							: _searchedSelected));
  					Ui::RowPainter::Paint(p, result.get(), {
@@ -123,7 +123,7 @@ index 6d60c58b25..80c6c76d2e 100644
  						.folder = _openedFolder,
  						.forum = _openedForum,
  						.currentBg = currentBg(),
-@@ -1764,7 +1768,7 @@ void InnerWidget::performDrag() {
+@@ -1770,7 +1774,7 @@ void InnerWidget::performDrag() {
  			('@' + u).toUtf8());
  	}
  
@@ -132,7 +132,7 @@ index 6d60c58b25..80c6c76d2e 100644
  	auto pixmap = QPixmap(Size(st.height * style::DevicePixelRatio()));
  	pixmap.setDevicePixelRatio(style::DevicePixelRatio());
  	pixmap.fill(Qt::transparent);
-@@ -5322,7 +5326,7 @@ void InnerWidget::repaintDialogRowCornerStatus(not_null<History*> history) {
+@@ -5333,7 +5337,7 @@ void InnerWidget::repaintDialogRowCornerStatus(not_null<History*> history) {
  		: st::dialogsCallBadgeSize;
  	const auto stroke = st::dialogsOnlineBadgeStroke;
  	const auto skip = user

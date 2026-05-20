@@ -12,7 +12,7 @@ Original author: c0re100 <corehusky@gmail.com>
  3 files changed, 14 insertions(+)
 
 diff --git a/Telegram/SourceFiles/window/window_main_menu.cpp b/Telegram/SourceFiles/window/window_main_menu.cpp
-index e672f011cb..be29b5d4f2 100644
+index a26a7cc91a..a7b66d9f9b 100644
 --- a/Telegram/SourceFiles/window/window_main_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_main_menu.cpp
 @@ -686,6 +686,15 @@ void MainMenu::setupMenu() {
@@ -32,10 +32,10 @@ index e672f011cb..be29b5d4f2 100644
  			tr::lng_create_channel_title(),
  			{ &st::menuIconChannel }
 diff --git a/Telegram/SourceFiles/window/window_session_controller.cpp b/Telegram/SourceFiles/window/window_session_controller.cpp
-index 7188aef40a..6c9f827e6c 100644
+index c9d1dd479e..bba8f218b3 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.cpp
 +++ b/Telegram/SourceFiles/window/window_session_controller.cpp
-@@ -3198,6 +3198,10 @@ void SessionController::showNewGroup() {
+@@ -3199,6 +3199,10 @@ void SessionController::showNewGroup() {
  	_window->show(Box<GroupInfoBox>(this, GroupInfoBox::Type::Group));
  }
  
