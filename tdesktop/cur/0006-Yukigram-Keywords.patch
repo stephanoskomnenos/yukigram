@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 20 May 2026 17:58:33 +0300
+Subject: [PATCH] (Yukigram) Keywords
+
+---
+ lib/xdg/io.github.yukigram.desktop | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/xdg/io.github.yukigram.desktop b/lib/xdg/io.github.yukigram.desktop
+index fc47676bad..93a1536930 100644
+--- a/lib/xdg/io.github.yukigram.desktop
++++ b/lib/xdg/io.github.yukigram.desktop
+@@ -9,7 +9,7 @@ StartupWMClass=@YUKIGRAM_APP_ID@
+ Type=Application
+ Categories=Chat;Network;InstantMessaging;Qt;
+ MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+-Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
++Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;telegram;
+ Actions=quit;
+ DBusActivatable=true
+ SingleMainWindow=true
+-- 
+2.53.0
+

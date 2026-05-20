@@ -19,13 +19,17 @@ Other patches may not apply cleanly
 (or not apply at all)
 without these.
 
-- Yukigram build support
-- Yukigram branding
-- Yukigram options framework
+- Build support
+- Application ID
+- Metadata (name, links, etc.)
+- Artwork
+- Version
+- Keywords for `.desktop` file
+- Options framework
 - Yukigram settings page
-- Yukigram settings deeplinks
+- Deeplinks for Yukigram settings
     (`tg://settings/yukigram/...`)
-- Mirror select Experimental settings to Yukigram settings page
+- Experimental settings mirror at Yukigram settings
 
 These are placed under `(Yukigram)` category.
 

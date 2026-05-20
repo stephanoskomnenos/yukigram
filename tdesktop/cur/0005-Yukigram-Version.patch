@@ -1,0 +1,26 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 20 May 2026 17:58:14 +0300
+Subject: [PATCH] (Yukigram) Version
+
+---
+ Telegram/SourceFiles/boxes/about_box.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/boxes/about_box.cpp b/Telegram/SourceFiles/boxes/about_box.cpp
+index 3a488ae04c..726ea1019b 100644
+--- a/Telegram/SourceFiles/boxes/about_box.cpp
++++ b/Telegram/SourceFiles/boxes/about_box.cpp
+@@ -63,7 +63,8 @@ rpl::producer<TextWithEntities> Text3() {
+ } // namespace
+ 
+ void AboutBox(not_null<Ui::GenericBox*> box) {
+-	box->setTitle(u"Telegram Desktop"_q);
++	const auto commit_info = "@commit";
++	box->setTitle(u"Yukigram "_q + (commit_info[0] != '@' ? commit_info : "v6.8.2.2"));
+ 
+ 	auto layout = box->verticalLayout();
+ 
+-- 
+2.53.0
+

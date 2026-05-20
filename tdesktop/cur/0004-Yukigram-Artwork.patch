@@ -1,0 +1,79 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 20 May 2026 17:57:39 +0300
+Subject: [PATCH] (Yukigram) Artwork
+
+---
+ Telegram/CMakeLists.txt                           | 15 +--------------
+ Telegram/Resources/art/yukigram.svg               |  6 ++++++
+ Telegram/Resources/qrc/telegram/telegram.qrc      |  1 +
+ .../SourceFiles/platform/linux/specific_linux.cpp |  2 +-
+ 4 files changed, 9 insertions(+), 15 deletions(-)
+ create mode 100644 Telegram/Resources/art/yukigram.svg
+
+diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
+index b72cd6d6b8..0a60ff8fec 100644
+--- a/Telegram/CMakeLists.txt
++++ b/Telegram/CMakeLists.txt
+@@ -2354,20 +2354,7 @@ if (LINUX AND DESKTOP_APP_USE_PACKAGED)
+     configure_file("../lib/xdg/io.github.yukigram.metainfo.xml" "${CMAKE_CURRENT_BINARY_DIR}/${YUKIGRAM_APP_ID}.metainfo.xml" @ONLY)
+     generate_appstream_changelog(Telegram "${CMAKE_SOURCE_DIR}/changelog.txt" "${CMAKE_CURRENT_BINARY_DIR}/${YUKIGRAM_APP_ID}.metainfo.xml")
+     install(TARGETS Telegram RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
+-    install(FILES "Resources/art/icon16.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon16@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon32.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon32@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon48.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon48@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon64.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon64@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon128.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/128x128/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon128@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/128x128@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon256.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon256@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon512.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps" RENAME "${YUKIGRAM_APP_ID}.png")
+-    install(FILES "Resources/art/icon512@2x.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512@2/apps" RENAME "${YUKIGRAM_APP_ID}.png")
++    install(FILES "Resources/art/yukigram.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps" RENAME "${YUKIGRAM_APP_ID}.svg")
+     install(FILES "Resources/icons/tray_monochrome.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "${YUKIGRAM_APP_ID}-symbolic.svg")
+     install(FILES "Resources/icons/tray_monochrome_attention.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "${YUKIGRAM_APP_ID}-attention-symbolic.svg")
+     install(FILES "Resources/icons/tray_monochrome_mute.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "${YUKIGRAM_APP_ID}-mute-symbolic.svg")
+diff --git a/Telegram/Resources/art/yukigram.svg b/Telegram/Resources/art/yukigram.svg
+new file mode 100644
+index 0000000000..e9ddc94952
+--- /dev/null
++++ b/Telegram/Resources/art/yukigram.svg
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!-- Based on https://openclipart.org/detail/248175/paperplane -->
++<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
++    <circle cx="8" cy="8" r="7.5" fill="#111" />
++    <path d="M2,8.625l2.5,0.9375L5.75,13l1.788-2.3875L10.75,11.75l1.25-8.75L2,8.625zM6.481,10.15l-0.5725,1.553l-0.6787-1.9487l5.251-4.769L6.481,10.15z" fill="#eee" />
++</svg>
+diff --git a/Telegram/Resources/qrc/telegram/telegram.qrc b/Telegram/Resources/qrc/telegram/telegram.qrc
+index 2c1be7a05c..0bc51b9079 100644
+--- a/Telegram/Resources/qrc/telegram/telegram.qrc
++++ b/Telegram/Resources/qrc/telegram/telegram.qrc
+@@ -7,6 +7,7 @@
+     <file alias="art/affiliate_logo.png">../../art/affiliate_logo.png</file>
+     <file alias="art/logo_256.png">../../art/logo_256.png</file>
+     <file alias="art/logo_256_no_margin.png">../../art/logo_256_no_margin.png</file>
++    <file alias="art/yukigram.svg">../../art/yukigram.svg</file>
+     <file alias="art/themeimage.jpg">../../art/themeimage.jpg</file>
+     <file alias="art/round_placeholder.jpg">../../art/round_placeholder.jpg</file>
+     <file alias="art/cocoon.webp">../../art/cocoon.webp</file>
+diff --git a/Telegram/SourceFiles/platform/linux/specific_linux.cpp b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
+index cf1ee0913c..60077548f7 100644
+--- a/Telegram/SourceFiles/platform/linux/specific_linux.cpp
++++ b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
+@@ -490,7 +490,7 @@ void InstallLauncher() {
+ 	const auto icon = appIcons + ApplicationIconName() + u".png"_q;
+ 	QFile::remove(icon);
+ 	QFile::remove(icons + u"telegram.png"_q);
+-	if (QFile::copy(u":/gui/art/logo_256.png"_q, icon)) {
++	if (QFile::copy(u":/gui/art/yukigram.svg"_q, icon)) {
+ 		DEBUG_LOG(("App Info: Icon copied to '%1'").arg(icon));
+ 	}
+ 
+-- 
+2.53.0
+

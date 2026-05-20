@@ -1,0 +1,192 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 20 May 2026 17:57:10 +0300
+Subject: [PATCH] (Yukigram) Metadata
+
+---
+ Telegram/CMakeLists.txt                                |  4 ++--
+ Telegram/SourceFiles/boxes/about_box.cpp               |  2 +-
+ Telegram/SourceFiles/core/version.h                    |  4 ++--
+ Telegram/SourceFiles/intro/intro_start.cpp             |  2 +-
+ .../settings/sections/settings_notifications.cpp       |  2 +-
+ Telegram/SourceFiles/window/main_window.cpp            |  2 +-
+ Telegram/SourceFiles/window/window_main_menu.cpp       |  4 ++--
+ lib/xdg/io.github.yukigram.desktop                     | 10 +++++-----
+ lib/xdg/io.github.yukigram.metainfo.xml                |  8 ++++----
+ lib/xdg/io.github.yukigram.service                     |  2 +-
+ 10 files changed, 20 insertions(+), 20 deletions(-)
+
+diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
+index 3d6f0322a0..b72cd6d6b8 100644
+--- a/Telegram/CMakeLists.txt
++++ b/Telegram/CMakeLists.txt
+@@ -2123,7 +2123,7 @@ else()
+         set(bundle_identifier "com.tdesktop.Telegram")
+     endif()
+     set(bundle_entitlements "Telegram.entitlements")
+-    set(output_name "Telegram")
++    set(output_name "yukigram")
+ endif()
+ 
+ if (CMAKE_GENERATOR STREQUAL Xcode)
+@@ -2169,7 +2169,7 @@ get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+ if (APPLE
+     OR is_multi_config
+     OR NOT CMAKE_EXECUTABLE_SUFFIX STREQUAL ""
+-    OR NOT "${output_name}" STREQUAL "Telegram")
++    OR NOT "${output_name}" STREQUAL "yukigram")
+     set(output_folder ${CMAKE_BINARY_DIR})
+ else()
+     set(output_folder ${CMAKE_BINARY_DIR}/bin)
+diff --git a/Telegram/SourceFiles/boxes/about_box.cpp b/Telegram/SourceFiles/boxes/about_box.cpp
+index 738ad20837..3a488ae04c 100644
+--- a/Telegram/SourceFiles/boxes/about_box.cpp
++++ b/Telegram/SourceFiles/boxes/about_box.cpp
+@@ -49,7 +49,7 @@ rpl::producer<TextWithEntities> Text2() {
+ 		lt_github_link,
+ 		rpl::single(tr::link(
+ 			"GitHub",
+-			"https://github.com/telegramdesktop/tdesktop")),
++			"https://github.com/yukigram/yukigram")),
+ 		tr::marked);
+ }
+ 
+diff --git a/Telegram/SourceFiles/core/version.h b/Telegram/SourceFiles/core/version.h
+index 0fcbd17417..9bdfb54573 100644
+--- a/Telegram/SourceFiles/core/version.h
++++ b/Telegram/SourceFiles/core/version.h
+@@ -20,8 +20,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ // used in Updater.cpp and Setup.iss for Windows
+ constexpr auto AppId = "{53F49750-6209-4FBF-9CA8-7A333C87D1ED}"_cs;
+ constexpr auto AppNameOld = "Telegram Win (Unofficial)"_cs;
+-constexpr auto AppName = "Telegram Desktop"_cs;
+-constexpr auto AppFile = "Telegram"_cs;
++constexpr auto AppName = "Yukigram"_cs;
++constexpr auto AppFile = "yukigram"_cs;
+ constexpr auto AppVersion = 6008002;
+ constexpr auto AppVersionStr = "6.8.2";
+ constexpr auto AppBetaVersion = false;
+diff --git a/Telegram/SourceFiles/intro/intro_start.cpp b/Telegram/SourceFiles/intro/intro_start.cpp
+index d1b835a09a..a871886d76 100644
+--- a/Telegram/SourceFiles/intro/intro_start.cpp
++++ b/Telegram/SourceFiles/intro/intro_start.cpp
+@@ -24,7 +24,7 @@ StartWidget::StartWidget(
+ 	not_null<Data*> data)
+ : Step(parent, account, data, true) {
+ 	setMouseTracking(true);
+-	setTitleText(rpl::single(u"Telegram Desktop"_q));
++	setTitleText(rpl::single(u"Yukigram"_q));
+ 	setDescriptionText(tr::lng_intro_about());
+ 	show();
+ }
+diff --git a/Telegram/SourceFiles/settings/sections/settings_notifications.cpp b/Telegram/SourceFiles/settings/sections/settings_notifications.cpp
+index 81242142ad..be84e4c7e9 100644
+--- a/Telegram/SourceFiles/settings/sections/settings_notifications.cpp
++++ b/Telegram/SourceFiles/settings/sections/settings_notifications.cpp
+@@ -492,7 +492,7 @@ void NotificationsCount::prepareNotificationSampleLarge() {
+ 		p.setPen(st::dialogsNameFg);
+ 		p.setFont(st::msgNameFont);
+ 
+-		auto notifyTitle = st::msgNameFont->elided(u"Telegram Desktop"_q, rectForName.width());
++		auto notifyTitle = st::msgNameFont->elided(u"Yukigram"_q, rectForName.width());
+ 		p.drawText(rectForName.left(), rectForName.top() + st::msgNameFont->ascent, notifyTitle);
+ 
+ 		st::notifyClose.icon.paint(p, w - st::notifyClosePos.x() - st::notifyClose.width + st::notifyClose.iconPosition.x(), st::notifyClosePos.y() + st::notifyClose.iconPosition.y(), w);
+diff --git a/Telegram/SourceFiles/window/main_window.cpp b/Telegram/SourceFiles/window/main_window.cpp
+index 5b11b2eaf4..599f8d25ca 100644
+--- a/Telegram/SourceFiles/window/main_window.cpp
++++ b/Telegram/SourceFiles/window/main_window.cpp
+@@ -847,7 +847,7 @@ void MainWindow::updateTitle() {
+ 		: Dialogs::Key();
+ 	const auto thread = key ? key.thread() : nullptr;
+ 	if (!thread) {
+-		setTitle((user.isEmpty() ? u"Telegram"_q : user) + added);
++		setTitle((user.isEmpty() ? u"Yukigram"_q : user) + added);
+ 		return;
+ 	}
+ 	const auto history = thread->owningHistory();
+diff --git a/Telegram/SourceFiles/window/window_main_menu.cpp b/Telegram/SourceFiles/window/window_main_menu.cpp
+index 16a5705ee7..e672f011cb 100644
+--- a/Telegram/SourceFiles/window/window_main_menu.cpp
++++ b/Telegram/SourceFiles/window/window_main_menu.cpp
+@@ -384,8 +384,8 @@ MainMenu::MainMenu(
+ 	parentResized();
+ 
+ 	_telegram->setMarkedText(tr::link(
+-		u"Telegram Desktop"_q,
+-		u"https://desktop.telegram.org"_q));
++		u"Yukigram"_q,
++		u"https://github.com/yukigram/yukigram"_q));
+ 	_telegram->setLinksTrusted();
+ 	_version->setMarkedText(
+ 		tr::link(
+diff --git a/lib/xdg/io.github.yukigram.desktop b/lib/xdg/io.github.yukigram.desktop
+index 28e8b3b7cb..fc47676bad 100644
+--- a/lib/xdg/io.github.yukigram.desktop
++++ b/lib/xdg/io.github.yukigram.desktop
+@@ -1,8 +1,8 @@
+ [Desktop Entry]
+ Name=@YUKIGRAM_DISPLAY_NAME@
+-Comment=New era of messaging
+-TryExec=Telegram
+-Exec=Telegram -- %U
++Comment=Telegram Desktop, patched
++TryExec=yukigram
++Exec=yukigram -- %U
+ Icon=@YUKIGRAM_APP_ID@
+ Terminal=false
+ StartupWMClass=@YUKIGRAM_APP_ID@
+@@ -17,6 +17,6 @@ X-GNOME-UsesNotifications=true
+ X-GNOME-SingleWindow=true
+ 
+ [Desktop Action quit]
+-Exec=Telegram -quit
+-Name=Quit Telegram
++Exec=yukigram -quit
++Name=Quit Yukigram
+ Icon=application-exit
+diff --git a/lib/xdg/io.github.yukigram.metainfo.xml b/lib/xdg/io.github.yukigram.metainfo.xml
+index 61fb172afe..182cf9c666 100644
+--- a/lib/xdg/io.github.yukigram.metainfo.xml
++++ b/lib/xdg/io.github.yukigram.metainfo.xml
+@@ -3,8 +3,8 @@
+     <id>@YUKIGRAM_APP_ID@</id>
+     <metadata_license>CC0-1.0</metadata_license>
+     <project_license>GPL-3.0</project_license>
+-    <name>Telegram</name>
+-    <summary>New era of messaging</summary>
++    <name>Yukigram</name>
++    <summary>Telegram Desktop, patched</summary>
+     <description>
+         <p>Pure instant messaging — simple, fast, secure, and synced across all your devices. One of the world's top 10 most downloaded apps with over 500 million active users.</p>
+         <p>FAST: Telegram is the fastest messaging app on the market, connecting people via a unique, distributed network of data centers around the globe.</p>
+@@ -26,7 +26,7 @@
+     <developer id="org.telegram"><name>Telegram FZ-LLC</name></developer>
+     <url type="homepage">https://desktop.telegram.org/</url>
+     <url type="faq">https://telegram.org/faq</url>
+-    <url type="bugtracker">https://github.com/telegramdesktop/tdesktop/issues</url>
++    <url type="bugtracker">https://github.com/yukigram/yukigram/issues</url>
+     <url type="translate">https://translations.telegram.org/</url>
+     <url type="vcs-browser">https://github.com/telegramdesktop/tdesktop</url>
+     <url type="contribute">https://github.com/telegramdesktop/tdesktop/blob/dev/.github/CONTRIBUTING.md</url>
+@@ -108,7 +108,7 @@
+     </content_rating>
+     <launchable type="desktop-id">@YUKIGRAM_APP_ID@.desktop</launchable>
+     <provides>
+-        <binary>Telegram</binary>
++        <binary>yukigram</binary>
+         <dbus type="session">@YUKIGRAM_APP_ID@</dbus>
+         <mediatype>x-scheme-handler/tg</mediatype>
+         <mediatype>x-scheme-handler/tonsite</mediatype>
+diff --git a/lib/xdg/io.github.yukigram.service b/lib/xdg/io.github.yukigram.service
+index c4c85188d6..9664e828cc 100644
+--- a/lib/xdg/io.github.yukigram.service
++++ b/lib/xdg/io.github.yukigram.service
+@@ -1,3 +1,3 @@
+ [D-BUS Service]
+ Name=@YUKIGRAM_APP_ID@
+-Exec=Telegram
++Exec=yukigram
+-- 
+2.53.0
+
