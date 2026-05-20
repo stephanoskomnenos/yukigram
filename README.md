@@ -262,10 +262,12 @@ Install .apk files from selected release.
 
 ### 64Gram-based
 
-Versions of Yukigram up to (and including) 6.4.1.1
-are deprecated and should no longer be used.
-They were based on 64Gram
-and developed in a downstream merge-based workflow.
+> [!CAUTION]
+>
+> Versions of Yukigram up to (and including) 6.4.1.1
+> are deprecated and should no longer be used.
+> They were based on 64Gram
+> and developed in a downstream merge-based workflow.
 
 "Enhanced settings" from 64Gram and Yukigram
 are converted to native "Experimental settings" (in Advanced).
