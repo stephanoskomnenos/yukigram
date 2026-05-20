@@ -213,9 +213,64 @@ and may be used instead of a manual from-source build:
 
 ## Previous versions
 
-Versions of Yukigram up to (and including) 6.8.2.1
-published their artifacts only to GitHub Pages and Cachix.
-They may become inaccessible in the future.
+Make a backup of your data!
+Downgrading versions is not supported.
+
+> [!IMPORTANT]
+> Versions prior to 6.7.8.1 are NOT devel-aware.
+> Running devel-oblivious development versions
+> *will* corrupt production version's tdata.
+>
+> Installations of Yukigram prior to that version
+> should migrate their data directory as follows.
+>
+> 1. Close Yukigram.
+> 1. Update Yukigram to a recent enough version.
+> 1. Go to `${XDG_DATA_HOME:-~/.local/share}` (nonisolated package).
+>   and rename `Yukigram` folder to `io.github.yukigram`.
+> 1. Go to `~/.var/app/io.github.yukigram/data` (flatpak or nixpak)
+>   and rename `Yukigram` folder to `io.github.yukigram`.
+> 1. Go to `~/.var/app/io.github.yukigram.devel/data` (devel, flatpak or nixpak)
+>   and rename `Yukigram` folder to `io.github.yukigram.devel`.
+> 1. Run Yukigram again.
+
+### with flatpak
+
+Download `flatpak-$ARCH` release asset and unpack it.
+
+```shell
+flatpak install --user .../flatpak-$ARCH io.github.yukigram
+```
+
+Substitute `io.github.yukigram`
+with `io.github.yukigram.devel`
+for development builds.
+
+### with nix
+
+Recent previous and development versions are cached at Cachix.
+
+> [!NOTE]
+> Versions prior to 6.8.2.1 are cached only on Cachix
+> and may become inaccessible.
+
+> [!CAUTION]
+> Versions prior to 6.8.3.1 are NOT devel-aware
+> and *will* corrupt your tdata.
+> Running those without `customNixpakConfig` or `appId`
+> is *not* supported.
+
+### with postmarketOS
+
+Install .apk files from selected release.
+
+> [!CAUTION]
+> postmarketOS builds are NOT devel-aware
+> and *will* corrupt your tdata.
+> Running those without backing up tdata
+> is *not* supported.
+
+### 64Gram-based
 
 Versions of Yukigram up to (and including) 6.4.1.1
 are deprecated and should no longer be used.

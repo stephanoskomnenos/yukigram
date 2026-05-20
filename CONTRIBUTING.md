@@ -302,25 +302,3 @@ cd yukigram-worktree
 cd ../yukigram/flatpak
 flatpak-builder --force-clean build io.github.yukigram.yml
 ```
-
-## Installing previous versions from artifacts
-
-Make a backup of your data!
-Downgrading versions is not supported.
-
-### with flatpak
-
-1. Download release asset `flatpak-x86_64` and unpack
-2. `flatpak install --user .../flatpak-x86_64/ io.github.yukigram`
-
-For development versions, use `io.github.yukigram.devel`
-
-### with nix binary cache
-
-1. Download release asset `nixos-$arch` and unpack
-2. `cd .../nixos-$arch && python3 -m http.server`
-3. Add `--extra-substituters http://127.0.0.1:8000` to nix command line
-    (don't forget to be a trusted user,
-    and don't forget to add a trusted key
-    if it's not added by other means,
-    e.g. by using flake in this repo)
