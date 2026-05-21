@@ -63,6 +63,7 @@ path = [
     "tdesktop/cur/*-Interface-Opt-Custom-monospace-font.patch",
     "tdesktop/cur/*-Compose-Opt-Hide-popular-stickers-in-suggested.patch",
     "tdesktop/cur/*-Compose-Opt-Hide-popular-custom-emoji-in-picker.patch",
+    "tdesktop/cur/*-Fix-Webview-socket-path.patch",
 ]
 SPDX-License-Identifier = "GPL-3.0-or-later WITH LicenseRef-sqlitestudio-OpenSSL-exception"
 SPDX-FileCopyrightText = "Yukigram contributors <https://github.com/yukigram/yukigram>"
