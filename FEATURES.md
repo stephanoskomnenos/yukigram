@@ -146,13 +146,15 @@ These are placed under `(Interface)` category.
 
 These are placed under `(Chat)` category.
 
-## Chat style
+## Style
 - :gear: Wide messages
 - Increase maxSignatureSize to accomodate time with seconds and message id
 - Larger stickers and round video messages
 - :star: :gear: Hide per-chat wallpaper and use wallpaper from theme instead
 - :zap: :gear: Hide reply backround emoji
 - :gear: Hide message bubble tail
+- :star: Revert pill design for chat list suggestions
+    (someone logged on, set birthday, buy premium, etc.)
 
 These are placed under `(Style)` category.
 
