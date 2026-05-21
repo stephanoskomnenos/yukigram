@@ -21,6 +21,10 @@ let
             webkitgtk_4_1
             dbus
             kdePackages.breeze-icons
+            gst_all_1.gstreamer
+            gst_all_1.gst-plugins-base
+            gst_all_1.gst-plugins-good
+            gst_all_1.gst-plugins-bad
             (stdenv.mkDerivation {
               name = "yukigram-data";
               src = ../yukigram-worktree/app/share;
