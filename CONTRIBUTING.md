@@ -53,8 +53,8 @@ Updates patchset version and other metadata.
 
 ```shell
 cd yukigram
-s/patchset-version.sh v6.8.2.0 # for normal releases
-s/patchset-version.sh v6.8.3.2-beta # for pre-releases
+s/patchset-version.sh v6.8.2.0 # creates a normal release
+s/patchset-version.sh v6.8.3.2-beta # creates a pre-releases
 ```
 
 This will create a commit and a tag.
@@ -70,6 +70,25 @@ the correctness of release
 before publishing the release itself
 and "maining" beta versions
 instead of "dual-wielding" both beta and stable.
+
+The following command sequence
+is recommended for creating a release:
+
+```shell
+cd yukigram
+
+s/patchset-version.sh v6.8.2.0-rc.1
+git push; git push --tags
+# manually run a workflow *from tag* with cachix and pre-release enabled
+# wait for the run to succeed
+# test beta
+# if the beta was a failure, repeat with incremented rc.N
+
+s/patchset-version.sh v6.8.2.0
+git push; git push --tags
+# wait for the run to succeed
+# test release just in case
+```
 
 #### `tdesktop-version.sh`
 
