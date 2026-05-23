@@ -26,7 +26,7 @@ index ef629b66c8..b63a2fed74 100644
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index 28725b8a7d..7e2442a8a9 100644
+index 93d72537d8..5681213e7f 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 @@ -41,6 +41,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -45,7 +45,7 @@ index 28725b8a7d..7e2442a8a9 100644
  #include "styles/style_boxes.h"
  #include "styles/style_channel_earn.h" // st::channelEarnCurrencyCommonMargins
  #include "styles/style_info.h"
-@@ -1639,6 +1641,22 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1631,6 +1633,22 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  			);
  		}
  	};
@@ -68,7 +68,7 @@ index 28725b8a7d..7e2442a8a9 100644
  	const auto setupJoinDate = [&] {
  		if (ShowChannelJoinedBelowAbout.value()) {
  			if (const auto channel = _peer->asChannel()) {
-@@ -1742,6 +1760,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1734,6 +1752,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  		});
  
  		setupPeerId();
@@ -76,14 +76,14 @@ index 28725b8a7d..7e2442a8a9 100644
  
  		if (!user->isBot()) {
  			tracker.track(result->add(
-@@ -1839,6 +1858,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1855,6 +1874,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  		}
  
  		setupPeerId();
 +		setupPeerDc();
  		setupJoinDate();
- 
- 		if (const auto channel = _topic ? nullptr : _peer->asChannel()) {
+ 	}
+ 	wrap->toggleOn(tracker.atLeastOneShownValue());
 diff --git a/Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp b/Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp
 new file mode 100644
 index 0000000000..9c29075a30

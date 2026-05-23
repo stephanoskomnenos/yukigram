@@ -4,17 +4,22 @@ Date: Wed, 29 Apr 2026 10:01:56 +0300
 Subject: [PATCH] (Interface) Sensible peer id and join date rendering
 
 ---
- .../info/profile/info_profile_actions.cpp     | 84 ++++++++++---------
- 1 file changed, 46 insertions(+), 38 deletions(-)
+ .../info/profile/info_profile_actions.cpp     | 98 +++++++++----------
+ 1 file changed, 49 insertions(+), 49 deletions(-)
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index d80b631b96..28725b8a7d 100644
+index d80b631b96..93d72537d8 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-@@ -230,44 +230,7 @@ base::options::toggle ShowChannelJoinedBelowAbout({
+@@ -225,51 +225,6 @@ base::options::toggle ShowChannelJoinedBelowAbout({
+ 	return result;
+ }
  
- 	return AboutValue(
- 		peer
+-[[nodiscard]] rpl::producer<TextWithEntities> AboutWithAdvancedValue(
+-		not_null<PeerData*> peer) {
+-
+-	return AboutValue(
+-		peer
 -	) | rpl::map([=](TextWithEntities &&value) {
 -		if (ShowPeerIdBelowAbout.value()) {
 -			using namespace Ui::Text;
@@ -53,11 +58,12 @@ index d80b631b96..28725b8a7d 100644
 -		}
 -		return std::move(value);
 -	});
-+	);
- }
- 
+-}
+-
  [[nodiscard]] bool AreNonTrivialHours(const Data::WorkingHours &hours) {
-@@ -1655,6 +1618,46 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+ 	if (!hours) {
+ 		return false;
+@@ -1655,6 +1610,46 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  				}
  			});
  	};
@@ -104,7 +110,18 @@ index d80b631b96..28725b8a7d 100644
  	if (const auto user = _peer->asUser()) {
  		if (user->session().supportMode()) {
  			addInfoLineGeneric(
-@@ -1738,6 +1741,8 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+@@ -1689,8 +1684,8 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
+ 			? tr::lng_info_about_label()
+ 			: tr::lng_info_bio_label();
+ 		addTranslateToMenu(
+-			addInfoLine(std::move(label), AboutWithAdvancedValue(user)).text,
+-			AboutWithAdvancedValue(user));
++			addInfoLine(std::move(label), AboutValue(user)).text,
++			AboutValue(user));
+ 
+ 		const auto usernameLine = addInfoOneLine(
+ 			UsernamesSubtext(_peer, tr::lng_info_username_label()),
+@@ -1738,6 +1733,8 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  			return false;
  		});
  
@@ -113,16 +130,22 @@ index d80b631b96..28725b8a7d 100644
  		if (!user->isBot()) {
  			tracker.track(result->add(
  				CreateBirthday(result, controller, user),
-@@ -1833,6 +1838,9 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
- 			});
- 		}
+@@ -1852,10 +1849,13 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
  
+ 		const auto about = addInfoLine(tr::lng_info_about_label(), _topic
+ 			? rpl::single(TextWithEntities())
+-			: AboutWithAdvancedValue(_peer));
++			: AboutValue(_peer));
+ 		if (!_topic) {
+-			addTranslateToMenu(about.text, AboutWithAdvancedValue(_peer));
++			addTranslateToMenu(about.text, AboutValue(_peer));
+ 		}
++
 +		setupPeerId();
 +		setupJoinDate();
-+
- 		if (const auto channel = _topic ? nullptr : _peer->asChannel()) {
- 			auto locationText = LocationValue(
- 				channel
+ 	}
+ 	wrap->toggleOn(tracker.atLeastOneShownValue());
+ 	wrap->finishAnimating();
 -- 
 2.53.0
 
