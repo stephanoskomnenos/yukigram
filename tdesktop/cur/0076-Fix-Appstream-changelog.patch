@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Sun, 24 May 2026 15:47:08 +0300
+Subject: [PATCH] (Fix) Appstream changelog
+
+---
+ Telegram/build/changelog2appstream.py             | 2 +-
+ Telegram/cmake/generate_appstream_changelog.cmake | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Telegram/build/changelog2appstream.py b/Telegram/build/changelog2appstream.py
+index edf349aba6..0da91c7915 100755
+--- a/Telegram/build/changelog2appstream.py
++++ b/Telegram/build/changelog2appstream.py
+@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
+ import argparse
+ 
+ def parse_changelog(changelog_path):
+-    version_re = re.compile(r'([\d.-]+)\s+(\w+)?\s*\((\d{2}.\d{2}\.\d{2})\)')
++    version_re = re.compile(r'([\d.-]+)\s+([\w.]+)?\s*\((\d{2}.\d{2}\.\d{2})\)')
+     entry_re = re.compile(r'-\s(.*)')
+ 
+     with open(changelog_path, "r", encoding="utf-8") as f:
+diff --git a/Telegram/cmake/generate_appstream_changelog.cmake b/Telegram/cmake/generate_appstream_changelog.cmake
+index fe0694e647..de991e8a77 100644
+--- a/Telegram/cmake/generate_appstream_changelog.cmake
++++ b/Telegram/cmake/generate_appstream_changelog.cmake
+@@ -21,7 +21,7 @@ function(generate_appstream_changelog target_name changelog_path metadata_path)
+         ${submodules_loc}/build/changelog2appstream.py
+         -c "${changelog_path}"
+         -m "${metadata_path}"
+-        -n 10
++        -n 25
+     COMMAND
+         echo 1> ${gen_timestamp}
+     COMMENT "Generating AppStream changelog (${target_name})"
+-- 
+2.53.0
+

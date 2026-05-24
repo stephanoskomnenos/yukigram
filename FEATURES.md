@@ -30,6 +30,7 @@ without these.
 - Deeplinks for Yukigram settings
     (`tg://settings/yukigram/...`)
 - Experimental settings mirror at Yukigram settings
+- Changelog
 
 These are placed under `(Yukigram)` category.
 
@@ -49,6 +50,8 @@ These are placed under `(Yukigram)` category.
     where pids always count from 1,
     and TMPDIR is per-appId,
     and not per-invocation)
+- More appstream changelog versions (25 instead of 10),
+    better version parsing
 
 These are placed under `(Fix)` category.
 
