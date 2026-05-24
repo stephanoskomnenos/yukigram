@@ -4,49 +4,85 @@ set -exuo pipefail
 die() { printf "\033[31m[ERROR]\033[0m: %s\n" "$@"; exit 1; }
 
 test $# -eq 1 || die "no version supplied"
-VERSION="$1"
-[[ $VERSION == v* ]] || die "versions should start with v"
-BARE_VERSION="${VERSION:1}"
-[[ $VERSION == *-* ]] && DEVEL=true || DEVEL=false
-[[ $DEVEL == true ]] && APP_ID=io.github.yukigram.devel || APP_ID=io.github.yukigram
-BARE_VERSION_SPACED=${BARE_VERSION/-/ }
-VERSION_DATE=$(TZ=UTC date +%d.%m.%y)
+InputVersion="$1"
 
-# Sanity checks
+SENTINEL_VERSION="9999 wip"
+SENTINEL_DATE="01.01.99"
+
+# Environment sanity checks
 test -f package.nix
 test -d tdesktop/cur
 test -d ../tdesktop
 test -f ../tdesktop/run-in-docker.sh
 
-sed -i -E -f - package.nix <<EOF
-/version =/s/".*"/"$BARE_VERSION"/
-/"DEVEL"/s/true|false/$DEVEL/
-/mainProgram =/s/".*"/"$APP_ID"/
+set_version() {
+    case "${Mode:-none}" in
+        none) die "no mode supplied" ;;
+        tag) ;;
+        post) ;;
+        *) die "unknown mode supplied" ;;
+    esac
+
+    if [[ ! -v Version ]]; then die "no version supplied"; fi
+    if [[ $Version != v* ]]; then die "versions should start with v"; fi
+
+    if [[ ! -v Devel ]]; then [[ $Version == *-* ]] && Devel=true || Devel=false; fi
+    if [[ $Devel == true ]]; then AppId=io.github.yukigram.devel; else AppId=io.github.yukigram; fi
+
+    BareVersion="${Version:1}"
+    : "${ChangelogVersion:="${BareVersion/-/ }"}"
+    : "${ChangelogDate:="$(TZ=UTC date +%d.%m.%y)"}"
+
+    sed -i -E -f - package.nix <<EOF
+/version =/s/".*"/"$BareVersion"/
+/"DEVEL"/s/true|false/$Devel/
+/mainProgram =/s/".*"/"$AppId"/
 EOF
 
-sed -i -E -f - flatpak/io.github.yukigram.yml <<EOF
-s/io.github.yukigram(.devel)?/$APP_ID/
+    sed -i -E -f - flatpak/io.github.yukigram.yml <<EOF
+s/io.github.yukigram(.devel)?/$AppId/
 EOF
 
-pushd ../tdesktop
+    pushd ../tdesktop
 
-sed -i -E -f - Telegram/SourceFiles/boxes/about_box.cpp <<EOF
-/box->setTitle/s/: ".*"/: "$VERSION"/
+    sed -i -E -f - Telegram/SourceFiles/boxes/about_box.cpp <<EOF
+/box->setTitle/s/: ".*"/: "$Version"/
 EOF
-git add Telegram/SourceFiles/boxes/about_box.cpp
-git commit --fixup 'HEAD^{/Yukigram) Version}' --allow-empty
+    git add Telegram/SourceFiles/boxes/about_box.cpp
+    git commit --fixup 'HEAD^{/Yukigram) Version}' --allow-empty
 
-sed -i -E -f - changelog.txt <<EOF
-/^9999 wip/s/^.*$/$BARE_VERSION_SPACED ($VERSION_DATE)/
+    if [[ $Mode == tag ]]; then
+        sed -i -E -f - changelog.txt <<EOF
+/^$SENTINEL_VERSION /s/^.*$/$ChangelogVersion ($ChangelogDate)/
 EOF
-git add changelog.txt
-git commit --fixup 'HEAD^{/Yukigram) Changelog}' --allow-empty
+    else
+        cat - changelog.txt >changelog.txt.new <<EOF
+$SENTINEL_VERSION ($SENTINEL_DATE)
 
-../yukigram/s/rebase.sh
-../yukigram/s/format-patch.sh
+- No changes
 
-popd
+EOF
+        mv changelog.txt.new changelog.txt
+    fi
+    git add changelog.txt
+    git commit --fixup 'HEAD^{/Yukigram) Changelog}' --allow-empty
 
-git add package.nix flatpak/io.github.yukigram.yml tdesktop/cur/????-Yukigram-Version.patch tdesktop/cur/????-Yukigram-Changelog.patch
-git commit -m "$VERSION"
-git tag -m "$VERSION" "$VERSION"
+    ../yukigram/s/rebase.sh
+    ../yukigram/s/format-patch.sh
+
+    popd
+
+    git add package.nix flatpak/io.github.yukigram.yml tdesktop/cur/????-Yukigram-Version.patch tdesktop/cur/????-Yukigram-Changelog.patch
+
+    if [[ $Mode == tag ]]; then
+        git commit -m "$Version"
+        git tag -m "$Version" "$Version"
+    else
+        git commit -m "post-release"
+    fi
+}
+
+# Tag a (pre)release...
+Mode=tag Version="$InputVersion" set_version
+# ...and mark next development cycle
+Mode=post Version="$InputVersion+wip" Devel=true ChangelogVersion="$SENTINEL_VERSION" ChangelogDate="$SENTINEL_DATE" set_version
