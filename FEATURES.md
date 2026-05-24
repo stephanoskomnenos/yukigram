@@ -148,6 +148,7 @@ These are placed under `(Interface)` category.
 - :zap: Channel statistics button in kebab menu
     near quick Recent Actions button
 - Go to first message button
+- :gear: Disable edit by Up key
 
 These are placed under `(Chat)` category.
 
