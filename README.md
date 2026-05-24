@@ -2,14 +2,12 @@
 
 Telegram Desktop, minus the bullshit, plus the features.
 
-[Full feature list] /
-[Known bugs] /
+[Full feature/bug list] /
 [Contributing notes] /
 [Licensing information] /
 [Telegram channel]
 
-[Full feature list]: ./FEATURES.md
-[Known bugs]: ./BUGS.md
+[Full feature/bug list]: ./FEATURES.md
 [Contributing notes]: ./CONTRIBUTING.md
 [Licensing information]: ./LICENSING.md
 [Telegram channel]: https://t.me/yukigram

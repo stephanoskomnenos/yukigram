@@ -199,7 +199,7 @@ Some patches originate from [64Gram], [Forkgram] and [Kotatogram].
 [Forkgram]: https://github.com/forkgram/tdesktop
 [Kotatogram]: https://github.com/kotatogram/kotatogram-desktop
 
-## Missing features
+# Missing features
 
 This is mostly a wishlist of sorts.
 I have not yet implemented them,
@@ -218,3 +218,13 @@ Contributions welcome!
 - Old-style spoilers
     (solid color, as in Telegram X)
 - Compile-time option to use QtWebEngine for Instant View
+
+# Known bugs
+
+- "Has unofficial client" icon won't show unless the user profile has already been opened before
+- Autostart with nixpak does not work correctly as xdg-desktop-portal adds `flatpak run` to command
+- "UTC+00:00:01" instead of readable timezone name ([nixpak#205])
+- "Telegram is working in Screen Reader mode" even without screen reader ([tdesktop#30511])
+
+[nixpak#205]: https://github.com/nixpak/nixpak/issues/205
+[tdesktop#30511]: https://github.com/telegramdesktop/tdesktop/issues/30511
