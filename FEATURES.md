@@ -217,14 +217,13 @@ to implement any of these.
 
 Contributions welcome!
 
+- View poll results before voting (if poll allows)
 - Inline diff in Recent Actions
 - Ban button for join requests
 - Client-side user muting (as in 64Gram)
     or AyuGram-style Filters
-- Ability to change font size
 - Old-style spoilers
     (solid color, as in Telegram X)
-- Compile-time option to use QtWebEngine for Instant View
 
 # Known bugs
 
