@@ -72,6 +72,7 @@ path = [
     "tdesktop/cur/*-Info-Warn-when-polls-forbid-revoting.patch",
     "tdesktop/cur/*-Minor-Peer-info-apply-join-button.patch",
     "tdesktop/cur/*-Chat-Opt-Hide-bottom-button-bar.patch",
+    "tdesktop/cur/*-Fix-Non-admin-monoforum-button-in-menu.patch",
 ]
 SPDX-License-Identifier = "GPL-3.0-or-later WITH LicenseRef-sqlitestudio-OpenSSL-exception"
 SPDX-FileCopyrightText = "Yukigram contributors <https://github.com/yukigram/yukigram>"

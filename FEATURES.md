@@ -53,6 +53,8 @@ These are placed under `(Yukigram)` category.
 - More appstream changelog versions (25 instead of 10),
     better version parsing
 - Disable `~/.TelegramDesktop` tdata fallback
+- Allow opening channel direct messages from kebab menus
+    even if user is not an admin
 
 These are placed under `(Fix)` category.
 

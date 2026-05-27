@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 27 May 2026 20:18:10 +0000
+Subject: [PATCH] (Fix) Non-admin monoforum button in menu
+
+---
+ Telegram/SourceFiles/window/window_peer_menu.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Telegram/SourceFiles/window/window_peer_menu.cpp b/Telegram/SourceFiles/window/window_peer_menu.cpp
+index d85831ac36..6eb2fe8462 100644
+--- a/Telegram/SourceFiles/window/window_peer_menu.cpp
++++ b/Telegram/SourceFiles/window/window_peer_menu.cpp
+@@ -938,7 +938,7 @@ void Filler::addDirectMessages() {
+ 		return;
+ 	}
+ 	const auto monoforum = channel->broadcastMonoforum();
+-	if (!monoforum || !monoforum->amMonoforumAdmin()) {
++	if (!monoforum) {
+ 		return;
+ 	}
+ 	const auto navigation = _controller;
+-- 
+2.53.0
+
