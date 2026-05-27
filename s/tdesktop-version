@@ -60,7 +60,8 @@ if ! git am -3 ../yukigram/tdesktop; then
     while
         info 'Fix conflicts and exit the shell to continue applying'
         bash -i || true
-        git am --continue
+        test -d .git/rebase-apply
+        ! git am --continue
     do
         :
     done
