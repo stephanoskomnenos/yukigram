@@ -83,6 +83,7 @@ These are placed under `(Annoyances)` category.
     (`:docker:` -> :whale:,
     `:podman:` -> :whale2:,
     `:bottom:` -> :pleading_face:)
+- :star: "Apply" instead of "Join" in peer info buttons
 
 These are placed under `(Minor)` category.
 
@@ -153,6 +154,8 @@ These are placed under `(Interface)` category.
     near quick Recent Actions button
 - Go to first message button
 - :gear: Disable edit by Up key
+- :star: :gear: Hide bottom button bar
+    (Join channel, mute/unmute, etc)
 
 These are placed under `(Chat)` category.
 

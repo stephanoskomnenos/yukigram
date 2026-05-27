@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 27 May 2026 19:21:28 +0000
+Subject: [PATCH] (Minor) Peer info apply join button
+
+---
+ Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp b/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
+index 43a5df9c24..8902fc7e2b 100644
+--- a/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
++++ b/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
+@@ -771,6 +771,7 @@ void TopBar::setupActions(not_null<Window::SessionController*> controller) {
+ 	if (canJoin) {
+ 		const auto join = Ui::CreateChild<TopBarActionButton>(
+ 			this,
++			(channel->requestToJoin() && !channel->amCreator()) ? u"Apply"_q :
+ 			tr::lng_profile_action_short_join(tr::now),
+ 			st::infoProfileTopBarActionJoin);
+ 		join->setClickedCallback([=] {
+-- 
+2.53.0
+
