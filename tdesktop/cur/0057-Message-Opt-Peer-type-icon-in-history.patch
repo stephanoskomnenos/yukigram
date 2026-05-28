@@ -7,11 +7,12 @@ This patch is adapted from Kotatogram.
 Original author: RadRussianRus <radrussianrus@gmail.com>
 ---
  Telegram/CMakeLists.txt                       |  2 +
+ Telegram/Resources/langs/yukigram/en.json     |  2 +
  .../history/view/history_view_message.cpp     | 39 ++++++++++++++++++-
  Telegram/SourceFiles/ui/chat/chat.style       | 11 ++++++
- .../settings/history_peer_type_icons.cpp      | 14 +++++++
+ .../settings/history_peer_type_icons.cpp      | 13 +++++++
  .../settings/history_peer_type_icons.h        |  5 +++
- 5 files changed, 70 insertions(+), 1 deletion(-)
+ 6 files changed, 71 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.h
 
@@ -28,6 +29,19 @@ index df4eb26343..4e6b991b69 100644
      yukigram/settings/icon_theme_symbolic.cpp
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index df1eebf0ce..74f8b65a43 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -20,6 +20,8 @@
+     "opt/force-mobile-layout/desc": "",
+     "opt/forum-hide-chats-list/name": "Hide narrow column chat list in forums",
+     "opt/forum-hide-chats-list/desc": "",
++    "opt/history-peer-type-icons/name": "Show peer type icon",
++    "opt/history-peer-type-icons/desc": "",
+     "opt/icon-theme-symbolic/name": "Use symbolic tray icon from icon theme",
+     "opt/icon-theme-symbolic/desc": "",
+     "opt/mpris-call-hangup/name": "Control calls with MPRIS",
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
 index 1323172631..2d7ec53cda 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
@@ -137,17 +151,16 @@ index 9ec23aa5a0..5946685f5e 100644
  	shift: 12px;
 diff --git a/Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.cpp b/Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.cpp
 new file mode 100644
-index 0000000000..23203dbd79
+index 0000000000..2cb3a5a069
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/history_peer_type_icons.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *HistoryPeerTypeIcons = Yukigram::Options::make(kOptionHistoryPeerTypeIcons, {
-+	.name = "Show peer type icon",
 +	.keywords = { u"yukigram"_q, u"peer"_q, u"user"_q, u"icon"_q, u"bot"_q, u"channel"_q, u"group"_q, u"chat"_q, u"forum"_q },
 +	.category = "history",
 +});

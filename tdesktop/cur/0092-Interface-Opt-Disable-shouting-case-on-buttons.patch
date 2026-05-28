@@ -5,10 +5,11 @@ Subject: [PATCH] (Interface)(Opt) Disable shouting-case on buttons
 
 ---
  Telegram/CMakeLists.txt                       |  2 ++
- .../yukigram/settings/no_shout_buttons.cpp    | 20 +++++++++++++++++++
+ Telegram/Resources/langs/yukigram/en.json     |  2 ++
+ .../yukigram/settings/no_shout_buttons.cpp    | 19 +++++++++++++++++++
  .../yukigram/settings/no_shout_buttons.h      |  5 +++++
  Telegram/lib_ui/ui/widgets/buttons.cpp        |  5 ++++-
- 4 files changed, 31 insertions(+), 1 deletion(-)
+ 5 files changed, 32 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/no_shout_buttons.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/no_shout_buttons.h
 
@@ -25,12 +26,25 @@ index a85ecf61ff..92f06168b1 100644
      yukigram/settings/old_style_spoilers.cpp
      yukigram/settings/old_style_spoilers.h
      yukigram/settings/right_action_comments.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index 13d786846e..ea84938fbf 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -48,6 +48,8 @@
+     "opt/inferred-peer-dc/desc": "",
+     "opt/mpris-call-hangup/name": "Control calls with MPRIS",
+     "opt/mpris-call-hangup/desc": "Use Prev/Next/Stop to hangup or decline.\nUse Play/Pause/PlayPause to accept.\nThis option conflicts with internal media player controls",
++    "opt/no-shout-buttons/name": "Disable SHOUT-case in buttons",
++    "opt/no-shout-buttons/desc": "",
+     "opt/old-style-spoilers/name": "Old-style spoilers (without mess)",
+     "opt/old-style-spoilers/desc": "",
+     "opt/show-channel-joined-below-about/name": "Show channel join date",
 diff --git a/Telegram/SourceFiles/yukigram/settings/no_shout_buttons.cpp b/Telegram/SourceFiles/yukigram/settings/no_shout_buttons.cpp
 new file mode 100644
-index 0000000000..192874fa15
+index 0000000000..243735beb4
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/no_shout_buttons.cpp
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,19 @@
 +#include "yukigram/settings/no_shout_buttons.h"
 +#include "yukigram/options.h"
 +
@@ -41,7 +55,6 @@ index 0000000000..192874fa15
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *NoShoutButtons = Yukigram::Options::make(kOptionNoShoutButtons, {
-+	.name = "Disable SHOUT-case in buttons",
 +	.keywords = { u"yukigram"_q, u"shout"_q, u"caps"_q, u"button"_q },
 +	.category = "interface",
 +}, [](bool value) {

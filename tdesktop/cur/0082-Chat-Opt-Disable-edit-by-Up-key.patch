@@ -6,12 +6,13 @@ Subject: [PATCH] (Chat)(Opt) Disable edit by Up key
 This patch is adapted from Kotatogram.
 Original author: RadRussianRus <radrussianrus@gmail.com>
 ---
- Telegram/CMakeLists.txt                            |  2 ++
- Telegram/SourceFiles/history/history_widget.cpp    |  2 ++
- .../controls/history_view_compose_controls.cpp     |  3 ++-
- .../yukigram/settings/disable_up_edit.cpp          | 14 ++++++++++++++
- .../yukigram/settings/disable_up_edit.h            |  5 +++++
- 5 files changed, 25 insertions(+), 1 deletion(-)
+ Telegram/CMakeLists.txt                             |  2 ++
+ Telegram/Resources/langs/yukigram/en.json           |  2 ++
+ Telegram/SourceFiles/history/history_widget.cpp     |  2 ++
+ .../view/controls/history_view_compose_controls.cpp |  3 ++-
+ .../yukigram/settings/disable_up_edit.cpp           | 13 +++++++++++++
+ .../SourceFiles/yukigram/settings/disable_up_edit.h |  5 +++++
+ 6 files changed, 26 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/disable_up_edit.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/disable_up_edit.h
 
@@ -28,6 +29,19 @@ index a218ff173b..97a7a78eea 100644
      yukigram/settings/force_mobile_layout.cpp
      yukigram/settings/force_mobile_layout.h
      yukigram/settings/hide_message_tail.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index ef5e47771c..064e62dc85 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -16,6 +16,8 @@
+     "opt/compact-chat-list/desc": "",
+     "opt/disable-animoji/name": "Disable animated big emoji",
+     "opt/disable-animoji/desc": "",
++    "opt/disable-up-edit/name": "Disable edit by Up key",
++    "opt/disable-up-edit/desc": "",
+     "opt/force-compose-search-one-column/name": "Embedded search in single-column",
+     "opt/force-compose-search-one-column/desc": "",
+     "opt/force-mobile-layout/name": "Force single-column layout",
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
 index 4eabf04763..44a4261682 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
@@ -71,17 +85,16 @@ index b7da4b70d0..ba8f8a6e80 100644
  				return;
 diff --git a/Telegram/SourceFiles/yukigram/settings/disable_up_edit.cpp b/Telegram/SourceFiles/yukigram/settings/disable_up_edit.cpp
 new file mode 100644
-index 0000000000..234c586f1e
+index 0000000000..18f1576258
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/disable_up_edit.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/disable_up_edit.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *DisableUpEdit = Yukigram::Options::make(kOptionDisableUpEdit, {
-+	.name = "Disable edit by Up key",
 +	.keywords = { u"yukigram"_q, u"edit"_q, u"up"_q },
 +	.category = "tweaks",
 +});

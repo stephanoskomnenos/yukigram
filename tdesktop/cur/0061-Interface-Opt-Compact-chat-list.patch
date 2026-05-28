@@ -5,14 +5,15 @@ Subject: [PATCH] (Interface)(Opt) Compact chat list
 
 ---
  Telegram/CMakeLists.txt                       |  2 ++
+ Telegram/Resources/langs/yukigram/en.json     |  2 ++
  Telegram/SourceFiles/dialogs/dialogs.style    |  5 ++++
  .../SourceFiles/dialogs/dialogs_entry.cpp     |  5 ++++
  .../dialogs/dialogs_inner_widget.cpp          | 12 ++++++---
  Telegram/SourceFiles/dialogs/dialogs_row.cpp  |  6 ++++-
  .../SourceFiles/dialogs/ui/dialogs_layout.cpp | 25 +++++++++++++++++--
- .../yukigram/settings/compact_chat_list.cpp   | 14 +++++++++++
+ .../yukigram/settings/compact_chat_list.cpp   | 13 ++++++++++
  .../yukigram/settings/compact_chat_list.h     |  5 ++++
- 8 files changed, 67 insertions(+), 7 deletions(-)
+ 9 files changed, 68 insertions(+), 7 deletions(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/compact_chat_list.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/compact_chat_list.h
 
@@ -29,6 +30,19 @@ index b89bfa40b7..ce19420093 100644
      yukigram/settings/disable_animoji.cpp
      yukigram/settings/disable_animoji.h
      yukigram/settings/force_mobile_layout.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index b3e14cbbfa..8ddd0b5e37 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -12,6 +12,8 @@
+     "opt/always-show-scheduled/desc": "",
+     "opt/comments-button-always-right/name": "Right action comments button",
+     "opt/comments-button-always-right/desc": "",
++    "opt/compact-chat-list/name": "Compact chat list",
++    "opt/compact-chat-list/desc": "",
+     "opt/disable-animoji/name": "Disable animated big emoji",
+     "opt/disable-animoji/desc": "",
+     "opt/force-compose-search-one-column/name": "Embedded search in single-column",
 diff --git a/Telegram/SourceFiles/dialogs/dialogs.style b/Telegram/SourceFiles/dialogs/dialogs.style
 index 58f39e74ba..11eb8ca12c 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs.style
@@ -263,17 +277,16 @@ index e8e88862b0..c097f3f309 100644
  		nullptr,
 diff --git a/Telegram/SourceFiles/yukigram/settings/compact_chat_list.cpp b/Telegram/SourceFiles/yukigram/settings/compact_chat_list.cpp
 new file mode 100644
-index 0000000000..42409139a5
+index 0000000000..e8eedf12c0
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/compact_chat_list.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/compact_chat_list.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *CompactChatList = Yukigram::Options::make(kOptionCompactChatList, {
-+	.name = "Compact chat list",
 +	.keywords = { u"yukigram"_q, u"compact"_q, u"chat"_q },
 +	.category = "dialogs",
 +});

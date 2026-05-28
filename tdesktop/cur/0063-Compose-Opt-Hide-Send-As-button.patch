@@ -4,11 +4,12 @@ Date: Tue, 28 Apr 2026 02:36:42 +0300
 Subject: [PATCH] (Compose)(Opt) Hide Send As button
 
 ---
- Telegram/CMakeLists.txt                            |  2 ++
- Telegram/SourceFiles/history/history_widget.cpp    | 11 ++++++++++-
- .../SourceFiles/yukigram/settings/hide_send_as.cpp | 14 ++++++++++++++
- .../SourceFiles/yukigram/settings/hide_send_as.h   |  5 +++++
- 4 files changed, 31 insertions(+), 1 deletion(-)
+ Telegram/CMakeLists.txt                             |  2 ++
+ Telegram/Resources/langs/yukigram/en.json           |  2 ++
+ Telegram/SourceFiles/history/history_widget.cpp     | 11 ++++++++++-
+ .../SourceFiles/yukigram/settings/hide_send_as.cpp  | 13 +++++++++++++
+ .../SourceFiles/yukigram/settings/hide_send_as.h    |  5 +++++
+ 5 files changed, 32 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_send_as.h
 
@@ -25,6 +26,19 @@ index 5c984795fe..f430f2b944 100644
      yukigram/settings/hide_wall_paper.cpp
      yukigram/settings/hide_wall_paper.h
      yukigram/settings/history_peer_type_icons.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index d4ba4668c1..e3c4205951 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -22,6 +22,8 @@
+     "opt/force-mobile-layout/desc": "",
+     "opt/forum-hide-chats-list/name": "Hide narrow column chat list in forums",
+     "opt/forum-hide-chats-list/desc": "",
++    "opt/hide-send-as/name": "Hide Send As button",
++    "opt/hide-send-as/desc": "",
+     "opt/hide-send-as-premium/name": "Hide Send As channels requiring Premium",
+     "opt/hide-send-as-premium/desc": "",
+     "opt/hide-wall-paper/name": "Hide per-chat wallpaper",
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
 index c50db344c2..97bb66c869 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
@@ -63,17 +77,16 @@ index c50db344c2..97bb66c869 100644
  	} else if (_sendAs) {
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp b/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp
 new file mode 100644
-index 0000000000..b27a901e41
+index 0000000000..2d8a58ad7b
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/hide_send_as.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/hide_send_as.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *HideSendAs = Yukigram::Options::make(kOptionHideSendAs, {
-+	.name = "Hide Send As button",
 +	.keywords = { u"yukigram"_q, u"send"_q, u"channels"_q },
 +	.category = "compose",
 +});

@@ -4,15 +4,14 @@ Date: Wed, 13 May 2026 22:24:17 +0300
 Subject: [PATCH] (Compose)(Opt) Hide popular stickers in suggested
 
 ---
- Telegram/CMakeLists.txt                            |  2 ++
- .../chat_helpers/field_autocomplete.cpp            |  5 +++++
- .../settings/hide_popular_sticker_suggest.cpp      | 14 ++++++++++++++
- .../settings/hide_popular_sticker_suggest.h        |  5 +++++
- .../settings/sticker_hide_popular_suggest.cpp      | 14 ++++++++++++++
- 5 files changed, 40 insertions(+)
+ Telegram/CMakeLists.txt                             |  2 ++
+ Telegram/Resources/langs/yukigram/en.json           |  2 ++
+ .../SourceFiles/chat_helpers/field_autocomplete.cpp |  5 +++++
+ .../settings/hide_popular_sticker_suggest.cpp       | 13 +++++++++++++
+ .../settings/hide_popular_sticker_suggest.h         |  5 +++++
+ 5 files changed, 27 insertions(+)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_popular_sticker_suggest.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_popular_sticker_suggest.h
- create mode 100644 Telegram/SourceFiles/yukigram/settings/sticker_hide_popular_suggest.cpp
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
 index e2f78bc84b..1653a090b4 100644
@@ -27,6 +26,19 @@ index e2f78bc84b..1653a090b4 100644
      yukigram/settings/hide_reply_background_emoji.cpp
      yukigram/settings/hide_reply_background_emoji.h
      yukigram/settings/hide_send_as_premium.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index 4c6c5af130..36b1db1341 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -24,6 +24,8 @@
+     "opt/forum-hide-chats-list/desc": "",
+     "opt/hide-message-tail/name": "Hide message bubble tail",
+     "opt/hide-message-tail/desc": "",
++    "opt/hide-popular-sticker-suggest/name": "Hide suggested stickers from popular packs",
++    "opt/hide-popular-sticker-suggest/desc": "",
+     "opt/hide-reply-background-emoji/name": "Hide reply background emoji",
+     "opt/hide-reply-background-emoji/desc": "",
+     "opt/hide-send-as/name": "Hide Send As button",
 diff --git a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp b/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
 index c3654bc80b..9497d87bf3 100644
 --- a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
@@ -52,17 +64,16 @@ index c3654bc80b..9497d87bf3 100644
  			sticker,
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_popular_sticker_suggest.cpp b/Telegram/SourceFiles/yukigram/settings/hide_popular_sticker_suggest.cpp
 new file mode 100644
-index 0000000000..b020baf07d
+index 0000000000..8e13e0ea79
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/hide_popular_sticker_suggest.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/hide_popular_sticker_suggest.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *HidePopularStickerSuggest = Yukigram::Options::make(kOptionHidePopularStickerSuggest, {
-+	.name = "Hide suggested stickers from popular packs",
 +	.keywords = { u"yukigram"_q, u"stickers"_q, u"suggested"_q, u"pack"_q, u"popular"_q },
 +	.category = "compose",
 +});
@@ -80,26 +91,6 @@ index 0000000000..076ceeb385
 +namespace Yukigram::Settings {
 +extern rpl::variable<bool> *HidePopularStickerSuggest;
 +extern const char kOptionHidePopularStickerSuggest[];
-+}
-diff --git a/Telegram/SourceFiles/yukigram/settings/sticker_hide_popular_suggest.cpp b/Telegram/SourceFiles/yukigram/settings/sticker_hide_popular_suggest.cpp
-new file mode 100644
-index 0000000000..b020baf07d
---- /dev/null
-+++ b/Telegram/SourceFiles/yukigram/settings/sticker_hide_popular_suggest.cpp
-@@ -0,0 +1,14 @@
-+#include "yukigram/settings/hide_popular_sticker_suggest.h"
-+#include "yukigram/options.h"
-+
-+namespace Yukigram::Settings {
-+
-+rpl::variable<bool> *HidePopularStickerSuggest = Yukigram::Options::make(kOptionHidePopularStickerSuggest, {
-+	.name = "Hide suggested stickers from popular packs",
-+	.keywords = { u"yukigram"_q, u"stickers"_q, u"suggested"_q, u"pack"_q, u"popular"_q },
-+	.category = "compose",
-+});
-+
-+const char kOptionHidePopularStickerSuggest[] = "hide-popular-sticker-suggest";
-+
 +}
 -- 
 2.53.0

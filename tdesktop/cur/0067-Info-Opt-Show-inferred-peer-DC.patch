@@ -5,10 +5,11 @@ Subject: [PATCH] (Info)(Opt) Show inferred peer DC
 
 ---
  Telegram/CMakeLists.txt                       |  2 ++
+ Telegram/Resources/langs/yukigram/en.json     |  2 ++
  .../info/profile/info_profile_actions.cpp     | 20 +++++++++++++++++++
- .../yukigram/settings/inferred_peer_dc.cpp    | 14 +++++++++++++
+ .../yukigram/settings/inferred_peer_dc.cpp    | 13 ++++++++++++
  .../yukigram/settings/inferred_peer_dc.h      |  5 +++++
- 4 files changed, 41 insertions(+)
+ 5 files changed, 42 insertions(+)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.h
 
@@ -25,6 +26,19 @@ index ef5ab54870..991165113a 100644
      yukigram/settings/icon_theme_symbolic.cpp
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index ba277fa61a..8e1cba3496 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -34,6 +34,8 @@
+     "opt/history-peer-type-icons/desc": "",
+     "opt/icon-theme-symbolic/name": "Use symbolic tray icon from icon theme",
+     "opt/icon-theme-symbolic/desc": "",
++    "opt/inferred-peer-dc/name": "Show inferred peer DC",
++    "opt/inferred-peer-dc/desc": "",
+     "opt/mpris-call-hangup/name": "Control calls with MPRIS",
+     "opt/mpris-call-hangup/desc": "Use Prev/Next/Stop to hangup or decline.\nUse Play/Pause/PlayPause to accept.\nThis option conflicts with internal media player controls",
+     "opt/show-channel-joined-below-about/name": "Show channel join date",
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 index 0d6871544f..8cd84d920b 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
@@ -86,17 +100,16 @@ index 0d6871544f..8cd84d920b 100644
  	raw->toggleOn(tracker.atLeastOneShownValue());
 diff --git a/Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp b/Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp
 new file mode 100644
-index 0000000000..9c29075a30
+index 0000000000..49683f118b
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/inferred_peer_dc.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/inferred_peer_dc.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *InferredPeerDc = Yukigram::Options::make(kOptionInferredPeerDc, {
-+	.name = "Show inferred peer DC",
 +	.keywords = { u"yukigram"_q, u"inferred"_q, u"peer"_q, u"dc"_q, u"datacenter"_q },
 +	.category = "tweaks",
 +});

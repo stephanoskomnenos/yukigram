@@ -5,10 +5,11 @@ Subject: [PATCH] (Message)(Opt) Right action comments
 
 ---
  Telegram/CMakeLists.txt                         |  2 ++
+ Telegram/Resources/langs/yukigram/en.json       |  2 ++
  .../history/view/history_view_message.cpp       | 17 +++++++++++------
- .../yukigram/settings/right_action_comments.cpp | 14 ++++++++++++++
+ .../yukigram/settings/right_action_comments.cpp | 13 +++++++++++++
  .../yukigram/settings/right_action_comments.h   |  5 +++++
- 4 files changed, 32 insertions(+), 6 deletions(-)
+ 5 files changed, 33 insertions(+), 6 deletions(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/right_action_comments.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/right_action_comments.h
 
@@ -25,6 +26,19 @@ index c69eed4150..5dde2421a6 100644
      apiwrap.cpp
      apiwrap.h
      config.h
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index 153ad82b3b..72f9c6382b 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -8,6 +8,8 @@
+     "optgroup/compose": "Composing messages",
+     "optgroup/picker": "Stickers and Emoji picker",
+     "optgroup/system": "System",
++    "opt/comments-button-always-right/name": "Right action comments button",
++    "opt/comments-button-always-right/desc": "",
+     "opt/disable-animoji/name": "Disable animated big emoji",
+     "opt/disable-animoji/desc": "",
+     "opt/force-compose-search-one-column/name": "Embedded search in single-column",
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
 index 22321dd539..ef6fe69e90 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
@@ -106,17 +120,16 @@ index 22321dd539..ef6fe69e90 100644
  			_comments = nullptr;
 diff --git a/Telegram/SourceFiles/yukigram/settings/right_action_comments.cpp b/Telegram/SourceFiles/yukigram/settings/right_action_comments.cpp
 new file mode 100644
-index 0000000000..12a8faa3c6
+index 0000000000..cc249f4de1
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/right_action_comments.cpp
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +#include "yukigram/settings/right_action_comments.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *RightActionComments = Yukigram::Options::make(kOptionRightActionComments, {
-+	.name = "Right action comments button",
 +	.keywords = { u"yukigram"_q, u"comments"_q, u"right"_q, u"compact"_q },
 +	.category = "history",
 +});

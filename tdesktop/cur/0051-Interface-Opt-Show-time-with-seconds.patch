@@ -7,6 +7,7 @@ This patch is adapted from 64Gram.
 Original author: c0re100 <corehusky@gmail.com>
 ---
  Telegram/CMakeLists.txt                       |  2 ++
+ Telegram/Resources/langs/yukigram/en.json     |  2 ++
  Telegram/SourceFiles/api/api_who_reacted.cpp  | 19 ++++--------
  .../SourceFiles/data/data_peer_values.cpp     | 10 +++----
  .../history/history_inner_widget.cpp          |  2 +-
@@ -19,9 +20,9 @@ Original author: c0re100 <corehusky@gmail.com>
  Telegram/SourceFiles/lang/lang_keys.h         |  3 ++
  .../controls/who_reacted_context_action.cpp   |  2 +-
  .../SourceFiles/ui/text/format_values.cpp     | 21 ++++----------
- .../yukigram/settings/time_with_seconds.cpp   | 15 ++++++++++
+ .../yukigram/settings/time_with_seconds.cpp   | 14 +++++++++
  .../yukigram/settings/time_with_seconds.h     |  5 ++++
- 15 files changed, 76 insertions(+), 44 deletions(-)
+ 16 files changed, 77 insertions(+), 44 deletions(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/time_with_seconds.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/time_with_seconds.h
 
@@ -38,6 +39,19 @@ index 7f884d73df..7539507d83 100644
      yukigram/settings/wide_messages.cpp
      yukigram/settings/wide_messages.h
      apiwrap.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index bde11933e9..0576afcd40 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -30,6 +30,8 @@
+     "opt/show-peer-id-below-about/desc": "",
+     "opt/tabbed-panel-show-on-click/name": "Click to show emoji picker",
+     "opt/tabbed-panel-show-on-click/desc": "",
++    "opt/time-with-seconds/name": "Show time with seconds",
++    "opt/time-with-seconds/desc": "",
+     "opt/unlimited-recent-stickers/name": "Unlimited recent stickers",
+     "opt/unlimited-recent-stickers/desc": "",
+     "opt/use-small-msg-bubble-radius/name": "Use small message bubble radius",
 diff --git a/Telegram/SourceFiles/api/api_who_reacted.cpp b/Telegram/SourceFiles/api/api_who_reacted.cpp
 index 5cc833ec41..020c95b5e9 100644
 --- a/Telegram/SourceFiles/api/api_who_reacted.cpp
@@ -322,17 +336,16 @@ index 7b70065e1f..14d23593d9 100644
  	} else {
 diff --git a/Telegram/SourceFiles/yukigram/settings/time_with_seconds.cpp b/Telegram/SourceFiles/yukigram/settings/time_with_seconds.cpp
 new file mode 100644
-index 0000000000..97223be11c
+index 0000000000..d8a616b43e
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/time_with_seconds.cpp
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,14 @@
 +#include "yukigram/settings/time_with_seconds.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *TimeWithSeconds = Yukigram::Options::make(kOptionTimeWithSeconds, {
-+	.name = "Show time with seconds",
 +	.keywords = { u"yukigram"_q, u"time"_q, u"seconds"_q },
 +	.category = "tweaks",
 +	.restartRequired = true,

@@ -6,13 +6,14 @@ Subject: [PATCH] (Message)(Opt) Show message id
 This patch is adapted from 64Gram.
 Original author: c0re100 <corehusky@gmail.com>
 ---
- Telegram/CMakeLists.txt                           |  2 ++
- .../history/view/history_view_bottom_info.cpp     |  7 ++++++-
- .../history/view/history_view_bottom_info.h       |  1 +
- .../history/view/history_view_element.cpp         |  3 +++
- .../yukigram/settings/show_message_id.cpp         | 15 +++++++++++++++
- .../yukigram/settings/show_message_id.h           |  5 +++++
- 6 files changed, 32 insertions(+), 1 deletion(-)
+ Telegram/CMakeLists.txt                            |  2 ++
+ Telegram/Resources/langs/yukigram/en.json          |  2 ++
+ .../history/view/history_view_bottom_info.cpp      |  7 ++++++-
+ .../history/view/history_view_bottom_info.h        |  1 +
+ .../history/view/history_view_element.cpp          |  3 +++
+ .../yukigram/settings/show_message_id.cpp          | 14 ++++++++++++++
+ .../yukigram/settings/show_message_id.h            |  5 +++++
+ 7 files changed, 33 insertions(+), 1 deletion(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/show_message_id.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/show_message_id.h
 
@@ -29,6 +30,19 @@ index 7539507d83..df4eb26343 100644
      yukigram/settings/time_with_seconds.cpp
      yukigram/settings/time_with_seconds.h
      yukigram/settings/wide_messages.cpp
+diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
+index 0576afcd40..df1eebf0ce 100644
+--- a/Telegram/Resources/langs/yukigram/en.json
++++ b/Telegram/Resources/langs/yukigram/en.json
+@@ -26,6 +26,8 @@
+     "opt/mpris-call-hangup/desc": "Use Prev/Next/Stop to hangup or decline.\nUse Play/Pause/PlayPause to accept.\nThis option conflicts with internal media player controls",
+     "opt/show-channel-joined-below-about/name": "Show channel join date",
+     "opt/show-channel-joined-below-about/desc": "",
++    "opt/show-msgid/name": "Show message ID",
++    "opt/show-msgid/desc": "",
+     "opt/show-peer-id-below-about/name": "Show peer ID",
+     "opt/show-peer-id-below-about/desc": "",
+     "opt/tabbed-panel-show-on-click/name": "Click to show emoji picker",
 diff --git a/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp b/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp
 index d9e1b4d257..a6d7fc1809 100644
 --- a/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp
@@ -89,17 +103,16 @@ index 1cfff66d67..53d9e3c909 100644
  
 diff --git a/Telegram/SourceFiles/yukigram/settings/show_message_id.cpp b/Telegram/SourceFiles/yukigram/settings/show_message_id.cpp
 new file mode 100644
-index 0000000000..c8366bbf8c
+index 0000000000..790e875ada
 --- /dev/null
 +++ b/Telegram/SourceFiles/yukigram/settings/show_message_id.cpp
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,14 @@
 +#include "yukigram/settings/show_message_id.h"
 +#include "yukigram/options.h"
 +
 +namespace Yukigram::Settings {
 +
 +rpl::variable<bool> *ShowMsgId = Yukigram::Options::make(kOptionShowMsgId, {
-+	.name = "Show message ID",
 +	.keywords = { u"yukigram"_q, u"message"_q, u"id"_q },
 +	.category = "history",
 +	.restartRequired = true,
