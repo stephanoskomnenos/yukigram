@@ -1,4 +1,4 @@
-# Yukigram: unofficial patch-based [Telegram Desktop][tdesktop] fork
+# Yukigram: patch-based [Telegram Desktop][tdesktop] fork
 
 [tdesktop]: https://github.com/telegramdesktop/tdesktop
 
