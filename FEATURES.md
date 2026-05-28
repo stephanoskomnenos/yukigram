@@ -170,6 +170,8 @@ These are placed under `(Chat)` category.
 - :gear: Hide message bubble tail
 - :star: Revert pill design for chat list suggestions
     (someone logged on, set birthday, buy premium, etc.)
+- :zap: :gear: Old-style spoilers
+    (solid color, as in Telegram X)
 
 These are placed under `(Style)` category.
 
@@ -222,8 +224,6 @@ Contributions welcome!
 - Ban button for join requests
 - Client-side user muting (as in 64Gram)
     or AyuGram-style Filters
-- Old-style spoilers
-    (solid color, as in Telegram X)
 
 # Known bugs
 
