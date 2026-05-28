@@ -1,0 +1,170 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Thu, 28 May 2026 22:20:22 +0000
+Subject: [PATCH] (Translations) Russian
+
+---
+ Telegram/Resources/langs/yukigram/ru.json    | 137 +++++++++++++++++++
+ Telegram/Resources/qrc/telegram/yukigram.qrc |   1 +
+ 2 files changed, 138 insertions(+)
+ create mode 100644 Telegram/Resources/langs/yukigram/ru.json
+
+diff --git a/Telegram/Resources/langs/yukigram/ru.json b/Telegram/Resources/langs/yukigram/ru.json
+new file mode 100644
+index 0000000000..ffd30821de
+--- /dev/null
++++ b/Telegram/Resources/langs/yukigram/ru.json
+@@ -0,0 +1,137 @@
++{
++    "about/1/text": "Неофициальный форк {tdesktop_link},\nкоторый добавляет фичи и убирает мусор.",
++    "about/1/tdesktop": "Telegram Desktop",
++    "about/3/text": "Посетите {channel_link} или {faq_link}, чтобы узнать больше.",
++    "about/3/channel": "канал Yukigram",
++    "box/edit-peer-permissions/rights/games": "Игры",
++    "box/edit-peer-permissions/rights/gifs": "GIFки",
++    "box/edit-peer-permissions/rights/inline": "Инлайн-боты",
++    "box/edit-peer-permissions/rights/stickers": "Стикеры",
++    "box/peer-list/channel-like/broadcast": "канал",
++    "box/peer-list/channel-like/forum": "форум",
++    "box/peer-list/channel-like/monoforum": "монофорум",
++    "box/peer-list/channel-like/supergroup": "супергруппа",
++    "box/peer-list/channel-like/unknown": "похоже на канал",
++    "box/peer-list/group": "старая группа",
++    "box/peer-list/count/members#zero": "{kind}",
++    "box/peer-list/count/members#one": "{kind}, {count} участник",
++    "box/peer-list/count/members#two": "{kind}, {count} участников",
++    "box/peer-list/count/members#few": "{kind}, {count} участника",
++    "box/peer-list/count/members#many": "{kind}, {count} участников",
++    "box/peer-list/count/members#other": "{kind}, {count} участников",
++    "box/peer-list/count/subscribers#zero": "{kind}",
++    "box/peer-list/count/subscribers#one": "{kind}, {count} подписчик",
++    "box/peer-list/count/subscribers#two": "{kind}, {count} подписчиков",
++    "box/peer-list/count/subscribers#few": "{kind}, {count} подписчика",
++    "box/peer-list/count/subscribers#many": "{kind}, {count} подписчиков",
++    "box/peer-list/count/subscribers#other": "{kind}, {count} подписчиков",
++    "box/sticker-set/owner/title": "Владелец",
++    "drawer/new-supergroup/title": "Создать супергруппу",
++    "menu/first-message/title": "Начало истории",
++    "info/peer-dc/inferred": "Предполагаемый дата-центр",
++    "info/peer-id/broadcast": "ID канала",
++    "info/peer-id/channel-like": "ID похожего на канал",
++    "info/peer-id/forum": "ID форума",
++    "info/peer-id/group": "ID старой группы",
++    "info/peer-id/monoforum": "ID монофорума",
++    "info/peer-id/supergroup": "ID супергруппы",
++    "info/peer-id/user": "ID пользователя",
++    "info/peer-id/unknown": "ID пира",
++    "info/profile/top-bar/join/apply": "Податься",
++    "intro/about": "Добро пожаловать в Yukigram, неофициальный форк Telegram Desktop, основанный на .patch-файлах.",
++    "media/poll/revotes/allowed": "{inner}",
++    "media/poll/revotes/forbidden": "{inner}, нельзя менять голос",
++    "media/poll/forbidden-revotes-warning/text": "В этом опросе нельзя менять свой голос",
++    "media/poll/forbidden-revotes-warning/confirm": "Проголосовать",
++    "media/poll/forbidden-revotes-warning/cancel": "Отказаться",
++    "nya": "Муррр >.<",
++    "optgroup/interface": "Интерфейс",
++    "optgroup/tweaks": "Твики",
++    "optgroup/dialogs": "Список чатов",
++    "optgroup/style": "Стиль чата",
++    "optgroup/history": "Сообщения",
++    "optgroup/reactions": "Реакции",
++    "optgroup/compose": "Окно написания сообщений",
++    "optgroup/picker": "Палитра стикеров и эмодзи",
++    "optgroup/system": "Система",
++    "opt/always-show-scheduled/name": "Всегда показвать отложенные сообщения",
++    "opt/always-show-scheduled/desc": "",
++    "opt/comments-button-always-right/name": "Кнопка комментариев справа",
++    "opt/comments-button-always-right/desc": "",
++    "opt/compact-chat-list/name": "Компактный список чатов",
++    "opt/compact-chat-list/desc": "",
++    "opt/disable-animoji/name": "Отключить анимодзи",
++    "opt/disable-animoji/desc": "",
++    "opt/disable-up-edit/name": "Отключить редактирование по Up",
++    "opt/disable-up-edit/desc": "",
++    "opt/force-compose-search-one-column/name": "Встроенный поиск в телеф. режиме",
++    "opt/force-compose-search-one-column/desc": "",
++    "opt/force-mobile-layout/name": "Телефонный режим",
++    "opt/force-mobile-layout/desc": "",
++    "opt/forum-hide-chats-list/name": "Скрыть список чатов в форумах",
++    "opt/forum-hide-chats-list/desc": "",
++    "opt/hide-bottom-bar/name": "Скрыть нижнюю панель с кнопками",
++    "opt/hide-bottom-bar/desc": "",
++    "opt/hide-message-tail/name": "Убрать хвост пузыря сообщения",
++    "opt/hide-message-tail/desc": "",
++    "opt/hide-popular-emoji-picker/name": "Скрыть популярные анимодзи из палитры",
++    "opt/hide-popular-emoji-picker/desc": "",
++    "opt/hide-popular-sticker-suggest/name": "Не предлагать популярные стикеры",
++    "opt/hide-popular-sticker-suggest/desc": "",
++    "opt/hide-reply-background-emoji/name": "Скрыть эмодзи фона в ответах",
++    "opt/hide-reply-background-emoji/desc": "",
++    "opt/hide-send-as/name": "Скрыть кнопку «Отправить от»",
++    "opt/hide-send-as/desc": "",
++    "opt/hide-send-as-premium/name": "Скрыть Premium-каналы в «Отправить от»",
++    "opt/hide-send-as-premium/desc": "",
++    "opt/hide-wall-paper/name": "Игнориривать обои чата",
++    "opt/hide-wall-paper/desc": "",
++    "opt/history-peer-type-icons/name": "Показывать иконку типа собеседника",
++    "opt/history-peer-type-icons/desc": "",
++    "opt/icon-theme-symbolic/name": "symbolic-и из системной темы иконок",
++    "opt/icon-theme-symbolic/desc": "",
++    "opt/inferred-peer-dc/name": "Угадывать дата-центр пира",
++    "opt/inferred-peer-dc/desc": "",
++    "opt/mpris-call-hangup/name": "Управлять звонками с помощью MPRIS",
++    "opt/mpris-call-hangup/desc": "Прош/След/Стоп — положить трубку.\nПроигр/Пауза/ПроигрПауза — снять трубку.\nЭта настркойка конфликтует со встроенным медиапроигрывателем",
++    "opt/no-shout-buttons/name": "Перестать ОРАТЬ на кнопках",
++    "opt/no-shout-buttons/desc": "",
++    "opt/old-style-spoilers/name": "Спойлеры как раньше (без частиц)",
++    "opt/old-style-spoilers/desc": "",
++    "opt/show-channel-joined-below-about/name": "Дата входа в чат",
++    "opt/show-channel-joined-below-about/desc": "",
++    "opt/show-msgid/name": "Показывать ID сообщений",
++    "opt/show-msgid/desc": "",
++    "opt/show-peer-id-below-about/name": "Показывать ID собеседника",
++    "opt/show-peer-id-below-about/desc": "",
++    "opt/star-hide-always/name": "Скрывать количество звёзд",
++    "opt/star-hide-always/desc": "",
++    "opt/star-hide-empty/name": "Скрывать пустое количество звёзд",
++    "opt/star-hide-empty/desc": "",
++    "opt/system-emoji/name": "Использовать системный эмодзи-шрифт",
++    "opt/system-emoji/desc": "",
++    "opt/tabbed-panel-show-on-click/name": "Открывать палитру по клику",
++    "opt/tabbed-panel-show-on-click/desc": "",
++    "opt/time-with-seconds/name": "Показывать время с секундами",
++    "opt/time-with-seconds/desc": "",
++    "opt/unlimited-recent-stickers/name": "Неограниченные недавние стикеры",
++    "opt/unlimited-recent-stickers/desc": "",
++    "opt/use-small-msg-bubble-radius/name": "Менее круглые сообщения",
++    "opt/use-small-msg-bubble-radius/desc": "",
++    "opt/view-profile-in-chats-list-context-menu/name": "Открыть профиль из меню",
++    "opt/view-profile-in-chats-list-context-menu/desc": "",
++    "opt/wide-messages/name": "Широкие сообщения",
++    "opt/wide-messages/desc": "",
++    "settings/chat/mono-font/title": "Моноширинный шрифт",
++    "settings/main/restart/title": "Перезапустить",
++    "settings/privacy/sessions/client-api-id": "API ID клиента",
++    "settings/privacy/sessions/client/official": "Официальный",
++    "settings/privacy/sessions/client/unofficial": "Сторонний",
++    "settings/privacy/sessions/created-time": "Сессия начата в",
++    "settings/privacy/sessions/name/official": "{session}",
++    "settings/privacy/sessions/name/unofficial": "{session} (сторонний)",
++    "settings/yukigram/title": "Настройки Yukigram",
++    "unsupported-message/text": "Это сообщение не поддерживается в вашей версии Yukigram. Пожалуйста, обновитесь до последней версии. Если вы уже на самой последней версии, возможно, это сообщение требует версию Telegram Desktop новее, чем существует в природе, или Yukigram запаздывает с обновлением.",
++    "unsupported-message/button/text": "Открыть канал Yukigram",
++    "_to_keep_the_diffs_nice": "Please make sure this string is kept at the bottom"
++}
+\ No newline at end of file
+diff --git a/Telegram/Resources/qrc/telegram/yukigram.qrc b/Telegram/Resources/qrc/telegram/yukigram.qrc
+index 769124b26c..f625d5616a 100644
+--- a/Telegram/Resources/qrc/telegram/yukigram.qrc
++++ b/Telegram/Resources/qrc/telegram/yukigram.qrc
+@@ -1,6 +1,7 @@
+ <RCC>
+   <qresource prefix="/yukigram_lang">
+     <file alias="en.json">../../Telegram/Resources/langs/yukigram/en.json</file>
++    <file alias="ru.json">../../Telegram/Resources/langs/yukigram/ru.json</file>
+   </qresource>
+   <qresource prefix="/misc">
+     <file alias="io.github.yukigram.desktop">@CMAKE_CURRENT_BINARY_DIR@/@YUKIGRAM_APP_ID@.desktop</file>
+-- 
+2.53.0
+

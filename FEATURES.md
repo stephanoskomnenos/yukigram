@@ -210,6 +210,11 @@ These are placed under `(Reactions)` category.
 
 These are placed under `(Compose)` category.
 
+## Translations
+- Russian
+
+These are placed under `(Translations)` category.
+
 Some patches originate from [64Gram], [Forkgram] and [Kotatogram].
 
 [64Gram]: https://github.com/TDesktop-x64/tdesktop
