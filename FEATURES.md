@@ -130,6 +130,8 @@ These are placed under `(Shortcut)` category.
     or the bare id itself
     to create a mention)
 - Split "Stickers and GIFs" chat permission toggle
+- :star: Retract quiz vote
+    (if quiz was created with "allow revotes")
 
 These are placed under `(Major)` category.
 

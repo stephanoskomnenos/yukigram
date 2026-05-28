@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Thu, 28 May 2026 08:41:15 +0000
+Subject: [PATCH] (Major) Retract quiz vote
+
+---
+ .../SourceFiles/history/view/history_view_context_menu.cpp     | 1 -
+ .../history/view/media/menu/history_view_poll_menu.cpp         | 3 +--
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
+index 1d00a329a2..be3351928e 100644
+--- a/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
++++ b/Telegram/SourceFiles/history/view/history_view_context_menu.cpp
+@@ -1735,7 +1735,6 @@ void FillPollOptionPage(
+ 		return;
+ 	}
+ 	if (!poll->closed()
+-		&& !poll->quiz()
+ 		&& poll->voted()
+ 		&& !poll->revotingDisabled()) {
+ 		menu->addAction(
+diff --git a/Telegram/SourceFiles/history/view/media/menu/history_view_poll_menu.cpp b/Telegram/SourceFiles/history/view/media/menu/history_view_poll_menu.cpp
+index 111a67d3be..70c8eadcfd 100644
+--- a/Telegram/SourceFiles/history/view/media/menu/history_view_poll_menu.cpp
++++ b/Telegram/SourceFiles/history/view/media/menu/history_view_poll_menu.cpp
+@@ -197,8 +197,7 @@ void FillPollAnswerMenu(
+ 		}
+ 	}
+ 	if (!option.isEmpty()
+-		&& !poll->closed()
+-		&& !poll->quiz()) {
++		&& !poll->closed()) {
+ 		if (poll->voted()
+ 			&& !poll->revotingDisabled()) {
+ 			menu->addAction(
+-- 
+2.53.0
+
