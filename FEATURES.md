@@ -38,11 +38,14 @@ These are placed under `(Yukigram)` category.
 
 - Disable D-Bus activation
     (unbreak `.desktop` launching under non-GNOME)
-- Allow using symbolic (monochrome) tray icon from icon theme
-    instead of bundled one with Yukigram name.
+- More appstream changelog versions (25 instead of 10),
+    better version parsing
 - Support `$XDG_DATA_HOME/Yukigram` as a fallback data directory for Yukigram
     (current one is `$XDG_DATA_HOME/io.github.yukigram`,
     or with `.devel` appended for development builds)
+- Disable `~/.TelegramDesktop` tdata fallback
+- Allow using symbolic (monochrome) tray icon from icon theme
+    instead of bundled one with Yukigram name.
 - Make webview socket paths more unique by adding random integers
     (original paths only depended on PID,
     and PIDs are reused heavily in Flatpak context,
@@ -50,9 +53,6 @@ These are placed under `(Yukigram)` category.
     where pids always count from 1,
     and TMPDIR is per-appId,
     and not per-invocation)
-- More appstream changelog versions (25 instead of 10),
-    better version parsing
-- Disable `~/.TelegramDesktop` tdata fallback
 - Allow opening channel direct messages from kebab menus
     even if user is not an admin
 
