@@ -4,11 +4,11 @@ Date: Wed, 27 May 2026 16:15:06 +0000
 Subject: [PATCH] (Info) Warn when polls forbid revoting
 
 ---
- .../history/view/media/history_view_poll.cpp  | 37 +++++++++++++++----
- 1 file changed, 30 insertions(+), 7 deletions(-)
+ .../history/view/media/history_view_poll.cpp  | 36 +++++++++++++++----
+ 1 file changed, 30 insertions(+), 6 deletions(-)
 
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_poll.cpp b/Telegram/SourceFiles/history/view/media/history_view_poll.cpp
-index fe195ab1cc..2b6bd7b5a5 100644
+index fe195ab1cc..72001e10d3 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_poll.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_poll.cpp
 @@ -22,6 +22,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -19,19 +19,17 @@ index fe195ab1cc..2b6bd7b5a5 100644
  #include "ui/widgets/dropdown_menu.h"
  #include "ui/widgets/menu/menu_action.h"
  #include "ui/chat/message_bubble.h"
-@@ -2178,9 +2179,9 @@ void Poll::updateTexts() {
- 				? ((_flags & Flag::PublicVotes)
- 					? tr::lng_polls_public_quiz(tr::now)
+@@ -2180,7 +2181,8 @@ void Poll::updateTexts() {
  					: tr::lng_polls_anonymous_quiz(tr::now))
--				: ((_flags & Flag::PublicVotes)
-+				: (((_flags & Flag::PublicVotes)
+ 				: ((_flags & Flag::PublicVotes)
  					? tr::lng_polls_public(tr::now)
 -					: tr::lng_polls_anonymous(tr::now))));
-+					: tr::lng_polls_anonymous(tr::now)) + (_flags & Flag::RevotingDisabled ? ", no revotes" : ""))));
++					: tr::lng_polls_anonymous(tr::now)))
++			+ (_flags & Flag::RevotingDisabled ? ", no revotes" : ""));
  	}
  	if (_footerPart->_adminBackVoteLabel.isEmpty()) {
  		_footerPart->_adminBackVoteLabel.setMarkedText(
-@@ -2799,17 +2800,39 @@ ClickHandlerPtr Poll::Options::createAnswerClickHandler(
+@@ -2799,17 +2801,39 @@ ClickHandlerPtr Poll::Options::createAnswerClickHandler(
  			}
  		}));
  	} else {
