@@ -32,7 +32,7 @@ index 0512132cd9..0ea330c405 100644
      "box/peer-list/count/members#one": "{kind}, {count} member",
      "box/peer-list/count/members#other": "{kind}, {count} members",
 diff --git a/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp b/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
-index 193866516a..f2392c7064 100644
+index 193866516a..f88c72dc6c 100644
 --- a/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
 +++ b/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
 @@ -9,8 +9,12 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -89,7 +89,7 @@ index 193866516a..f2392c7064 100644
 +					}
 +				}
 +			} else if (const auto chat = history->peer->asChat()) {
-+				statuses << "box/peer-list/group";
++				statuses << ktr("box/peer-list/group");
 +				if (!chat->amIn()) {
 +					statuses << ktr("box/peer-list/status/not-member");
 +				} else if (chat->amCreator()) {
