@@ -6,13 +6,13 @@ Subject: [PATCH] (Info) More info in filtered chats
 This patch is adapted from Kotatogram.
 Original author: RadRussianRus <radrussianrus@gmail.com>
 ---
- .../filters/edit_filter_chats_preview.cpp     | 66 +++++++++++++++++--
- Telegram/SourceFiles/window/window.style      |  8 +++
+ .../filters/edit_filter_chats_preview.cpp     | 65 +++++++++++++++++--
+ Telegram/SourceFiles/window/window.style      |  5 ++
  Telegram/lib_ui/ui/widgets/widgets.style      |  2 +
- 3 files changed, 70 insertions(+), 6 deletions(-)
+ 3 files changed, 66 insertions(+), 6 deletions(-)
 
 diff --git a/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp b/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
-index 193866516a..2486800fcb 100644
+index 193866516a..4e106ff205 100644
 --- a/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
 +++ b/Telegram/SourceFiles/boxes/filters/edit_filter_chats_preview.cpp
 @@ -9,6 +9,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -91,7 +91,7 @@ index 193866516a..2486800fcb 100644
  			p.setPen(st::contactsNameFg);
  			if (name.isEmpty()) {
  				name.setText(
-@@ -175,12 +223,18 @@ void FilterChatsPreview::paintEvent(QPaintEvent *e) {
+@@ -175,12 +223,17 @@ void FilterChatsPreview::paintEvent(QPaintEvent *e) {
  					history->peer->name(),
  					Ui::NameTextOptions());
  			}
@@ -104,8 +104,7 @@ index 193866516a..2486800fcb 100644
 +			if (statuses.empty()) {
 +				name.drawLeftElided(p, nameLeft, top + nameTop, button->x() - nameLeft, width());
 +			} else {
-+				auto nameStr = Ui::Text::String{ st::windowFilterChatNameStyle, name.toString(), Ui::NameTextOptions() };
-+				nameStr.drawLeftElided(p, nameLeft, top + chatNameTop, button->x() - nameLeft, width());
++				name.drawLeftElided(p, nameLeft, top + chatNameTop, button->x() - nameLeft, width());
 +
 +				p.setPen(st::windowSubTextFg);
 +				p.setFont(st::windowFilterChatDescStyle.font);
@@ -117,7 +116,7 @@ index 193866516a..2486800fcb 100644
  		top += st.height;
  	}
 diff --git a/Telegram/SourceFiles/window/window.style b/Telegram/SourceFiles/window/window.style
-index c4806e1b06..e9baf442f7 100644
+index c4806e1b06..766147a1c6 100644
 --- a/Telegram/SourceFiles/window/window.style
 +++ b/Telegram/SourceFiles/window/window.style
 @@ -284,6 +284,8 @@ windowFilterSmallItem: PeerListItem(defaultPeerListItem) {
@@ -129,13 +128,10 @@ index c4806e1b06..e9baf442f7 100644
  	photoSize: 34px;
  	checkbox: RoundImageCheckbox(defaultPeerListCheckbox) {
  		imageRadius: 17px;
-@@ -326,6 +328,12 @@ windowFilterChatsSectionSubtitle: FlatLabel(defaultFlatLabel) {
+@@ -326,6 +328,9 @@ windowFilterChatsSectionSubtitle: FlatLabel(defaultFlatLabel) {
  	textFg: searchedBarFg;
  }
  windowFilterChatsSectionSubtitlePadding: margins(22px, 5px, 22px, 5px);
-+windowFilterChatNameStyle: TextStyle(defaultTextStyle) {
-+	font: font(11px semibold);
-+}
 +windowFilterChatDescStyle: TextStyle(defaultTextStyle) {
 +	font: font(11px);
 +}
