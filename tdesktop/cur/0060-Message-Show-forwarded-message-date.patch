@@ -10,7 +10,7 @@ Original author: 23rd <23rd@vivaldi.net>
  1 file changed, 4 insertions(+)
 
 diff --git a/Telegram/SourceFiles/history/history_item_components.cpp b/Telegram/SourceFiles/history/history_item_components.cpp
-index 410acc22d1..f0b72ee190 100644
+index 410acc22d1..f131f08792 100644
 --- a/Telegram/SourceFiles/history/history_item_components.cpp
 +++ b/Telegram/SourceFiles/history/history_item_components.cpp
 @@ -10,6 +10,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -26,7 +26,7 @@ index 410acc22d1..f0b72ee190 100644
  		}
  	}
 +	if (originalDate != TimeId(0)) {
-+		phrase.append(QString(" on ") + Ui::FormatDateTime(base::unixtime::parse(originalDate)));
++		phrase.append(" " + Ui::kQBullet + u" \u2068" + Ui::FormatDateTime(base::unixtime::parse(originalDate)));
 +	}
  	text.setMarkedText(st::fwdTextStyle, phrase, kMarkupTextOptions, context);
  
