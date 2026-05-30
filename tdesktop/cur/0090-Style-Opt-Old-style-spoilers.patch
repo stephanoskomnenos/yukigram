@@ -11,7 +11,8 @@ Subject: [PATCH] (Style)(Opt) Old-style spoilers
  .../yukigram/settings/old_style_spoilers.h    |  5 ++++
  Telegram/lib_ui/ui/effects/spoiler_mess.cpp   | 26 ++++++++++++++++---
  Telegram/lib_ui/ui/text/text_renderer.cpp     |  6 ++++-
- 7 files changed, 77 insertions(+), 4 deletions(-)
+ .../ui/widgets/fields/custom_field_object.cpp |  4 ++-
+ 8 files changed, 80 insertions(+), 5 deletions(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/old_style_spoilers.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/old_style_spoilers.h
 
@@ -227,6 +228,28 @@ index d866f14758..c627534383 100644
  		}
  	} else {
  		// Show forgotten spoiler context part.
+diff --git a/Telegram/lib_ui/ui/widgets/fields/custom_field_object.cpp b/Telegram/lib_ui/ui/widgets/fields/custom_field_object.cpp
+index 67e2893d31..861cb1d364 100644
+--- a/Telegram/lib_ui/ui/widgets/fields/custom_field_object.cpp
++++ b/Telegram/lib_ui/ui/widgets/fields/custom_field_object.cpp
+@@ -27,6 +27,8 @@ using SpoilerRect = InputFieldSpoilerRect;
+ 
+ } // namespace
+ 
++void FillSpoilerRectEx(QPainter &p, QRect rect, const SpoilerMessFrame &frame, QPoint originShift, bool round = false, bool forText = false);
++
+ class FieldSpoilerOverlay final : public RpWidget {
+ public:
+ 	FieldSpoilerOverlay(
+@@ -97,7 +99,7 @@ void FieldSpoilerOverlay::paintEvent(QPaintEvent *e) {
+ 		}
+ 		p->setOpacity(fgOpacity);
+ 		const auto shift = QPoint(0, *topShift) - rect.geometry.topLeft();
+-		FillSpoilerRect(*p, rect.geometry, *frame, shift);
++		FillSpoilerRectEx(*p, rect.geometry, *frame, shift, true, true);
+ 	}
+ }
+ 
 -- 
 2.53.0
 
