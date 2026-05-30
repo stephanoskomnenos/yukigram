@@ -9,7 +9,7 @@ Subject: [PATCH] (Info) Show mutual contacts
  2 files changed, 57 insertions(+), 1 deletion(-)
 
 diff --git a/Telegram/SourceFiles/boxes/peer_list_controllers.cpp b/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
-index a83af75867..92e2280f8c 100644
+index d74378a9d5..9a658e6801 100644
 --- a/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
 +++ b/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
 @@ -63,6 +63,42 @@ constexpr auto kSearchPerPage = 50;

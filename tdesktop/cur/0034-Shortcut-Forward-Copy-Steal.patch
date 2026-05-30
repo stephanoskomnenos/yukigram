@@ -5,6 +5,8 @@ Subject: [PATCH] (Shortcut) Forward/Copy/Steal
 
 ---
  Telegram/Resources/langs/yukigram/en.json     |  3 ++
+ Telegram/SourceFiles/boxes/peer_list_box.h    |  9 +++++
+ .../boxes/peer_list_controllers.cpp           |  2 ++
  Telegram/SourceFiles/core/shortcuts.cpp       |  7 ++++
  Telegram/SourceFiles/core/shortcuts.h         |  4 +++
  .../history/history_inner_widget.cpp          | 35 ++++++++++++++++++
@@ -13,7 +15,7 @@ Subject: [PATCH] (Shortcut) Forward/Copy/Steal
  Telegram/SourceFiles/history/history_widget.h |  2 +-
  .../SourceFiles/window/window_peer_menu.cpp   | 36 +++++++++++++++----
  .../SourceFiles/window/window_peer_menu.h     |  9 +++--
- 9 files changed, 89 insertions(+), 12 deletions(-)
+ 11 files changed, 100 insertions(+), 12 deletions(-)
 
 diff --git a/Telegram/Resources/langs/yukigram/en.json b/Telegram/Resources/langs/yukigram/en.json
 index 36a03a1864..2a8f13bd7c 100644
@@ -29,6 +31,61 @@ index 36a03a1864..2a8f13bd7c 100644
      "box/sticker-set/owner/title": "Owner",
      "intro/about": "Welcome to Yukigram, an unofficial patch-based Telegram Desktop fork.",
      "nya": "Meow >.<",
+diff --git a/Telegram/SourceFiles/boxes/peer_list_box.h b/Telegram/SourceFiles/boxes/peer_list_box.h
+index 0e32d2f3d5..d53b3f206a 100644
+--- a/Telegram/SourceFiles/boxes/peer_list_box.h
++++ b/Telegram/SourceFiles/boxes/peer_list_box.h
+@@ -337,6 +337,9 @@ struct PeerListState;
+ 
+ class PeerListDelegate {
+ public:
++	virtual rpl::producer<QString> peerListGetTitle() {
++		Unexpected("PeerListDelegate::peerListGetTitle");
++	}
+ 	virtual void peerListSetTitle(rpl::producer<QString> title) = 0;
+ 	virtual void peerListSetAdditionalTitle(rpl::producer<QString> title) = 0;
+ 	virtual void peerListSetHideEmpty(bool hide) = 0;
+@@ -1138,7 +1141,11 @@ public:
+ 	[[nodiscard]] rpl::producer<int> multiSelectHeightValue() const;
+ 	[[nodiscard]] rpl::producer<> noSearchSubmits() const;
+ 
++	rpl::producer<QString> peerListGetTitle() override {
++		return rpl::duplicate(_title);
++	}
+ 	void peerListSetTitle(rpl::producer<QString> title) override {
++		_title = rpl::duplicate(title);
+ 		setTitle(std::move(title));
+ 	}
+ 	void peerListSetAdditionalTitle(rpl::producer<QString> title) override {
+@@ -1198,6 +1205,8 @@ private:
+ 	void updateScrollSkips();
+ 	void searchQueryChanged(const QString &query);
+ 
++	rpl::producer<QString> _title;
++
+ 	object_ptr<Ui::SlideWrap<Ui::MultiSelect>> _select = { nullptr };
+ 
+ 	const std::shared_ptr<Main::SessionShow> _show;
+diff --git a/Telegram/SourceFiles/boxes/peer_list_controllers.cpp b/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
+index a83af75867..d74378a9d5 100644
+--- a/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
++++ b/Telegram/SourceFiles/boxes/peer_list_controllers.cpp
+@@ -889,6 +889,7 @@ void ChooseRecipientBoxController::rowClicked(not_null<PeerListRow*> row) {
+ 			});
+ 		*weak = owned.data();
+ 		delegate()->peerListUiShow()->showBox(std::move(owned));
++		(*weak)->setTitle(delegate()->peerListGetTitle());
+ 		return;
+ 	} else if (const auto monoforum = peer->monoforum()) {
+ 		const auto weak = std::make_shared<base::weak_qptr<Ui::BoxContent>>();
+@@ -928,6 +929,7 @@ void ChooseRecipientBoxController::rowClicked(not_null<PeerListRow*> row) {
+ 			});
+ 		*weak = owned.data();
+ 		delegate()->peerListUiShow()->showBox(std::move(owned));
++		(*weak)->setTitle(delegate()->peerListGetTitle());
+ 		return;
+ 	}
+ 	const auto history = peer->owner().history(peer);
 diff --git a/Telegram/SourceFiles/core/shortcuts.cpp b/Telegram/SourceFiles/core/shortcuts.cpp
 index 4ca872a75e..ed2463c77b 100644
 --- a/Telegram/SourceFiles/core/shortcuts.cpp
