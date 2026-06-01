@@ -81,6 +81,7 @@ path = [
     "tdesktop/cur/*-Interface-Opt-Disable-shouting-case-on-buttons.patch",
     "tdesktop/cur/*-Major-Retract-quiz-vote.patch",
     "tdesktop/cur/*-Translations-Russian.patch",
+    "tdesktop/cur/*-Info-Deleted-reply-ID.patch",
 ]
 SPDX-License-Identifier = "GPL-3.0-or-later WITH LicenseRef-sqlitestudio-OpenSSL-exception"
 SPDX-FileCopyrightText = "Yukigram contributors <https://github.com/yukigram/yukigram>"

@@ -1,0 +1,35 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Mon, 1 Jun 2026 14:14:56 +0000
+Subject: [PATCH] (Info) Deleted reply ID
+
+---
+ Telegram/SourceFiles/history/view/history_view_reply.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Telegram/SourceFiles/history/view/history_view_reply.cpp b/Telegram/SourceFiles/history/view/history_view_reply.cpp
+index 9fbe455fc5..abc4371b78 100644
+--- a/Telegram/SourceFiles/history/view/history_view_reply.cpp
++++ b/Telegram/SourceFiles/history/view/history_view_reply.cpp
+@@ -25,6 +25,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "history/history_item_components.h"
+ #include "history/history_item_helpers.h"
+ #include "lang/lang_keys.h"
++#include "yukigram/lang.h"
+ #include "main/main_session.h"
+ #include "ui/chat/chat_style.h"
+ #include "ui/effects/ripple_animation.h"
+@@ -693,8 +694,8 @@ void Reply::updateName(
+ 		_stateText = ((fields.messageId || fields.storyId) && !unavailable)
+ 			? tr::lng_profile_loading(tr::now)
+ 			: fields.storyId
+-			? tr::lng_deleted_story(tr::now)
+-			: tr::lng_deleted_message(tr::now);
++			? ktr("history/deleted/story", { "id", QString::number(fields.storyId) })
++			: ktr("history/deleted/message", { "id", QString::number(fields.messageId.bare) });
+ 		const auto phraseWidth = st::msgDateFont->width(_stateText);
+ 		_maxWidth = unavailable
+ 			? phraseWidth
+-- 
+2.53.0
+

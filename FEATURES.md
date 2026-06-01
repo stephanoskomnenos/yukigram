@@ -103,6 +103,7 @@ These are placed under `(Minor)` category.
 - :star: Chat types in some in peer list boxes
 - :star: More info in folder chat list
 - :zap: Warn when polls forbid revoting
+- :star: Show deleted reply ID
 
 These are placed under `(Info)` category.
 
