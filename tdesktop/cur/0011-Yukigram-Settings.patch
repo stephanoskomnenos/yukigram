@@ -8,9 +8,9 @@ Co-Authored-By: Lunya <241520024+lunya-miaou@users.noreply.github.com>
  Telegram/CMakeLists.txt                       |   2 +
  Telegram/Resources/langs/lang.strings         |   1 +
  .../settings/sections/settings_main.cpp       |   8 +
- .../settings/sections/settings_yukigram.cpp   | 164 ++++++++++++++++++
+ .../settings/sections/settings_yukigram.cpp   | 165 ++++++++++++++++++
  .../settings/sections/settings_yukigram.h     |   9 +
- 5 files changed, 184 insertions(+)
+ 5 files changed, 185 insertions(+)
  create mode 100644 Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
  create mode 100644 Telegram/SourceFiles/settings/sections/settings_yukigram.h
 
@@ -67,10 +67,10 @@ index 3d4eda91da..59ce88648c 100644
  		.title = tr::lng_settings_language(),
 diff --git a/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp b/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
 new file mode 100644
-index 0000000000..4c16ff7192
+index 0000000000..31aefea049
 --- /dev/null
 +++ b/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
-@@ -0,0 +1,164 @@
+@@ -0,0 +1,165 @@
 +#include "settings/sections/settings_yukigram.h"
 +#include "yukigram/options_database.h"
 +
@@ -154,6 +154,7 @@ index 0000000000..4c16ff7192
 +	"tweaks",
 +	"dialogs",
 +	"style",
++	"chat",
 +	"messages",
 +	"reactions",
 +	"compose",

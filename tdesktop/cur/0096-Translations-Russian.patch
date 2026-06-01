@@ -4,17 +4,17 @@ Date: Thu, 28 May 2026 22:20:22 +0000
 Subject: [PATCH] (Translations) Russian
 
 ---
- Telegram/Resources/langs/yukigram/ru.json    | 154 +++++++++++++++++++
+ Telegram/Resources/langs/yukigram/ru.json    | 155 +++++++++++++++++++
  Telegram/Resources/qrc/telegram/yukigram.qrc |   1 +
- 2 files changed, 155 insertions(+)
+ 2 files changed, 156 insertions(+)
  create mode 100644 Telegram/Resources/langs/yukigram/ru.json
 
 diff --git a/Telegram/Resources/langs/yukigram/ru.json b/Telegram/Resources/langs/yukigram/ru.json
 new file mode 100644
-index 0000000000..6f1c1a51d5
+index 0000000000..ae5a83b02c
 --- /dev/null
 +++ b/Telegram/Resources/langs/yukigram/ru.json
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,155 @@
 +{
 +    "about/1/text": "Неофициальный форк {tdesktop_link},\nкоторый добавляет фичи и убирает мусор.",
 +    "about/1/tdesktop": "Telegram Desktop",
@@ -80,6 +80,7 @@ index 0000000000..6f1c1a51d5
 +    "optgroup/tweaks": "Твики",
 +    "optgroup/dialogs": "Список чатов",
 +    "optgroup/style": "Стиль",
++    "optgroup/chat": "Чат",
 +    "optgroup/messages": "Сообщения",
 +    "optgroup/reactions": "Реакции",
 +    "optgroup/compose": "Окно написания сообщений",
