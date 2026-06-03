@@ -116,6 +116,8 @@ These are placed under `(Info)` category.
     (e.g. in linked discussion groups)
 - :star: Allow opening group from peer info
 - Plain send in context menu
+- Mention by name with right-click
+    (in addition to Ctrl + left-click from upstream)
 
 These are placed under `(Shortcut)` category.
 
