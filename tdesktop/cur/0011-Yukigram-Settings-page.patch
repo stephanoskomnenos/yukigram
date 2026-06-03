@@ -8,9 +8,9 @@ Co-Authored-By: Lunya <241520024+lunya-miaou@users.noreply.github.com>
  Telegram/CMakeLists.txt                       |   2 +
  Telegram/Resources/langs/lang.strings         |   1 +
  .../settings/sections/settings_main.cpp       |   8 +
- .../settings/sections/settings_yukigram.cpp   | 208 ++++++++++++++++++
+ .../settings/sections/settings_yukigram.cpp   | 198 ++++++++++++++++++
  .../settings/sections/settings_yukigram.h     |   9 +
- 5 files changed, 228 insertions(+)
+ 5 files changed, 218 insertions(+)
  create mode 100644 Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
  create mode 100644 Telegram/SourceFiles/settings/sections/settings_yukigram.h
 
@@ -67,10 +67,10 @@ index 3d4eda91da..59ce88648c 100644
  		.title = tr::lng_settings_language(),
 diff --git a/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp b/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
 new file mode 100644
-index 0000000000..634be65d5a
+index 0000000000..0a4ec3d19c
 --- /dev/null
 +++ b/Telegram/SourceFiles/settings/sections/settings_yukigram.cpp
-@@ -0,0 +1,208 @@
+@@ -0,0 +1,198 @@
 +#include "settings/sections/settings_yukigram.h"
 +#include "yukigram/options_database.h"
 +
@@ -103,13 +103,19 @@ index 0000000000..634be65d5a
 +	return QString::fromStdString(std::string(v));
 +};
 +
++void InputInt(std::string_view key, const Yukigram::Options::Description<int> &d, std::shared_ptr<rpl::variable<int>> v) {
++	LOG(("Soon. int %1").arg(key));
++}
++
++void InputString(std::string_view key, const Yukigram::Options::Description<QString> &d, std::shared_ptr<rpl::variable<QString>> v) {
++	LOG(("Soon. QString %1").arg(key));
++}
++
 +template<typename T>
-+Ui::SettingsButton *BuildButton(
-+	SectionBuilder &builder,
-+	std::string_view key,
-+	const Yukigram::Options::Description<T> &d,
-+	std::shared_ptr<rpl::variable<T>> v
-+) {
++Ui::SettingsButton *BuildButton(SectionBuilder &builder, Yukigram::Options::Option<T> &o) {
++	const auto key = o.key;
++	const auto d = o.d;
++	auto v = o.v;
 +	const auto icon = d.mirrorExperimental ? &st::menuIconExperimental : nullptr;
 +
 +	SectionBuilder::ButtonArgs args = {
@@ -123,35 +129,14 @@ index 0000000000..634be65d5a
 +	if constexpr (std::is_same_v<T, bool>) {
 +		args.toggled = rpl::single(v->current());
 +	} else if constexpr (std::is_same_v<T, int>) {
-+		args.label = rpl::single(QString::number(v->current()));
++		args.label = v->value() | rpl::map([](int i) { return QString::number(i); });
++		args.onClick = [=] { InputInt(key, d, v); };
 +	} else if constexpr (std::is_same_v<T, QString>) {
-+		args.label = rpl::single(v->current());
++		args.label = v->value();
++		args.onClick = [=] { InputString(key, d, v); };
 +	}
 +
 +	return builder.addButton(std::move(args));
-+}
-+
-+void BuildToggle(
-+	Ui::SettingsButton *button,
-+	Window::SessionController *controller,
-+	std::string_view key,
-+	const Yukigram::Options::Description<bool> &d,
-+	std::shared_ptr<rpl::variable<bool>> v
-+) {
-+	button->toggledValue(
-+	) | rpl::filter([=](bool toggled) {
-+		return toggled != v->current();
-+	}) | rpl::on_next([=](bool toggled) {
-+		*v = toggled;
-+		if (d.restartRequired) {
-+			controller->show(Ui::MakeConfirmBox({
-+				.text = tr::lng_settings_need_restart(),
-+				.confirmed = [] { Core::Restart(); },
-+				.confirmText = tr::lng_settings_restart_now(),
-+				.cancelText = tr::lng_settings_restart_later(),
-+			}));
-+		}
-+	}, button->lifetime());
 +}
 +
 +void BuildDescription(SectionBuilder &builder, std::string_view key) {
@@ -164,27 +149,32 @@ index 0000000000..634be65d5a
 +}
 +
 +template<typename T>
-+void BuildYukigramSettingsRow(
-+	SectionBuilder &builder,
-+	std::string_view key,
-+	const Yukigram::Options::Description<T> &d,
-+	std::shared_ptr<rpl::variable<T>> v
-+) {
-+	auto button = BuildButton(builder, key, d, v);
++void BuildRow(SectionBuilder &builder, Yukigram::Options::Option<T> &o) {
++	auto button = BuildButton(builder, o);
 +	const auto controller = builder.controller();
 +	if (!controller) {
 +		return;
 +	}
 +
 +	if constexpr (std::is_same_v<T, bool>) {
-+		BuildToggle(button, controller, key, d, v);
-+	} else if constexpr (std::is_same_v<T, int>) {
-+		// BuildInt(button, controller, key, d, v);
-+	} else if constexpr (std::is_same_v<T, QString>) {
-+		// BuildString(button, controller, key, d, v);
++		auto v = o.v;
++		button->toggledValue(
++		) | rpl::filter([=](bool toggled) {
++			return toggled != v->current();
++		}) | rpl::on_next([=, d = o.d](bool toggled) {
++			*v = toggled;
++			if (d.restartRequired) {
++				controller->show(Ui::MakeConfirmBox({
++					.text = tr::lng_settings_need_restart(),
++					.confirmed = [] { Core::Restart(); },
++					.confirmText = tr::lng_settings_restart_now(),
++					.cancelText = tr::lng_settings_restart_later(),
++				}));
++			}
++		}, button->lifetime());
 +	}
 +
-+	BuildDescription(builder, key);
++	BuildDescription(builder, o.key);
 +}
 +
 +const std::string_view Categories[] = {
@@ -221,11 +211,11 @@ index 0000000000..634be65d5a
 +		}
 +		for (const auto &key : options) {
 +			v::match(Yukigram::Options::Options()[key], [&](Yukigram::Options::Option<bool> &o) {
-+				BuildYukigramSettingsRow(builder, key, o.d, o.v);
++				BuildRow(builder, o);
 +			}, [&](Yukigram::Options::Option<int> &o) {
-+				BuildYukigramSettingsRow(builder, key, o.d, o.v);
++				BuildRow(builder, o);
 +			}, [&](Yukigram::Options::Option<QString> &o) {
-+				BuildYukigramSettingsRow(builder, key, o.d, o.v);
++				BuildRow(builder, o);
 +			});
 +		}
 +	}
