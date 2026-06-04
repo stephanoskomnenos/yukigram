@@ -364,7 +364,7 @@ jobs:
       - name: Setup NIX_PATH
         run: |
           set -exuo pipefail
-          echo NIX_PATH=nixpkgs=$(nix-shell -I nixpkgs=channel:nixos-unstable -E 'with import <nixpkgs> {}; mkShellNoCC { packages = [npins]; }' --run 'npins get-path nixpkgs') >> $GITHUB_ENV
+          echo NIX_PATH=nixpkgs=$(nix-instantiate --eval --raw ./. -A sources.nixpkgs.outPath) >> $GITHUB_ENV
 
       - name: Fetch dependencies from caches
         run: |
