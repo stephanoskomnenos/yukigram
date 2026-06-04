@@ -1,0 +1,85 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Thu, 4 Jun 2026 03:00:06 +0000
+Subject: [PATCH] (Style)(Opt) Round message size
+
+---
+ Telegram/CMakeLists.txt                         |  2 ++
+ .../history/view/media/history_view_gif.cpp     |  3 ++-
+ .../yukigram/settings/round_size.cpp            | 17 +++++++++++++++++
+ .../SourceFiles/yukigram/settings/round_size.h  |  5 +++++
+ 4 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 Telegram/SourceFiles/yukigram/settings/round_size.cpp
+ create mode 100644 Telegram/SourceFiles/yukigram/settings/round_size.h
+
+diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
+index e319af4a69..30d4cdbfb4 100644
+--- a/Telegram/CMakeLists.txt
++++ b/Telegram/CMakeLists.txt
+@@ -1998,6 +1998,8 @@ PRIVATE
+     yukigram/settings/quick_recent_actions.h
+     yukigram/settings/right_action_comments.cpp
+     yukigram/settings/right_action_comments.h
++    yukigram/settings/round_size.cpp
++    yukigram/settings/round_size.h
+     yukigram/settings/show_message_id.cpp
+     yukigram/settings/show_message_id.h
+     yukigram/settings/star_hide_always.cpp
+diff --git a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
+index 17873f1220..c917c81fef 100644
+--- a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
++++ b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
+@@ -50,6 +50,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "ui/ui_utility.h"
+ #include "ui/effects/path_shift_gradient.h"
+ #include "ui/effects/spoiler_mess.h"
++#include "yukigram/settings/round_size.h"
+ #include "data/data_photo.h"
+ #include "data/data_photo_media.h"
+ #include "data/data_session.h"
+@@ -288,7 +289,7 @@ QSize Gif::countThumbSize(int &inOutWidthMax) const {
+ 		} else if (_data->isVideoFile()) {
+ 			return st::maxMediaSize;
+ 		} else if (_data->isVideoMessage()) {
+-			return st::maxVideoMessageSize;
++			return Yukigram::Settings::RoundSize->current();
+ 		}
+ 		return st::maxGifSize;
+ 	}();
+diff --git a/Telegram/SourceFiles/yukigram/settings/round_size.cpp b/Telegram/SourceFiles/yukigram/settings/round_size.cpp
+new file mode 100644
+index 0000000000..0ed04e4459
+--- /dev/null
++++ b/Telegram/SourceFiles/yukigram/settings/round_size.cpp
+@@ -0,0 +1,17 @@
++#include "yukigram/settings/round_size.h"
++#include "yukigram/options.h"
++
++namespace Yukigram::Settings {
++
++rpl::variable<int> *RoundSize = Yukigram::Options::make<int>(kOptionRoundSize, {
++	.keywords = { u"yukigram"_q, u"round"_q, u"video"_q, u"size"_q },
++	.category = "style",
++	.restartRequired = true,
++	.defaultValue = 240,
++	.checkValid = Yukigram::Options::Valid::Bounded(80, 384),
++	.validHint = Yukigram::Options::Valid::BoundedHint(80, 384),
++});
++
++const char kOptionRoundSize[] = "round-size";
++
++}
+diff --git a/Telegram/SourceFiles/yukigram/settings/round_size.h b/Telegram/SourceFiles/yukigram/settings/round_size.h
+new file mode 100644
+index 0000000000..dc5aa4aae5
+--- /dev/null
++++ b/Telegram/SourceFiles/yukigram/settings/round_size.h
+@@ -0,0 +1,5 @@
++#include "rpl/rpl.h"
++namespace Yukigram::Settings {
++extern rpl::variable<int> *RoundSize;
++extern const char kOptionRoundSize[];
++}
+-- 
+2.53.0
+

@@ -4,17 +4,17 @@ Date: Thu, 28 May 2026 22:20:22 +0000
 Subject: [PATCH] (Translations) Russian
 
 ---
- Telegram/Resources/langs/yukigram/ru.json    | 170 +++++++++++++++++++
+ Telegram/Resources/langs/yukigram/ru.json    | 172 +++++++++++++++++++
  Telegram/Resources/qrc/telegram/yukigram.qrc |   1 +
- 2 files changed, 171 insertions(+)
+ 2 files changed, 173 insertions(+)
  create mode 100644 Telegram/Resources/langs/yukigram/ru.json
 
 diff --git a/Telegram/Resources/langs/yukigram/ru.json b/Telegram/Resources/langs/yukigram/ru.json
 new file mode 100644
-index 0000000000..68b40819cb
+index 0000000000..d24ff5463a
 --- /dev/null
 +++ b/Telegram/Resources/langs/yukigram/ru.json
-@@ -0,0 +1,170 @@
+@@ -0,0 +1,172 @@
 +{
 +    "about/1/text": "Неофициальный форк {tdesktop_link},\nкоторый добавляет фичи и убирает мусор.",
 +    "about/1/tdesktop": "Telegram Desktop",
@@ -143,6 +143,8 @@ index 0000000000..68b40819cb
 +    "opt/quick-admin-list/desc": "",
 +    "opt/quick-recent-actions/name": "Кнопка недавних действий",
 +    "opt/quick-recent-actions/desc": "",
++    "opt/round-size/name": "Размер кружочков",
++    "opt/round-size/desc": "240 — по умолчанию\n320 — прошлые версии Yukigram\n384 — pixel perfect",
 +    "opt/show-channel-joined-below-about/name": "Дата входа в чат",
 +    "opt/show-channel-joined-below-about/desc": "",
 +    "opt/show-msgid/name": "Показывать ID сообщений",

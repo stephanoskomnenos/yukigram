@@ -195,7 +195,8 @@ These are placed under `(Chat)` category.
     (:star: up to full size)
 - :zap: :gear: Change animoji and custom emoji size
     (up to full size)
-- Larger round video messages
+- :zap: :gear: Change round video messages size
+    (up to full size)
 
 These are placed under `(Style)` category.
 
