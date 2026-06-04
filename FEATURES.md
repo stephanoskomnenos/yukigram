@@ -193,7 +193,9 @@ These are placed under `(Chat)` category.
 - :star: :gear: Square round messages
 - :gear: Change sticker size
     (:star: up to full size)
-- Larger stickers and round video messages
+- :zap: :gear: Change animoji and custom emoji size
+    (up to full size)
+- Larger round video messages
 
 These are placed under `(Style)` category.
 

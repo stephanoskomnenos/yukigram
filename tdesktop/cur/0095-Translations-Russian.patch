@@ -4,17 +4,17 @@ Date: Thu, 28 May 2026 22:20:22 +0000
 Subject: [PATCH] (Translations) Russian
 
 ---
- Telegram/Resources/langs/yukigram/ru.json    | 168 +++++++++++++++++++
+ Telegram/Resources/langs/yukigram/ru.json    | 170 +++++++++++++++++++
  Telegram/Resources/qrc/telegram/yukigram.qrc |   1 +
- 2 files changed, 169 insertions(+)
+ 2 files changed, 171 insertions(+)
  create mode 100644 Telegram/Resources/langs/yukigram/ru.json
 
 diff --git a/Telegram/Resources/langs/yukigram/ru.json b/Telegram/Resources/langs/yukigram/ru.json
 new file mode 100644
-index 0000000000..bcbcdfd618
+index 0000000000..68b40819cb
 --- /dev/null
 +++ b/Telegram/Resources/langs/yukigram/ru.json
-@@ -0,0 +1,168 @@
+@@ -0,0 +1,170 @@
 +{
 +    "about/1/text": "Неофициальный форк {tdesktop_link},\nкоторый добавляет фичи и убирает мусор.",
 +    "about/1/tdesktop": "Telegram Desktop",
@@ -97,6 +97,8 @@ index 0000000000..bcbcdfd618
 +    "opt/comments-button-always-right/desc": "",
 +    "opt/compact-chat-list/name": "Компактный список чатов",
 +    "opt/compact-chat-list/desc": "",
++    "opt/custom-emoji-size/name": "Размер премиум-эмодзи",
++    "opt/custom-emoji-size/desc": "112 — по умолчанию\n128 — прошлые версии Yukigram\n256 — pixel perfect",
 +    "opt/disable-animoji/name": "Отключить анимодзи",
 +    "opt/disable-animoji/desc": "",
 +    "opt/disable-up-edit/name": "Отключить редактирование по Up",
