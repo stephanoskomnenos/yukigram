@@ -29,7 +29,7 @@ index 1cb63305fb..a69423ba31 100644
      yukigram/settings/icon_theme_symbolic.h
      yukigram/settings/mirrored.cpp
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 1323172631..4436301e37 100644
+index 1323172631..4d0ab5aa0a 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -53,6 +53,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -57,10 +57,10 @@ index 1323172631..4436301e37 100644
 +			return st::msgNameChatIcon;
 +		} else if (from->isForum()) {
 +			return st::msgNameForumIcon;
-+		} else if (from->isChannel()) {
-+			return st::msgNameChannelIcon;
 +		} else if (from->isMegagroup()) {
 +			return st::msgNameChatIcon;
++		} else if (from->isBroadcast()) {
++			return st::msgNameChannelIcon;
 +		} else if (const auto user = from->asUser()) {
 +			if (user->isInaccessible()) {
 +				return st::msgNameDeletedIcon;
