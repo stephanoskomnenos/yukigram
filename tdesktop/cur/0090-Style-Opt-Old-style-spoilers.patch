@@ -29,7 +29,7 @@ index 4059e69a16..d120f1ef9c 100644
      yukigram/settings/quick_admin_list.h
      yukigram/settings/quick_recent_actions.cpp
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_media.cpp b/Telegram/SourceFiles/history/view/media/history_view_media.cpp
-index 8159b021f1..0111f780ff 100644
+index 8159b021f1..a75c444bce 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_media.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_media.cpp
 @@ -21,6 +21,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -53,8 +53,8 @@ index 8159b021f1..0111f780ff 100644
  			spoiler->animation->index(context.now, pausedSpoiler)),
  		spoiler->cornerCache);
 +if (Yukigram::Settings::OldStyleSpoilers->current()) {
-+	const auto center = rect.topLeft() + QPoint(24, 24);
-+	const auto iconRect = QRect(rect.topLeft(), QSize(48, 48));
++	const auto center = rect.topRight() + QPoint(-24, 24);
++	const auto iconRect = QRect(rect.topRight() - QPoint(48, 0), QSize(48, 48));
 +	const auto radius = 18;
 +	p.setPen(Qt::NoPen);
 +	p.setBrush(st::msgDateImgBg->c);
