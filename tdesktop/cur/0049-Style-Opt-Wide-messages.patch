@@ -4,23 +4,25 @@ Date: Fri, 3 Apr 2026 03:22:31 +0300
 Subject: [PATCH] (Style)(Opt) Wide messages
 
 ---
- Telegram/CMakeLists.txt                             |  2 ++
- Telegram/SourceFiles/data/data_media_types.cpp      |  3 ++-
- .../SourceFiles/history/history_inner_widget.cpp    |  3 ++-
- .../history/view/history_view_element.cpp           |  3 ++-
- .../history/view/history_view_list_widget.cpp       |  3 ++-
- .../history/view/history_view_message.cpp           |  5 +++--
- .../history/view/history_view_service_message.cpp   |  7 ++++---
- .../history/view/media/history_view_document.cpp    |  3 +++
- .../history/view/media/history_view_location.cpp    | 13 ++++++++-----
- .../view/media/history_view_media_common.cpp        |  3 ++-
- .../view/media/history_view_media_grouped.cpp       |  3 ++-
- .../history/view/media/history_view_photo.cpp       | 10 +++++++---
- .../history/view/media/history_view_web_page.cpp    |  4 ++++
- .../window/themes/window_theme_preview.cpp          |  7 +++++++
- .../SourceFiles/yukigram/settings/wide_messages.cpp | 13 +++++++++++++
- .../SourceFiles/yukigram/settings/wide_messages.h   |  5 +++++
- 16 files changed, 68 insertions(+), 19 deletions(-)
+ Telegram/CMakeLists.txt                       |  2 ++
+ .../SourceFiles/data/data_media_types.cpp     |  3 ++-
+ .../history/history_inner_widget.cpp          |  3 ++-
+ .../history/view/history_view_element.cpp     |  3 ++-
+ .../history/view/history_view_list_widget.cpp |  3 ++-
+ .../history/view/history_view_message.cpp     |  5 ++--
+ .../view/history_view_service_message.cpp     |  7 +++---
+ .../view/media/history_view_document.cpp      |  3 +++
+ .../view/media/history_view_location.cpp      | 13 ++++++----
+ .../view/media/history_view_media_common.cpp  |  3 ++-
+ .../view/media/history_view_media_grouped.cpp |  3 ++-
+ .../history/view/media/history_view_photo.cpp | 10 +++++---
+ .../view/media/history_view_web_page.cpp      |  4 ++++
+ .../iv/markdown/iv_markdown_article.cpp       |  4 ++++
+ .../iv/markdown/iv_markdown_media_block.cpp   | 24 +++++++++++++++++--
+ .../window/themes/window_theme_preview.cpp    |  7 ++++++
+ .../yukigram/settings/wide_messages.cpp       | 13 ++++++++++
+ .../yukigram/settings/wide_messages.h         |  5 ++++
+ 18 files changed, 94 insertions(+), 21 deletions(-)
  create mode 100644 Telegram/SourceFiles/yukigram/settings/wide_messages.cpp
  create mode 100644 Telegram/SourceFiles/yukigram/settings/wide_messages.h
 
@@ -360,6 +362,126 @@ index 5acbea7480..19662da8a4 100644
  	const auto innerWidth = newWidth - rect::m::sum::h(padding);
  	auto newHeight = 0;
  
+diff --git a/Telegram/SourceFiles/iv/markdown/iv_markdown_article.cpp b/Telegram/SourceFiles/iv/markdown/iv_markdown_article.cpp
+index a4d09bcf04..c9e89bee82 100644
+--- a/Telegram/SourceFiles/iv/markdown/iv_markdown_article.cpp
++++ b/Telegram/SourceFiles/iv/markdown/iv_markdown_article.cpp
+@@ -15,6 +15,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "iv/markdown/iv_markdown_media_reuse.h"
+ #include "iv/markdown/iv_markdown_prepare_links.h"
+ #include "iv/markdown/iv_markdown_prepare_serialize.h"
++#include "yukigram/settings/wide_messages.h"
+ #include "lang/lang_keys.h"
+ #include "ui/style/style_core_color.h"
+ #include "ui/style/style_core_scale.h"
+@@ -23,6 +24,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "ui/dynamic_image.h"
+ 
+ #include "styles/style_iv.h"
++#include "styles/style_chat.h"
+ #include "styles/style_widgets.h"
+ 
+ #include <algorithm>
+@@ -3041,6 +3043,8 @@ void MarkdownArticle::Impl::clearTextLeafHeightOverride() {
+ int MarkdownArticle::Impl::maxWidth() {
+ 	const auto &st = layoutStyle();
+ 	return std::max(
++		st.pageMaxWidth == st::msgMaxWidth && Yukigram::Settings::WideMessages->current() ?
++		2 * st::maxMediaSize : // Treat as "media" instead of "text" to constrain album widths
+ 		st.pageMaxWidth,
+ 		st.pagePadding.left()
+ 			+ st.pagePadding.right()
+diff --git a/Telegram/SourceFiles/iv/markdown/iv_markdown_media_block.cpp b/Telegram/SourceFiles/iv/markdown/iv_markdown_media_block.cpp
+index b428c40612..0e012a9034 100644
+--- a/Telegram/SourceFiles/iv/markdown/iv_markdown_media_block.cpp
++++ b/Telegram/SourceFiles/iv/markdown/iv_markdown_media_block.cpp
+@@ -10,6 +10,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "iv/markdown/iv_markdown_article.h"
+ #include "iv/markdown/iv_markdown_article_layout_blocks.h"
+ #include "iv/markdown/iv_markdown_prepare.h"
++#include "yukigram/settings/wide_messages.h"
+ #include "lang/lang_keys.h"
+ #include "ui/dynamic_image.h"
+ #include "ui/effects/spoiler_mess.h"
+@@ -20,6 +21,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ 
+ #include "styles/palette.h"
+ #include "styles/style_iv.h"
++#include "styles/style_chat.h"
+ #include "styles/style_widgets.h"
+ 
+ #include <QtGui/QPainterPath>
+@@ -50,7 +52,16 @@ constexpr auto kMaxGroupedMediaLayoutItems = 10;
+ 	}
+ 	if (const auto frame = image->image(std::max(rect.width(), rect.height()));
+ 		!frame.isNull()) {
++		// Image height could have been further constrained without adjusting width.
++		const auto ratio = (rect.height() + frame.height() - 1) / frame.height();
++		const auto displayWidth = frame.width() * ratio;
++		const auto displayLeft = (rect.width() - displayWidth) / 2;
++	if (displayLeft < 2) {
+ 		p.drawImage(rect, frame);
++	} else {
++		const auto startPoint = rect.topLeft() + QPoint(displayLeft, 0);
++		p.drawImage(startPoint, frame);
++	}
+ 		return true;
+ 	}
+ 	return false;
+@@ -231,13 +242,19 @@ void PaintPhotoProgress(
+ 
+ [[nodiscard]] int MediaHeightForWidth(
+ 		int width,
++		bool forWideMessages,
+ 		int aspectWidth,
+ 		int aspectHeight) {
+ 	aspectWidth = std::max(aspectWidth, 1);
+ 	aspectHeight = std::max(aspectHeight, 1);
+-	return std::max(
++	const auto preferredHeight = std::max(
+ 		int((int64(width) * aspectHeight + aspectWidth - 1) / aspectWidth),
+ 		1);
++	if (forWideMessages && Yukigram::Settings::WideMessages->current()) {
++		return std::min(preferredHeight, 2 * st::maxMediaSize);
++	} else {
++		return preferredHeight;
++	}
+ }
+ 
+ void SetPlainTextLeaf(
+@@ -560,7 +577,7 @@ uint64 ImageBackedMediaBlock::stableId() const {
+ }
+ 
+ int ImageBackedMediaBlock::resizeGetHeight(int width) {
+-	return MediaHeightForWidth(width, _aspectWidth, _aspectHeight);
++	return MediaHeightForWidth(width, layoutStyle().pageMaxWidth == st::msgMaxWidth, _aspectWidth, _aspectHeight);
+ }
+ 
+ void ImageBackedMediaBlock::setGeometry(QRect geometry) {
+@@ -1389,6 +1406,7 @@ int GroupedMediaBlock::fallbackHeight(int width) const {
+ 	}
+ 	return MediaHeightForWidth(
+ 		width,
++		layoutStyle().pageMaxWidth == st::msgMaxWidth,
+ 		_fallbackSize.width(),
+ 		_fallbackSize.height());
+ }
+@@ -1737,6 +1755,7 @@ int GroupedMediaBlock::activeItemForegroundHeight(int width) const {
+ 	if (const auto item = activeItem()) {
+ 		return MediaHeightForWidth(
+ 			width,
++			layoutStyle().pageMaxWidth == st::msgMaxWidth,
+ 			item->original.width(),
+ 			item->original.height());
+ 	}
+@@ -1756,6 +1775,7 @@ int GroupedMediaBlock::slideshowNavigationFrameHeight(int width) const {
+ 			result,
+ 			MediaHeightForWidth(
+ 				width,
++				layoutStyle().pageMaxWidth == st::msgMaxWidth,
+ 				item.original.width(),
+ 				item.original.height()));
+ 	}
 diff --git a/Telegram/SourceFiles/window/themes/window_theme_preview.cpp b/Telegram/SourceFiles/window/themes/window_theme_preview.cpp
 index 0130e318a0..90dc18226d 100644
 --- a/Telegram/SourceFiles/window/themes/window_theme_preview.cpp
