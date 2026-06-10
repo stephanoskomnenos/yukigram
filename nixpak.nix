@@ -19,9 +19,11 @@ mkNixPak {
   dbus.policies = {
     # https://github.com/flathub/org.telegram.desktop/commit/c647652ce6ed0dc6a89490f0c811371da8eb42f8
     "org.freedesktop.Notifications" = "talk";
+    "org.gnome.Mutter.IdleMonitor" = "talk";
     "org.kde.StatusNotifierWatcher" = "talk";
     "com.canonical.AppMenu.Registrar" = "talk";
     "com.canonical.indicator.application" = "talk";
     "org.ayatana.indicator.application" = "talk";
+    "org.sigxcpu.Feedback" = "talk";
   };
 }
