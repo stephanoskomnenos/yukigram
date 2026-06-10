@@ -8,11 +8,11 @@ Subject: [PATCH] (Yukigram) Changelog
  1 file changed, 313 insertions(+)
 
 diff --git a/changelog.txt b/changelog.txt
-index f3f5e1d399..f5e341dc0a 100644
+index f3f5e1d399..bcb020b6c9 100644
 --- a/changelog.txt
 +++ b/changelog.txt
 @@ -1,3 +1,21 @@
-+9999 wip (01.01.99)
++6.9.1.0 (10.06.26)
 +
 +- Various fixes, features and other improvements. See changelogs of 6.8.3.x, 6.8.4.x, 6.8.5.x, and 6.9.1.0-rc.x for more.
 +- All installations with old data directory path should migrate as described in this post (https://t.me/yukigram/42), as mixing development and production tdata is not supported. Fallback to ~/.local/share/Yukigram might be removed in the future, and is already removed for pre-release builds.

@@ -10,13 +10,13 @@ telegram-desktop.overrideAttrs (final: prev: {
   pname = "yukigram";
   unwrapped = prev.unwrapped.overrideAttrs (final: prev: {
     pname = "yukigram-unwrapped";
-    version = "6.9.1.0-rc.2+wip";
+    version = "6.9.1.0";
     src = prev.src.overrideAttrs {
       rev = "v6.9.1";
       hash = "sha256-siHKp+/17HdrN+g+iTIqttlB4SoTlLnQ/QjB8qZBycY=";
     };
     cmakeFlags = prev.cmakeFlags ++ [
-      (lib.cmakeBool "DEVEL" true)
+      (lib.cmakeBool "DEVEL" false)
     ];
     # system minizip and zlib are required since 6.9.0
     buildInputs = (prev.buildInputs or []) ++ [minizip zlib];
@@ -28,7 +28,7 @@ telegram-desktop.overrideAttrs (final: prev: {
       description = "Telegram Desktop, minus the bullshit, plus the features";
       homepage = "https://github.com/yukigram/yukigram";
       changelog = "https://t.me/yukigram";
-      mainProgram = "io.github.yukigram.devel";
+      mainProgram = "io.github.yukigram";
     };
   });
 
