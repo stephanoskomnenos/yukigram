@@ -59,6 +59,7 @@ These are placed under `(Yukigram)` category.
     (same situation as with libada,
     no distro packages it yet,
     and breaking bulids is not fun)
+- Disable TooManyCooks on ARMv7
 
 These are placed under `(Fix)` category.
 
