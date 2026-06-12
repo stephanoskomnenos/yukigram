@@ -105,5 +105,5 @@ index bab18dca01..874b3fe02a 100644
  	_location.setText(st::defaultTextStyle, LocationAndDate(_data));
  	_type = TypeFromEntry(_data);
 -- 
-2.53.0
+2.54.0
 

@@ -14,7 +14,7 @@ Subject: [PATCH] (Interface)(Opt) Single-column layout
  create mode 100644 Telegram/SourceFiles/yukigram/settings/force_mobile_layout.h
 
 diff --git a/Telegram/SourceFiles/mainwidget.cpp b/Telegram/SourceFiles/mainwidget.cpp
-index af5e899b62..27cc858199 100644
+index 8774eb6ae7..5b36d9c802 100644
 --- a/Telegram/SourceFiles/mainwidget.cpp
 +++ b/Telegram/SourceFiles/mainwidget.cpp
 @@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -33,7 +33,7 @@ index af5e899b62..27cc858199 100644
  		Core::App().settings().dialogsWithChatWidthRatioChanges(
  		) | filter(true) | rpl::to_empty,
  		Core::App().settings().dialogsNoChatWidthRatioChanges(
-@@ -2888,7 +2890,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
+@@ -2892,7 +2894,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
  
  	// Check if we are in a single-column layout in a wide enough window
  	// for the normal layout. If so, switch to the normal layout.
@@ -105,5 +105,5 @@ index 0000000000..8220914012
 +extern const char kOptionForceMobileLayout[];
 +}
 -- 
-2.53.0
+2.54.0
 

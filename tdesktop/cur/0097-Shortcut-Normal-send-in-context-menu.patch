@@ -20,5 +20,5 @@ index 1e2bb9c495..f5f80464e8 100644
  		menu->addAction(
  			tr::lng_send_silent_message(tr::now),
 -- 
-2.53.0
+2.54.0
 

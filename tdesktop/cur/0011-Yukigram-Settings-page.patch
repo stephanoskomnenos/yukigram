@@ -15,10 +15,10 @@ Co-Authored-By: Lunya <241520024+lunya-miaou@users.noreply.github.com>
  create mode 100644 Telegram/SourceFiles/settings/sections/settings_yukigram.h
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index b2c96e8160..ac755c55e0 100644
+index 992356b642..d03c535c2c 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1748,6 +1748,8 @@ PRIVATE
+@@ -1750,6 +1750,8 @@ PRIVATE
      settings/sections/settings_shortcuts.h
      settings/sections/settings_websites.cpp
      settings/sections/settings_websites.h
@@ -28,10 +28,10 @@ index b2c96e8160..ac755c55e0 100644
      storage/details/storage_file_utilities.h
      storage/details/storage_settings_scheme.cpp
 diff --git a/Telegram/Resources/langs/lang.strings b/Telegram/Resources/langs/lang.strings
-index 966d63a71a..43880463db 100644
+index f1d4e37ba4..b82be2bac1 100644
 --- a/Telegram/Resources/langs/lang.strings
 +++ b/Telegram/Resources/langs/lang.strings
-@@ -852,6 +852,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -853,6 +853,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  "lng_settings_add_account_about" = "You can add up to four accounts with different phone numbers.";
  "lng_settings_peer_to_peer_about" = "Disabling peer-to-peer will relay all calls through Telegram servers to avoid revealing your IP address, but may decrease audio and video quality.";
  "lng_settings_advanced" = "Advanced";
@@ -387,5 +387,5 @@ index 0000000000..2ae5460740
 +
 +} // namespace Settings
 -- 
-2.53.0
+2.54.0
 

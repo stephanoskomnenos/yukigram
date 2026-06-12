@@ -27,5 +27,5 @@ index ff8ac3ce0e..ba6f7db0b2 100644
  
  class Style : public ReplyKeyboard::Style {
 -- 
-2.53.0
+2.54.0
 

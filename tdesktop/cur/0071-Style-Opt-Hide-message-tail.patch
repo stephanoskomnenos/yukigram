@@ -12,7 +12,7 @@ Subject: [PATCH] (Style)(Opt) Hide message tail
  create mode 100644 Telegram/SourceFiles/yukigram/settings/hide_message_tail.h
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 2ec98ccd1e..68c334f89e 100644
+index 9dddf1a8cd..690e441326 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -33,6 +33,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -23,7 +23,7 @@ index 2ec98ccd1e..68c334f89e 100644
  #include "boxes/premium_preview_box.h"
  #include "boxes/share_box.h"
  #include "boxes/peers/tag_info_box.h"
-@@ -6271,6 +6272,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
+@@ -6283,6 +6284,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
  	const auto item = data();
  	const auto keyboard = item->inlineReplyKeyboard();
  	const auto skipTail = smallBottom
@@ -63,5 +63,5 @@ index 0000000000..d7d4b4e793
 +extern const char kOptionHideMessageTail[];
 +}
 -- 
-2.53.0
+2.54.0
 

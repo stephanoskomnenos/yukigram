@@ -96,5 +96,5 @@ index 6eb90a0009..a829db20d5 100644
  	not_null<Window::SessionController*> sessionController);
  [[nodiscard]] QBrush PeerListStoriesGradient(const style::PeerList &st);
 -- 
-2.53.0
+2.54.0
 

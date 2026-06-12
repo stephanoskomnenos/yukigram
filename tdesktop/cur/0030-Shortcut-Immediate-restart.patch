@@ -34,5 +34,5 @@ index d4d9229279..1ca6465eda 100644
  		.text = tr::lng_settings_logout(tr::now),
  		.handler = [=] { window->showLogoutConfirmation(); },
 -- 
-2.53.0
+2.54.0
 

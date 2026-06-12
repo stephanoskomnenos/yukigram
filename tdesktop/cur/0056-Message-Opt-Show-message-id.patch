@@ -60,7 +60,7 @@ index 91a1d434b2..da83efc973 100644
  		int64 tonStake = 0;
  		int stars = 0;
 diff --git a/Telegram/SourceFiles/history/view/history_view_element.cpp b/Telegram/SourceFiles/history/view/history_view_element.cpp
-index 41081bd995..32bf2438d9 100644
+index 78f69f8ad0..8ddbf25f2f 100644
 --- a/Telegram/SourceFiles/history/view/history_view_element.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_element.cpp
 @@ -32,6 +32,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -142,5 +142,5 @@ index 0000000000..6f36d0441e
 +#include "data/data_msg_id.h"
 +int64 CleanMessageId(MsgId id);
 -- 
-2.53.0
+2.54.0
 

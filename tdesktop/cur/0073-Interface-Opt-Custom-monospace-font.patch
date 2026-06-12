@@ -248,5 +248,5 @@ index 5324f1e711..e08cd94b54 100644
  	const auto key = internal::QtFontKey(font);
  	const auto i = internal::QtFontsKeys.find(key);
 -- 
-2.53.0
+2.54.0
 

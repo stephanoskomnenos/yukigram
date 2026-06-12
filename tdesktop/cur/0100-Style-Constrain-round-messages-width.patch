@@ -8,10 +8,10 @@ Subject: [PATCH] (Style) Constrain round messages width
  1 file changed, 6 insertions(+)
 
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
-index fab6d5b2dc..a51e2b41a3 100644
+index 00529180dc..039041c51b 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
-@@ -391,11 +391,17 @@ QSize Gif::countCurrentSize(int newWidth) {
+@@ -392,11 +392,17 @@ QSize Gif::countCurrentSize(int newWidth) {
  		auto reply = _parent->Get<Reply>();
  		auto forwarded = item->Get<HistoryMessageForwarded>();
  		if (via || reply || forwarded) {
@@ -30,5 +30,5 @@ index fab6d5b2dc..a51e2b41a3 100644
  				via->resize(availw);
  			}
 -- 
-2.53.0
+2.54.0
 

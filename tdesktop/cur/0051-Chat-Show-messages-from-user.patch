@@ -27,10 +27,10 @@ index c46947f28c..e0ef6eb9a1 100644
  	if (user && !_peer->isBroadcast()) {
  		const auto isSelf = user->isSelf();
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 6591dca57c..48da311c8b 100644
+index fe16d7b621..2cb8aa7eee 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -2933,6 +2933,17 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
+@@ -2934,6 +2934,17 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
  				std::move(callback),
  				&st::menuIconStats);
  		}
@@ -118,5 +118,5 @@ index b11ed93434..738171972e 100644
  		not_null<ChannelData*> channel,
  		int boostsToLift = 0);
 -- 
-2.53.0
+2.54.0
 

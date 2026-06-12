@@ -72,10 +72,10 @@ index 039e8a46d5..161f644fd7 100644
  	}
  	const auto history = peer->owner().history(peer);
 diff --git a/Telegram/SourceFiles/core/shortcuts.cpp b/Telegram/SourceFiles/core/shortcuts.cpp
-index 4ca872a75e..ed2463c77b 100644
+index 3f28de9ca6..55a7bc250d 100644
 --- a/Telegram/SourceFiles/core/shortcuts.cpp
 +++ b/Telegram/SourceFiles/core/shortcuts.cpp
-@@ -139,6 +139,9 @@ const auto CommandByName = base::flat_map<QString, Command>{
+@@ -140,6 +140,9 @@ const auto CommandByName = base::flat_map<QString, Command>{
  	{ u"record_round"_q                  , Command::RecordRound },
  	{ u"show_admin_log"_q                , Command::ShowAdminLog },
  	//
@@ -85,7 +85,7 @@ index 4ca872a75e..ed2463c77b 100644
  };
  
  const base::flat_map<Command, QString> &CommandNames() {
-@@ -533,6 +536,10 @@ void Manager::fillDefaults() {
+@@ -535,6 +538,10 @@ void Manager::fillDefaults() {
  
  	set(u"ctrl+r"_q, Command::RecordVoice);
  
@@ -97,10 +97,10 @@ index 4ca872a75e..ed2463c77b 100644
  }
  
 diff --git a/Telegram/SourceFiles/core/shortcuts.h b/Telegram/SourceFiles/core/shortcuts.h
-index 2d6005ee8d..917cfd78fc 100644
+index c6e50ec09b..5edcc82e3a 100644
 --- a/Telegram/SourceFiles/core/shortcuts.h
 +++ b/Telegram/SourceFiles/core/shortcuts.h
-@@ -88,6 +88,10 @@ enum class Command {
+@@ -89,6 +89,10 @@ enum class Command {
  	SupportScrollToCurrent,
  	SupportHistoryBack,
  	SupportHistoryForward,
@@ -112,7 +112,7 @@ index 2d6005ee8d..917cfd78fc 100644
  
  [[maybe_unused]] constexpr auto kShowFolder = {
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 376335499b..fcedc93251 100644
+index 470f7b88f4..55e6fd19e5 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
 @@ -11,6 +11,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -132,7 +132,7 @@ index 376335499b..fcedc93251 100644
  	HistoryView::Reactions::SetupManagerList(
  		_reactionsManager.get(),
  		_reactionsItem.value());
-@@ -6076,6 +6079,38 @@ bool CanSendReply(not_null<const HistoryItem*> item) {
+@@ -6077,6 +6080,38 @@ bool CanSendReply(not_null<const HistoryItem*> item) {
  	return true;
  }
  
@@ -184,10 +184,10 @@ index 4a34dd2019..56199ffd3d 100644
  	[[nodiscard]] auto reactionButtonParameters(
  		not_null<const Element*> view,
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index af86beeafa..7963844158 100644
+index a475c6bfcf..87ab0e17d7 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
-@@ -9645,7 +9645,7 @@ bool HistoryWidget::updateCanSendMessage() {
+@@ -9662,7 +9662,7 @@ bool HistoryWidget::updateCanSendMessage() {
  	return true;
  }
  
@@ -196,7 +196,7 @@ index af86beeafa..7963844158 100644
  	if (!_list) {
  		return;
  	}
-@@ -9654,7 +9654,7 @@ void HistoryWidget::forwardSelected() {
+@@ -9671,7 +9671,7 @@ void HistoryWidget::forwardSelected() {
  		if (const auto strong = weak.get()) {
  			strong->clearSelected();
  		}
@@ -347,5 +347,5 @@ index 8664c91dbb..35fc31db43 100644
  	not_null<Window::SessionNavigation*> navigation,
  	const QString &url,
 -- 
-2.53.0
+2.54.0
 

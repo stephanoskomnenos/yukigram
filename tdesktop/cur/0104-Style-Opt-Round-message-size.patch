@@ -12,7 +12,7 @@ Subject: [PATCH] (Style)(Opt) Round message size
  create mode 100644 Telegram/SourceFiles/yukigram/settings/round_size.h
 
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
-index 17873f1220..c917c81fef 100644
+index d1b8efbb3a..9ad62b54f9 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
 @@ -50,6 +50,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -23,7 +23,7 @@ index 17873f1220..c917c81fef 100644
  #include "data/data_photo.h"
  #include "data/data_photo_media.h"
  #include "data/data_session.h"
-@@ -288,7 +289,7 @@ QSize Gif::countThumbSize(int &inOutWidthMax) const {
+@@ -289,7 +290,7 @@ QSize Gif::countThumbSize(int &inOutWidthMax) const {
  		} else if (_data->isVideoFile()) {
  			return st::maxMediaSize;
  		} else if (_data->isVideoMessage()) {
@@ -67,5 +67,5 @@ index 0000000000..dc5aa4aae5
 +extern const char kOptionRoundSize[];
 +}
 -- 
-2.53.0
+2.54.0
 

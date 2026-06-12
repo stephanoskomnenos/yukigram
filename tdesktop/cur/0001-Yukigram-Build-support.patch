@@ -16,10 +16,10 @@ Subject: [PATCH] (Yukigram) Build support
  create mode 100755 run-in-docker.sh
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index d434cf17ac..150e36a322 100644
+index 01291b190c..0465b39914 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -1969,6 +1969,9 @@ PRIVATE
+@@ -1971,6 +1971,9 @@ PRIVATE
      tray.h
  )
  
@@ -63,7 +63,7 @@ index 0000000000..441c32a088
 +./run-in-docker.sh env DESTDIR="${DESTDIR:-.}" /usr/src/tdesktop/Telegram/build/docker/centos_env/install.sh "$@"
 diff --git a/run-in-docker.sh b/run-in-docker.sh
 new file mode 100755
-index 0000000000..5e670380dc
+index 0000000000..4fb2fe85ab
 --- /dev/null
 +++ b/run-in-docker.sh
 @@ -0,0 +1,16 @@
@@ -81,11 +81,11 @@ index 0000000000..5e670380dc
 +    -u $USERFLAGS \
 +    -v "$PWD:/usr/src/tdesktop" \
 +    -e CONFIG=${CONFIG:-Release} \
-+    ghcr.io/telegramdesktop/tdesktop/centos_env@sha256:6335f0789a3fced0e245fdf88838336cc369e332528b3f629f250f8b10efe9b3 \
++    ghcr.io/telegramdesktop/tdesktop/centos_env@sha256:33fb5167695624960b4113e8ddf3fa0580d8cc5fb29e7e87285031063644654c \
 +    "$@"
 
-base-commit: 1380c62819c18e8c458d517f1a526adb35d453d3
-prerequisite-patch-id: 00a948dbe0d5302b6fa1a354dbb254fca04e9ac5
+base-commit: f5e93bedbd20bd3e282b7e4c920d96589d082f77
+prerequisite-patch-id: 474c58b01bbdf6d5703d40f3280e1fbf583cff36
 -- 
-2.53.0
+2.54.0
 

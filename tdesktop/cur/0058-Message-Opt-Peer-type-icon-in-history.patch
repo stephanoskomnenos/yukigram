@@ -15,7 +15,7 @@ Original author: RadRussianRus <radrussianrus@gmail.com>
  create mode 100644 Telegram/SourceFiles/yukigram/settings/history_peer_type_icons.h
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 35ec988e86..29a3eaf5fd 100644
+index b0f93559dc..3270cde4cb 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
 @@ -57,6 +57,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -61,7 +61,7 @@ index 35ec988e86..29a3eaf5fd 100644
  struct SecondRightAction {
  	std::unique_ptr<Ui::RippleAnimation> ripple;
  	ClickHandlerPtr link;
-@@ -1483,6 +1512,9 @@ QSize Message::performCountOptimalSize() {
+@@ -1484,6 +1513,9 @@ QSize Message::performCountOptimalSize() {
  				if (Has<RightBadge>()) {
  					namew += st::msgPadding.right() + rightBadgeWidth();
  				}
@@ -71,7 +71,7 @@ index 35ec988e86..29a3eaf5fd 100644
  				accumulate_max(maxWidth, namew);
  				accumulate_max(nonTextMax, namew);
  			} else if (via && !displayForwardedFrom()) {
-@@ -2419,6 +2451,19 @@ void Message::paintFromName(
+@@ -2420,6 +2452,19 @@ void Message::paintFromName(
  		context,
  		colorIndex(),
  		colorCollectible());
@@ -91,7 +91,7 @@ index 35ec988e86..29a3eaf5fd 100644
  	const auto nameText = [&] {
  		if (from) {
  			validateFromNameText(from);
-@@ -4025,6 +4070,8 @@ bool Message::getStateFromName(
+@@ -4026,6 +4071,8 @@ bool Message::getStateFromName(
  			availableWidth -= st::msgPadding.right() + badgeWidth;
  		}
  		const auto item = data();
@@ -100,7 +100,7 @@ index 35ec988e86..29a3eaf5fd 100644
  		const auto from = item->displayFrom();
  		const auto nameText = [&]() -> const Ui::Text::String * {
  			if (from) {
-@@ -4056,7 +4103,7 @@ bool Message::getStateFromName(
+@@ -4057,7 +4104,7 @@ bool Message::getStateFromName(
  		}
  		if (point.x() >= availableLeft
  			&& point.x() < availableLeft + availableWidth
@@ -162,5 +162,5 @@ index 0000000000..ccee3ad817
 +extern const char kOptionHistoryPeerTypeIcons[];
 +}
 -- 
-2.53.0
+2.54.0
 

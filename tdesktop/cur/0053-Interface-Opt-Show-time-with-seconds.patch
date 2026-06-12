@@ -93,10 +93,10 @@ index 2e8ee8c52d..4a11612dad 100644
  }
  
 diff --git a/Telegram/SourceFiles/history/history_inner_widget.cpp b/Telegram/SourceFiles/history/history_inner_widget.cpp
-index 48da311c8b..9caacce43a 100644
+index 2cb8aa7eee..6c47e9fae6 100644
 --- a/Telegram/SourceFiles/history/history_inner_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_inner_widget.cpp
-@@ -3932,7 +3932,7 @@ TextForMimeData HistoryInner::getSelectedText() const {
+@@ -3933,7 +3933,7 @@ TextForMimeData HistoryInner::getSelectedText() const {
  		const auto i = texts.emplace(item->position(), Part{
  			.name = item->author()->name(),
  			.time = QString("[%1] ").arg(
@@ -106,7 +106,7 @@ index 48da311c8b..9caacce43a 100644
  		}).first;
  		fullSize += i->second.time.size()
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 20f1a60c05..fd6bcc2752 100644
+index 15c2ee4bf8..b66db0af7a 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
 @@ -1408,7 +1408,7 @@ void HistoryItem::setCommentsItemId(FullMsgId id) {
@@ -118,7 +118,7 @@ index 20f1a60c05..fd6bcc2752 100644
  	}
  	return QString();
  }
-@@ -8015,7 +8015,7 @@ PreparedServiceText HistoryItem::prepareCallScheduledText(
+@@ -8016,7 +8016,7 @@ PreparedServiceText HistoryItem::prepareCallScheduledText(
  	};
  	const auto time = QLocale().toString(
  		scheduled.time(),
@@ -338,5 +338,5 @@ index 0000000000..a0f3cc7088
 +extern const char kOptionTimeWithSeconds[];
 +}
 -- 
-2.53.0
+2.54.0
 

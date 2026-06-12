@@ -58,5 +58,5 @@ index 61857485c0..b7bafecd50 100644
  			u"^join/?\\?invite=([a-zA-Z0-9\\.\\_\\-]+)(&|$)"_q,
  			JoinGroupByHash
 -- 
-2.53.0
+2.54.0
 

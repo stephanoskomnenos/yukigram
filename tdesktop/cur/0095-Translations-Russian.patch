@@ -200,5 +200,5 @@ index 769124b26c..f625d5616a 100644
    <qresource prefix="/misc">
      <file alias="io.github.yukigram.desktop">@CMAKE_CURRENT_BINARY_DIR@/@YUKIGRAM_APP_ID@.desktop</file>
 -- 
-2.53.0
+2.54.0
 

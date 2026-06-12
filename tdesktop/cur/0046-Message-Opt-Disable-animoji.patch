@@ -12,7 +12,7 @@ Subject: [PATCH] (Message)(Opt) Disable animoji
  create mode 100644 Telegram/SourceFiles/yukigram/settings/disable_animoji.h
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_element.cpp b/Telegram/SourceFiles/history/view/history_view_element.cpp
-index 50e9e45c58..c99328526b 100644
+index 4a277020fd..bc956dfcde 100644
 --- a/Telegram/SourceFiles/history/view/history_view_element.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_element.cpp
 @@ -44,6 +44,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -64,5 +64,5 @@ index 0000000000..27322b07a0
 +extern const char kOptionDisableAnimoji[];
 +}
 -- 
-2.53.0
+2.54.0
 

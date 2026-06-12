@@ -71,5 +71,5 @@ index 7200f6431b..8934340ec1 100644
  						Ui::PanelAnimation::Origin::TopRight);
  					top->setForceRippled(true);
 -- 
-2.53.0
+2.54.0
 

@@ -12,7 +12,7 @@ Subject: [PATCH] (Compose)(Opt) Show scheduled messages button
  create mode 100644 Telegram/SourceFiles/yukigram/settings/always_show_scheduled.h
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index b457796297..b55006ce95 100644
+index e8b9b0135d..4e565652b0 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
 @@ -35,6 +35,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -23,7 +23,7 @@ index b457796297..b55006ce95 100644
  #include "ui/emoji_config.h"
  #include "ui/chat/attach/attach_prepare.h"
  #include "ui/chat/choose_theme_controller.h"
-@@ -3387,7 +3388,7 @@ void HistoryWidget::setupScheduledToggle() {
+@@ -3400,7 +3401,7 @@ void HistoryWidget::setupScheduledToggle() {
  }
  
  void HistoryWidget::refreshScheduledToggle() {
@@ -63,5 +63,5 @@ index 0000000000..910bfebadb
 +extern const char kOptionAlwaysShowScheduled[];
 +}
 -- 
-2.53.0
+2.54.0
 
