@@ -294,9 +294,6 @@ jobs:
           additional_sha512sums=$(sha512sum tdesktop/cur/*.patch)
           cp -r tdesktop pmaports/temp/yukigram/
 
-          # Remvove minizip patch
-          sed -i '/tdesktop-fix-minizip-includes.patch/d' pmaports/temp/yukigram/APKBUILD
-
           # Remove libdispatch (replaced with in-tree TooManyCooks)
           sed -i '/libdispatch-dev/d' pmaports/temp/yukigram/APKBUILD
 
