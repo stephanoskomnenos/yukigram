@@ -104,6 +104,3 @@ index 0000000000..8220914012
 +extern rpl::variable<bool> *ForceMobileLayout;
 +extern const char kOptionForceMobileLayout[];
 +}
--- 
-2.54.0
-

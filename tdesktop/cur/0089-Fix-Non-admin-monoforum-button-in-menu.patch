@@ -20,6 +20,3 @@ index 8291fb629c..efeb06e983 100644
  		return;
  	}
  	const auto navigation = _controller;
--- 
-2.54.0
-

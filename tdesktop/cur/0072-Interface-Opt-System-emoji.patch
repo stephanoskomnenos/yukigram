@@ -77,6 +77,3 @@ index f92235f536..b49358ea46 100644
  #ifdef Q_OS_MAC
  	const auto s = (style::Scale() == kScaleForTouchBar)
  		? SizeLarge
--- 
-2.54.0
-

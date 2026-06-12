@@ -277,6 +277,3 @@ index 0000000000..3dcea7ad9a
 +extern rpl::variable<bool> *CompactChatList;
 +extern const char kOptionCompactChatList[];
 +}
--- 
-2.54.0
-

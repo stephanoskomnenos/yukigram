@@ -171,6 +171,3 @@ index 0000000000..e014323bf2
 +extern rpl::variable<bool> *QuickRecentActions;
 +extern const char kOptionQuickRecentActions[];
 +}
--- 
-2.54.0
-

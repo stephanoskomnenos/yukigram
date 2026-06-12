@@ -161,6 +161,3 @@ index d17f4abc42..0d12802059 100644
  	nameStyle: TextStyle;
  	nameFg: color;
  	nameFgChecked: color;
--- 
-2.54.0
-

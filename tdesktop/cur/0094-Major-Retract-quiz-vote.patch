@@ -34,6 +34,3 @@ index 111a67d3be..70c8eadcfd 100644
  		if (poll->voted()
  			&& !poll->revotingDisabled()) {
  			menu->addAction(
--- 
-2.54.0
-

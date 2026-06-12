@@ -33,6 +33,3 @@ index d4d9229279..1ca6465eda 100644
  	const auto logout = addAction({
  		.text = tr::lng_settings_logout(tr::now),
  		.handler = [=] { window->showLogoutConfirmation(); },
--- 
-2.54.0
-

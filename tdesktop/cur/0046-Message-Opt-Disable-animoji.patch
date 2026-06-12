@@ -63,6 +63,3 @@ index 0000000000..27322b07a0
 +extern rpl::variable<bool> *DisableAnimoji;
 +extern const char kOptionDisableAnimoji[];
 +}
--- 
-2.54.0
-

@@ -228,6 +228,3 @@ index 4513752cb0..6e7021ab28 100644
  	if (_leftPadding != padding) {
  		_leftPadding = padding;
  		resizeToWidth(width());
--- 
-2.54.0
-

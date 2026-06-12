@@ -62,6 +62,3 @@ index 0000000000..910bfebadb
 +extern rpl::variable<bool> *AlwaysShowScheduled;
 +extern const char kOptionAlwaysShowScheduled[];
 +}
--- 
-2.54.0
-

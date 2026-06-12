@@ -386,6 +386,3 @@ index 0000000000..2ae5460740
 +[[nodiscard]] Type YukigramId();
 +
 +} // namespace Settings
--- 
-2.54.0
-

@@ -125,6 +125,3 @@ index 0000000000..73564b7ab3
 +extern rpl::variable<bool> *UnroundMessages;
 +extern const char kOptionUnroundMessages[];
 +}
--- 
-2.54.0
-

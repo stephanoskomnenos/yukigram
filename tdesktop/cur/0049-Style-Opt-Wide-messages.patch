@@ -540,6 +540,3 @@ index 0000000000..c6e779b7d2
 +extern rpl::variable<bool> *WideMessages;
 +extern const char kOptionWideMessages[];
 +}
--- 
-2.54.0
-

@@ -63,6 +63,3 @@ index 0000000000..3ba5ef9303
 +extern rpl::variable<bool> *HidePopularEmojiPicker;
 +extern const char kOptionHidePopularEmojiPicker[];
 +}
--- 
-2.54.0
-

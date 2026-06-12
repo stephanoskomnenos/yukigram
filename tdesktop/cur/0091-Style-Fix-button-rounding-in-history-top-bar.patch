@@ -27,6 +27,3 @@ index c4cac74921..532665e177 100644
  		for (const auto button : buttons) {
  			if (button->isHidden()) {
  				continue;
--- 
-2.54.0
-

@@ -37,6 +37,3 @@ index 34bbee7322..e8b9b0135d 100644
  	}
  
  	// Restart timer only if we are sure that we've painted the whole timer.
--- 
-2.54.0
-

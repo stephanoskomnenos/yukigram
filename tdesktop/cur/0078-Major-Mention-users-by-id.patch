@@ -45,6 +45,3 @@ index fa34ee3e96..1332d49d6d 100644
  		if (linkText.text.isEmpty()) {
  			text->showError();
  			return;
--- 
-2.54.0
-

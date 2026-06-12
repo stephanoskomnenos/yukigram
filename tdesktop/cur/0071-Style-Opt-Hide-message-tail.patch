@@ -62,6 +62,3 @@ index 0000000000..d7d4b4e793
 +extern rpl::variable<bool> *HideMessageTail;
 +extern const char kOptionHideMessageTail[];
 +}
--- 
-2.54.0
-

@@ -66,6 +66,3 @@ index 738171972e..32f8d31f73 100644
  	void showNewChannel();
  
  	void showPassportForm(const Passport::FormRequest &request);
--- 
-2.54.0
-

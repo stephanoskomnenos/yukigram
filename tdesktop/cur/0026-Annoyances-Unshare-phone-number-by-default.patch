@@ -20,6 +20,3 @@ index 056b66d7f1..f25b68ca52 100644
  			st::defaultBoxCheckbox),
  		st::addContactWarningMargin);
  	_box->addRow(
--- 
-2.54.0
-

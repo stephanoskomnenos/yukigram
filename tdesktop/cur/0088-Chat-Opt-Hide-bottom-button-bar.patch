@@ -123,6 +123,3 @@ index 0000000000..4efd4816a1
 +extern rpl::variable<bool> *HideBottomBar;
 +extern const char kOptionHideBottomBar[];
 +}
--- 
-2.54.0
-

@@ -114,6 +114,3 @@ index 0000000000..b48127f692
 +extern rpl::variable<bool> *IconThemeSymbolic;
 +extern const char kOptionIconThemeSymbolic[];
 +}
--- 
-2.54.0
-

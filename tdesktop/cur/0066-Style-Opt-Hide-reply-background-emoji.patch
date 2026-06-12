@@ -63,6 +63,3 @@ index 0000000000..13b957e076
 +extern rpl::variable<bool> *HideReplyBackgroundEmoji;
 +extern const char kOptionHideReplyBackgroundEmoji[];
 +}
--- 
-2.54.0
-

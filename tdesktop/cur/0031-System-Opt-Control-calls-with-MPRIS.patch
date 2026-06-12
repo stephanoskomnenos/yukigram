@@ -186,6 +186,3 @@ index 0000000000..7cc06af518
 +extern rpl::variable<bool> *MprisCallHangup;
 +extern const char kOptionMprisCallHangup[];
 +}
--- 
-2.54.0
-

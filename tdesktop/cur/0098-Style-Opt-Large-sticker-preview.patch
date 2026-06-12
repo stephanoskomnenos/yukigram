@@ -63,6 +63,3 @@ index 0000000000..babb404946
 +extern rpl::variable<bool> *LargeStickerPreview;
 +extern const char kOptionLargeStickerPreview[];
 +}
--- 
-2.54.0
-

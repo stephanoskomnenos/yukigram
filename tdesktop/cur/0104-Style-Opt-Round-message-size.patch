@@ -66,6 +66,3 @@ index 0000000000..dc5aa4aae5
 +extern rpl::variable<int> *RoundSize;
 +extern const char kOptionRoundSize[];
 +}
--- 
-2.54.0
-

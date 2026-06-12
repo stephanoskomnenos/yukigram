@@ -64,6 +64,3 @@ index 0000000000..cf1797862c
 +extern rpl::variable<bool> *StarHideAlways;
 +extern const char kOptionStarHideAlways[];
 +}
--- 
-2.54.0
-

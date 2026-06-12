@@ -346,6 +346,3 @@ index 8664c91dbb..35fc31db43 100644
  base::weak_qptr<Ui::BoxContent> ShowShareUrlBox(
  	not_null<Window::SessionNavigation*> navigation,
  	const QString &url,
--- 
-2.54.0
-

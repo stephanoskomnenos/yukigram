@@ -117,6 +117,3 @@ index b11ed93434..738171972e 100644
  	void resolveBoostState(
  		not_null<ChannelData*> channel,
  		int boostsToLift = 0);
--- 
-2.54.0
-

@@ -33,6 +33,3 @@ index 1dd1fa68b4..15c2ee4bf8 100644
  	_text = std::move(prepared.text);
  	data->textLinks = std::move(prepared.links);
  	if (had) {
--- 
-2.54.0
-

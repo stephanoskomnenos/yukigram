@@ -29,6 +29,3 @@ index 4074241196..8b26d655f4 100644
  	if (!_fromName.isEmpty()) {
  		_fromNameLabel.setText(
  			st::mediaviewTextStyle,
--- 
-2.54.0
-

@@ -95,6 +95,3 @@ index 5ac8d8b9b3..f0afa8dd2d 100644
  			} else if (_owner->voteRestricted()) {
  				_owner->showVoteRestrictionToast();
  			} else if (_owner->showVotes()) {
--- 
-2.54.0
-

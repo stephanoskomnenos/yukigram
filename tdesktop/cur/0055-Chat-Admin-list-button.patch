@@ -170,6 +170,3 @@ index 0000000000..169b0150dd
 +extern rpl::variable<bool> *QuickAdminList;
 +extern const char kOptionQuickAdminList[];
 +}
--- 
-2.54.0
-

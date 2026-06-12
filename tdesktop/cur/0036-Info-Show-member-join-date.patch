@@ -104,6 +104,3 @@ index 6d40bec4c2..51fd764757 100644
  	PeerData *applyBanned(const Api::ChatParticipant &data);
  	void fillFromChat(not_null<ChatData*> chat);
  	void fillFromChannel(not_null<ChannelData*> channel);
--- 
-2.54.0
-

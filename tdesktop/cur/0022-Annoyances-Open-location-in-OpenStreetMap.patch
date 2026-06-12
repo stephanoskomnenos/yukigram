@@ -25,6 +25,3 @@ index 6cf1ecfddd..99a266be72 100644
 +	const auto lon = point.lonAsString();
 +	return u"https://www.openstreetmap.org/?mlat="_q + lat + u"&mlon="_q + lon + u"#map=16/"_q + lat + u"/"_q + lon;
  }
--- 
-2.54.0
-

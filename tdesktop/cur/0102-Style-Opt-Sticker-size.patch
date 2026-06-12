@@ -71,6 +71,3 @@ index 0000000000..ff1c13369d
 +extern rpl::variable<int> *StickerSize;
 +extern const char kOptionStickerSize[];
 +}
--- 
-2.54.0
-

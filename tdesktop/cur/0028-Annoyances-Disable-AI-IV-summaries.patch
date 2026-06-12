@@ -22,6 +22,3 @@ index a8355d3c3e..b19db96714 100644
  	}, [&](const MTPDpageBlockBlockquoteBlocks &data) {
  		auto parsed = MakeBlock(BlockKind::Quote);
  		AppendBlocks(data.vblocks().v, &parsed.blocks, context);
--- 
-2.54.0
-

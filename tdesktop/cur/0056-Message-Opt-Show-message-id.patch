@@ -141,6 +141,3 @@ index 0000000000..6f36d0441e
 +
 +#include "data/data_msg_id.h"
 +int64 CleanMessageId(MsgId id);
--- 
-2.54.0
-

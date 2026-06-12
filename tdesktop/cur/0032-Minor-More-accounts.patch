@@ -22,6 +22,3 @@ index 99e2c9d5b3..436c6581d0 100644
  
  	explicit Domain(const QString &dataName);
  	~Domain();
--- 
-2.54.0
-

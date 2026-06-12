@@ -27,6 +27,3 @@ index 617f5c820f..6e8b0bd948 100644
  			tr::lng_profile_action_short_join(tr::now),
  			st::infoProfileTopBarActionJoin);
  		join->setClickedCallback([=] {
--- 
-2.54.0
-

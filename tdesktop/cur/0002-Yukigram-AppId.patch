@@ -358,6 +358,3 @@ index 8935a4fa83..0000000000
 -[D-BUS Service]
 -Name=org.telegram.desktop
 -Exec=@CMAKE_INSTALL_FULL_BINDIR@/Telegram
--- 
-2.54.0
-

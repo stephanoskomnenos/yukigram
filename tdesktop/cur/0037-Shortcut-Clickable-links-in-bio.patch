@@ -20,6 +20,3 @@ index e2ad5c3316..ac627d6808 100644
  		StripExternalLinks(result);
  	}
  	return result;
--- 
-2.54.0
-

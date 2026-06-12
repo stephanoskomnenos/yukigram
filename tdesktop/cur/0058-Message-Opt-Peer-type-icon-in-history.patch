@@ -161,6 +161,3 @@ index 0000000000..ccee3ad817
 +extern rpl::variable<bool> *HistoryPeerTypeIcons;
 +extern const char kOptionHistoryPeerTypeIcons[];
 +}
--- 
-2.54.0
-

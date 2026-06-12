@@ -67,6 +67,3 @@ index 0000000000..a39fe340ab
 +extern rpl::variable<int> *CustomEmojiSize;
 +extern const char kOptionCustomEmojiSize[];
 +}
--- 
-2.54.0
-

@@ -49,6 +49,3 @@ index 1dc78f8412..617f5c820f 100644
  	if (!topic
  		&& canJoin
  		&& ((chat && !chat->amCreator() && !chat->hasAdminRights())
--- 
-2.54.0
-

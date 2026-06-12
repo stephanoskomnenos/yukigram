@@ -24,6 +24,3 @@ index 8b26d655f4..e823a196ff 100644
  }
  
  QImage OverlayWidget::videoFrame() const {
--- 
-2.54.0
-

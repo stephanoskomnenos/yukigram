@@ -31,6 +31,3 @@ index d1100d7ee4..c412f571ab 100644
  	text.setMarkedText(st::fwdTextStyle, phrase, kMarkupTextOptions, context);
  
  	text.setLink(1, fromChannel
--- 
-2.54.0
-

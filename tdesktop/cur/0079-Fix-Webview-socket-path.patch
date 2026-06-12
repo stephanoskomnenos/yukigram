@@ -31,6 +31,3 @@ index 0e8c317294..82f70152c1 100644
  		u"TD"_q).toStdString());
  
  	InstallLauncher();
--- 
-2.54.0
-

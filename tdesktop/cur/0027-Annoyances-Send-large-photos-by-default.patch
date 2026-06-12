@@ -20,6 +20,3 @@ index ba758ae69b..a36599f1f5 100644
  	};
  	friend inline constexpr bool is_flag_type(Flag) { return true; };
  
--- 
-2.54.0
-

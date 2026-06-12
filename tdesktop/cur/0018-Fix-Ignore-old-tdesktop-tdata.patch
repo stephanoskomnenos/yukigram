@@ -28,6 +28,3 @@ index 84b1b44e78..0e8c317294 100644
  	const auto prevPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/Yukigram/";
  	if (hasPreviousProfileAt(prevPath)) {
  		return prevPath;
--- 
-2.54.0
-

@@ -85,6 +85,3 @@ index 0000000000..6a4cf57d12
 +extern rpl::variable<bool> *DisableUpEdit;
 +extern const char kOptionDisableUpEdit[];
 +}
--- 
-2.54.0
-

@@ -64,6 +64,3 @@ index 0000000000..076ceeb385
 +extern rpl::variable<bool> *HidePopularStickerSuggest;
 +extern const char kOptionHidePopularStickerSuggest[];
 +}
--- 
-2.54.0
-

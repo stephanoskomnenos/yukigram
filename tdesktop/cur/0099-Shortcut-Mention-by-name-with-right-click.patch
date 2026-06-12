@@ -30,6 +30,3 @@ index 9497d87bf3..494b93a7d5 100644
  			field->insertTag(
  				user->firstName.isEmpty() ? user->name() : user->firstName,
  				PrepareMentionTag(user));
--- 
-2.54.0
-

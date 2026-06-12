@@ -34,6 +34,3 @@ index fe0694e647..de991e8a77 100644
      COMMAND
          echo 1> ${gen_timestamp}
      COMMENT "Generating AppStream changelog (${target_name})"
--- 
-2.54.0
-

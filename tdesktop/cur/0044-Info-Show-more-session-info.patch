@@ -104,6 +104,3 @@ index bab18dca01..874b3fe02a 100644
  	refreshName(st::sessionListItem);
  	_location.setText(st::defaultTextStyle, LocationAndDate(_data));
  	_type = TypeFromEntry(_data);
--- 
-2.54.0
-

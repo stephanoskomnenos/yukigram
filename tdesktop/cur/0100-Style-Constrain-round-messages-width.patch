@@ -29,6 +29,3 @@ index 00529180dc..039041c51b 100644
  			if (!forwarded && via) {
  				via->resize(availw);
  			}
--- 
-2.54.0
-

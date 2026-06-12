@@ -20,6 +20,3 @@ index 5db12b314f..12eb04214e 100644
  		/*&& item->originalText().text.size() >= kSummarizeThreshold*/) {
  		if (!_summarize) {
  			_summarize
--- 
-2.54.0
-

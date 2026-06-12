@@ -95,6 +95,3 @@ index 6eb90a0009..a829db20d5 100644
  [[nodiscard]] object_ptr<Ui::BoxContent> PrepareContactsBox(
  	not_null<Window::SessionController*> sessionController);
  [[nodiscard]] QBrush PeerListStoriesGradient(const style::PeerList &st);
--- 
-2.54.0
-

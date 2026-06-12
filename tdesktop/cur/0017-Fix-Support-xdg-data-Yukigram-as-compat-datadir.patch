@@ -50,6 +50,3 @@ index 567881008b..84b1b44e78 100644
  	return QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + '/';
  }
  
--- 
-2.54.0
-

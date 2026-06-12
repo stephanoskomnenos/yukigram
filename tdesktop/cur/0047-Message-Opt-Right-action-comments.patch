@@ -120,6 +120,3 @@ index 0000000000..9f9613c054
 +extern rpl::variable<bool> *RightActionComments;
 +extern const char kOptionRightActionComments[];
 +}
--- 
-2.54.0
-

@@ -168,6 +168,3 @@ index c1fae9a2ee..0d2ca8e873 100644
  	if (error) {
  		Data::ShowSendErrorToast(show, _data.peer, error);
  		return false;
--- 
-2.54.0
-

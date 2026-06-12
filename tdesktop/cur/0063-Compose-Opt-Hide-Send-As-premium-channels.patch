@@ -68,6 +68,3 @@ index 0000000000..45d59664d2
 +extern rpl::variable<bool> *HideSendAsPremium;
 +extern const char kOptionHideSendAsPremium[];
 +}
--- 
-2.54.0
-

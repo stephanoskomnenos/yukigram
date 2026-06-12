@@ -100,6 +100,3 @@ index 0000000000..5e9df1c406
 +extern rpl::variable<bool> *InferredPeerDc;
 +extern const char kOptionInferredPeerDc[];
 +}
--- 
-2.54.0
-

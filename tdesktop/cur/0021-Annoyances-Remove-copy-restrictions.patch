@@ -102,6 +102,3 @@ index fb490ddecd..4074241196 100644
  	if (const auto story = _stories ? _stories->story() : nullptr) {
  		if (story->call()) {
  			return true;
--- 
-2.54.0
-

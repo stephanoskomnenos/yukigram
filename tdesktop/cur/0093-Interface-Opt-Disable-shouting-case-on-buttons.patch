@@ -63,6 +63,3 @@ index 4637ed5d33..35a789fb77 100644
  		_text.setMarkedText(
  			_st.style,
  			{ text.text.toUpper(), text.entities },
--- 
-2.54.0
-

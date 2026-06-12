@@ -30,6 +30,3 @@ index 9fbe455fc5..abc4371b78 100644
  		const auto phraseWidth = st::msgDateFont->width(_stateText);
  		_maxWidth = unavailable
  			? phraseWidth
--- 
-2.54.0
-

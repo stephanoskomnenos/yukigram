@@ -64,6 +64,3 @@ index 0000000000..9ce6b0a872
 +extern rpl::variable<bool> *StarHideEmpty;
 +extern const char kOptionStarHideEmpty[];
 +}
--- 
-2.54.0
-

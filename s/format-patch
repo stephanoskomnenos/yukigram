@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -x
-git format-patch --zero-commit -N -o ../yukigram/tdesktop/cur --base HEAD^{/#flatten}{^,}
+git format-patch --zero-commit --no-signature -N -o ../yukigram/tdesktop/cur --base HEAD^{/#flatten}{^,}
 # `--zero-commit` is needed
 # to make first line of `.patch` files
 # (the `From ... Mon Sep 17 00:00:00 2001` line)
 # stable across rebases and reapplies.
+#
+# `--no-signature` hides git version in the bottom.
 #
 # `-N` disables patch numbering,
 # making `[PATCH 45/67]` in subject line
