@@ -51,7 +51,7 @@ index 5a6ab2d037..60026a5ec3 100644
  		return false;
  	}
 diff --git a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp b/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
-index 46f951ff64..c8e4ead5a3 100644
+index 46f951ff64..a04fbc592c 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
 @@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -80,24 +80,6 @@ index 46f951ff64..c8e4ead5a3 100644
  
  		auto chatsFilterTags = std::vector<QImage*>();
  		if (context.narrow) {
-@@ -1275,7 +1279,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
- 							? _previewPressed
- 							: _previewSelected));
- 					Ui::RowPainter::Paint(p, result.get(), {
--						.st = _st,
-+						.st = &st::defaultDialogRow,
- 						.folder = _openedFolder,
- 						.forum = _openedForum,
- 						.currentBg = currentBg(),
-@@ -1353,7 +1357,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
- 							? _searchedPressed
- 							: _searchedSelected));
- 					Ui::RowPainter::Paint(p, result.get(), {
--						.st = _st,
-+						.st = &st::defaultDialogRow,
- 						.folder = _openedFolder,
- 						.forum = _openedForum,
- 						.currentBg = currentBg(),
 @@ -1770,7 +1774,7 @@ void InnerWidget::performDrag() {
  			('@' + u).toUtf8());
  	}
