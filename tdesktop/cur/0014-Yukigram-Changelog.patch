@@ -5,11 +5,11 @@ Subject: [PATCH] (Yukigram) Changelog
 
 
 diff --git a/changelog.txt b/changelog.txt
-index 6608e5f513..15832579c5 100644
+index 6608e5f513..42cfb78e63 100644
 --- a/changelog.txt
 +++ b/changelog.txt
 @@ -1,9 +1,21 @@
-+9999 wip (01.01.99)
++6.9.3.0 rc.1 (14.06.26)
 +
 +- Upstream updated to 6.9.3
 +
