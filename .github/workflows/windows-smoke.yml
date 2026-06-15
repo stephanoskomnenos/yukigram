@@ -1,0 +1,271 @@
+name: Windows smoke build
+
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_ref:
+        description: 'telegramdesktop/tdesktop ref to patch and build'
+        required: true
+        default: 'v6.8.4'
+      architecture:
+        description: 'Windows target architecture'
+        required: true
+        type: choice
+        default: 'x64'
+        options:
+          - x64
+      configuration:
+        description: 'CMake configuration to build'
+        required: true
+        type: choice
+        default: 'Release'
+        options:
+          - Release
+          - RelWithDebInfo
+          - Debug
+      devel:
+        description: 'Build with Yukigram devel app id'
+        required: true
+        type: boolean
+        default: true
+      qt_argument:
+        description: 'Optional tdesktop Qt selector argument, for example qt6'
+        required: false
+        default: ''
+      prepare_args:
+        description: 'Arguments passed to Telegram/build/prepare/win.bat'
+        required: false
+        default: 'skip-release silent'
+      use_dependency_cache:
+        description: 'Restore/save Windows dependency cache (off for cleaner reproducibility checks)'
+        required: true
+        type: boolean
+        default: false
+      windows_sdk:
+        description: 'Windows SDK version expected by upstream docs'
+        required: true
+        default: '10.0.26100.0'
+      msvc_toolset:
+        description: 'MSVC toolset requested through vcvars64.bat -vcvars_ver'
+        required: true
+        default: '14.44'
+      strict_toolchain:
+        description: 'Fail instead of falling back when the requested SDK/toolset is absent'
+        required: true
+        type: boolean
+        default: true
+      disable_autoupdate:
+        description: 'Disable Telegram Desktop auto-update targets for the smoke artifact'
+        required: true
+        type: boolean
+        default: true
+      disable_crash_reports:
+        description: 'Disable crash-report generation for the smoke artifact'
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+env:
+  TBUILD: ${{ github.workspace }}\TBuild
+  TDESKTOP_WORKTREE: ${{ github.workspace }}\TBuild\yukigram-worktree
+  YUKIGRAM_WORKTREE: ${{ github.workspace }}\TBuild\yukigram
+
+jobs:
+  windows:
+    name: Windows ${{ inputs.architecture }} ${{ inputs.configuration }}
+    runs-on: windows-latest
+    timeout-minutes: 360
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      - name: Prepare directory layout
+        run: |
+          if not exist "%USERPROFILE%\TBuild" mkdir "%USERPROFILE%\TBuild"
+          if not exist "%USERPROFILE%\TBuild\Libraries" mkdir "%USERPROFILE%\TBuild\Libraries"
+          if not exist "%GITHUB_WORKSPACE%\TBuild" mklink /d "%GITHUB_WORKSPACE%\TBuild" "%USERPROFILE%\TBuild"
+          echo TBUILD=%TBUILD%
+          dir "%TBUILD%"
+
+      - name: Clone Yukigram
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          path: TBuild\yukigram
+
+      - name: Clone Telegram Desktop
+        uses: actions/checkout@v6
+        with:
+          repository: telegramdesktop/tdesktop
+          ref: ${{ inputs.upstream_ref }}
+          path: TBuild\yukigram-worktree
+          submodules: recursive
+
+      - name: Compute reproducibility metadata
+        id: metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          yukigram=$(cygpath -u "$YUKIGRAM_WORKTREE")
+          tdesktop=$(cygpath -u "$TDESKTOP_WORKTREE")
+          patchset_hash=$(find "$yukigram/tdesktop/cur" -type f -name '*.patch' -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
+          prepare_hash=$(sha256sum "$tdesktop/Telegram/build/prepare/prepare.py" | awk '{print $1}')
+          gitmodules_hash=$(sha256sum "$tdesktop/.gitmodules" | awk '{print $1}')
+          upstream_commit=$(git -C "$tdesktop" rev-parse HEAD)
+          yukigram_commit=$(git -C "$yukigram" rev-parse HEAD)
+          {
+            echo "patchset_hash=$patchset_hash"
+            echo "prepare_hash=$prepare_hash"
+            echo "gitmodules_hash=$gitmodules_hash"
+            echo "upstream_commit=$upstream_commit"
+            echo "yukigram_commit=$yukigram_commit"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "PATCHSET_HASH=$patchset_hash"
+            echo "PREPARE_HASH=$prepare_hash"
+            echo "GITMODULES_HASH=$gitmodules_hash"
+            echo "UPSTREAM_COMMIT=$upstream_commit"
+            echo "YUKIGRAM_COMMIT=$yukigram_commit"
+          } >> "$GITHUB_ENV"
+
+      - name: Apply Yukigram patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          yukigram=$(cygpath -u "$YUKIGRAM_WORKTREE")
+          tdesktop=$(cygpath -u "$TDESKTOP_WORKTREE")
+          commit=$(git -C "$yukigram" describe --abbrev=12 HEAD)
+          sed -i "s/@commit/$commit/" "$yukigram"/tdesktop/cur/*-Yukigram-Version.patch
+          for patch in "$yukigram"/tdesktop/cur/*.patch; do
+            printf '==== %s ====\n' "$patch"
+            git -C "$tdesktop" apply --verbose --whitespace=nowarn "$patch"
+          done
+
+      - name: Restore Windows dependency cache
+        if: inputs.use_dependency_cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ env.TBUILD }}\ThirdParty
+            ${{ env.TBUILD }}\Libraries
+          key: windows-${{ runner.os }}-${{ inputs.architecture }}-${{ inputs.upstream_ref }}-${{ inputs.qt_argument || 'qt-default' }}-${{ inputs.prepare_args }}-${{ inputs.windows_sdk }}-${{ inputs.msvc_toolset }}-${{ steps.metadata.outputs.prepare_hash }}-${{ steps.metadata.outputs.gitmodules_hash }}-${{ steps.metadata.outputs.patchset_hash }}
+          restore-keys: |
+            windows-${{ runner.os }}-${{ inputs.architecture }}-${{ inputs.upstream_ref }}-${{ inputs.qt_argument || 'qt-default' }}-${{ inputs.prepare_args }}-${{ inputs.windows_sdk }}-${{ inputs.msvc_toolset }}-
+
+      - name: Verify requested MSVC toolchain
+        env:
+          WINDOWS_SDK: ${{ inputs.windows_sdk }}
+          MSVC_TOOLSET: ${{ inputs.msvc_toolset }}
+          STRICT_TOOLCHAIN: ${{ inputs.strict_toolchain }}
+        run: |
+          set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+          if not exist "%VSWHERE%" (
+            echo vswhere.exe was not found at "%VSWHERE%"
+            exit /b 1
+          )
+          for /f "usebackq delims=" %%I in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSINSTALL=%%I"
+          if not defined VSINSTALL (
+            echo No Visual Studio installation with VC tools was found.
+            "%VSWHERE%" -products *
+            exit /b 1
+          )
+          echo Visual Studio installation: %VSINSTALL%
+          if not exist "%ProgramFiles(x86)%\Windows Kits\10\Include\%WINDOWS_SDK%\um" (
+            echo Requested Windows SDK %WINDOWS_SDK% is not installed.
+            if /I "%STRICT_TOOLCHAIN%" == "true" exit /b 1
+          )
+          call "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=%MSVC_TOOLSET%
+          if errorlevel 1 (
+            echo Requested MSVC toolset %MSVC_TOOLSET% is not available.
+            if /I "%STRICT_TOOLCHAIN%" == "true" exit /b 1
+            call "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat"
+          )
+          where cl
+          cl
+          where cmake
+          cmake --version
+          where python
+          python --version
+          where git
+          git --version
+
+      - name: Prepare Telegram Desktop Windows libraries
+        env:
+          MSVC_TOOLSET: ${{ inputs.msvc_toolset }}
+          PREPARE_ARGS: ${{ inputs.prepare_args }}
+        run: |
+          set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+          for /f "usebackq delims=" %%I in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSINSTALL=%%I"
+          call "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=%MSVC_TOOLSET%
+          cd /d "%TDESKTOP_WORKTREE%"
+          call Telegram\build\prepare\win.bat %PREPARE_ARGS% ${{ inputs.qt_argument }}
+
+      - name: Configure and build Yukigram
+        env:
+          CONFIGURATION: ${{ inputs.configuration }}
+          DEVEL_FLAG: ${{ inputs.devel && 'true' || 'false' }}
+          MSVC_TOOLSET: ${{ inputs.msvc_toolset }}
+          AUTOUPDATE_DISABLED: ${{ inputs.disable_autoupdate && 'ON' || 'OFF' }}
+          CRASH_REPORTS_DISABLED: ${{ inputs.disable_crash_reports && 'ON' || 'OFF' }}
+        run: |
+          set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+          for /f "usebackq delims=" %%I in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSINSTALL=%%I"
+          call "%VSINSTALL%\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=%MSVC_TOOLSET%
+          cd /d "%TDESKTOP_WORKTREE%\Telegram"
+          call configure.bat ${{ inputs.architecture }} ${{ inputs.qt_argument }} ^
+            -D TDESKTOP_API_ID=611335 ^
+            -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c ^
+            -D DEVEL=%DEVEL_FLAG% ^
+            -D CMAKE_CONFIGURATION_TYPES=%CONFIGURATION% ^
+            -D CMAKE_COMPILE_WARNING_AS_ERROR=ON ^
+            -D CMAKE_MSVC_DEBUG_INFORMATION_FORMAT= ^
+            -D DESKTOP_APP_DISABLE_AUTOUPDATE=%AUTOUPDATE_DISABLED% ^
+            -D DESKTOP_APP_DISABLE_CRASH_REPORTS=%CRASH_REPORTS_DISABLED%
+          cmake --build ..\out --config %CONFIGURATION% --parallel
+
+      - name: Collect smoke artifact
+        id: artifact
+        shell: pwsh
+        run: |
+          $source = Join-Path $env:TDESKTOP_WORKTREE "out\${{ inputs.configuration }}"
+          if (!(Test-Path $source)) {
+            throw "Build output directory was not found: $source"
+          }
+          New-Item -ItemType Directory -Path artifact -Force | Out-Null
+          Copy-Item -Path (Join-Path $source '*') -Destination artifact -Recurse -Force
+          Get-ChildItem artifact -Recurse | Select-Object FullName, Length
+          $artifactName = "windows-${{ inputs.architecture }}-${{ inputs.configuration }}"
+          "name=$artifactName" >> $env:GITHUB_OUTPUT
+
+      - name: Write build metadata
+        shell: pwsh
+        run: |
+          @"
+          upstream_ref=${{ inputs.upstream_ref }}
+          upstream_commit=${{ steps.metadata.outputs.upstream_commit }}
+          yukigram_commit=${{ steps.metadata.outputs.yukigram_commit }}
+          patchset_hash=${{ steps.metadata.outputs.patchset_hash }}
+          prepare_hash=${{ steps.metadata.outputs.prepare_hash }}
+          gitmodules_hash=${{ steps.metadata.outputs.gitmodules_hash }}
+          architecture=${{ inputs.architecture }}
+          configuration=${{ inputs.configuration }}
+          qt_argument=${{ inputs.qt_argument }}
+          prepare_args=${{ inputs.prepare_args }}
+          windows_sdk=${{ inputs.windows_sdk }}
+          msvc_toolset=${{ inputs.msvc_toolset }}
+          devel=${{ inputs.devel }}
+          disable_autoupdate=${{ inputs.disable_autoupdate }}
+          disable_crash_reports=${{ inputs.disable_crash_reports }}
+          "@ | Set-Content -Path artifact\build-metadata.txt -Encoding UTF8
+
+      - name: Upload smoke artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.artifact.outputs.name }}
+          path: artifact
+          if-no-files-found: error
