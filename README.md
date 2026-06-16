@@ -155,6 +155,34 @@ let
 in yukigram.packages.default;
 ```
 
+## Windows release builds
+
+Windows remains unsupported for end users,
+but this repository contains a manual GitHub Actions release build
+for producing Windows artifacts when the current patchset builds there.
+The workflow intentionally builds Telegram Desktop from source,
+applies `tdesktop/cur/*.patch`, records upstream/patchset hashes,
+and uploads a portable artifact to a GitHub Release.
+
+To run it from a checkout with GitHub CLI access:
+
+```shell
+gh workflow run windows-release.yml \
+  -f upstream_ref=v6.9.3 \
+  -f architecture=x64 \
+  -f configuration=Release \
+  -f devel=false \
+  -f use_dependency_cache=false \
+  -f release_tag=v6.9.3.0
+```
+
+The default toolchain check expects the upstream-documented
+Windows SDK `10.0.26100.0` and MSVC toolset `14.44`.
+If the hosted runner does not provide them,
+the workflow should fail early before preparing dependencies.
+When run from a tag ref, `release_tag` may be left empty and the current
+tag is used.
+
 ### on PostmarketOS
 
 #### repository installation
