@@ -1,0 +1,34 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Tue, 16 Jun 2026 00:00:00 +0000
+Subject: [PATCH] (Fix) Avoid Linux desktop file resource on non-Linux builds
+
+
+diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
+index 898820b6f9..898820b6f9 100644
+--- a/Telegram/CMakeLists.txt
++++ b/Telegram/CMakeLists.txt
+@@ -1984,6 +1984,11 @@ else()
+     set(YUKIGRAM_APP_ID "io.github.yukigram.devel")
+     set(YUKIGRAM_DEVEL "true")
+ endif()
++if (LINUX AND DESKTOP_APP_USE_PACKAGED)
++    set(YUKIGRAM_DESKTOP_QRC "    <file alias=\"io.github.yukigram.desktop\">${CMAKE_CURRENT_BINARY_DIR}/${YUKIGRAM_APP_ID}.desktop</file>")
++else()
++    set(YUKIGRAM_DESKTOP_QRC "")
++endif()
+ configure_file("${src_loc}/yukigram/appid.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/yukigram-appid.cpp" @ONLY)
+ configure_file("${res_loc}/qrc/telegram/yukigram.qrc" "${CMAKE_CURRENT_BINARY_DIR}/yukigram.qrc" @ONLY)
+ nice_target_sources(Telegram ${CMAKE_CURRENT_BINARY_DIR}
+diff --git a/Telegram/Resources/qrc/telegram/yukigram.qrc b/Telegram/Resources/qrc/telegram/yukigram.qrc
+index f625d5616a..f625d5616a 100644
+--- a/Telegram/Resources/qrc/telegram/yukigram.qrc
++++ b/Telegram/Resources/qrc/telegram/yukigram.qrc
+@@ -4,6 +4,6 @@
+     <file alias="ru.json">../../Telegram/Resources/langs/yukigram/ru.json</file>
+   </qresource>
+   <qresource prefix="/misc">
+-    <file alias="io.github.yukigram.desktop">@CMAKE_CURRENT_BINARY_DIR@/@YUKIGRAM_APP_ID@.desktop</file>
++@YUKIGRAM_DESKTOP_QRC@
+   </qresource>
+ </RCC>
