@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuki Sireneva <sylfn@disroot.org>
+Date: Wed, 23 Sep 2026 05:56:54 +0000
+Subject: [PATCH] (Annoyances) Disable proxy sponsor
+
+
+diff --git a/Telegram/SourceFiles/history/history.cpp b/Telegram/SourceFiles/history/history.cpp
+index e6225f531e..ec263981f0 100644
+--- a/Telegram/SourceFiles/history/history.cpp
++++ b/Telegram/SourceFiles/history/history.cpp
+@@ -4517,7 +4517,7 @@ void History::cacheTopPromoted(bool promoted) {
+ }
+ 
+ bool History::isTopPromoted() const {
+-	return (_flags & Flag::IsTopPromoted);
++	return false;
+ }
+ 
+ void History::translateOfferFrom(LanguageId id) {
