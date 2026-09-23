@@ -76,6 +76,7 @@ This is what I mean by "minus the bullshit"
 - Send large photos by default
 - :zap: Disable AI Instant View summaries
 - :zap: Hide "Pasted as plain text" toast
+- No proxy sponsored channels
 
 [OpenStreetMap]: https://openstreetmap.org
 
