@@ -2,6 +2,11 @@
 # SPDX-FileCopyrightText: none
 version = 1
 
+[[annotations]]
+path = "tdesktop/cur/9901-Fix-Use-MSYS-diffutils-for-Windows-preparation.patch"
+SPDX-License-Identifier = "CC0-1.0"
+SPDX-FileCopyrightText = "none"
+
 # TODO: replace `WITH LicenseRef` to `WITH AdditionRef` when supported and/or devendor exception when database is updated.
 
 [[annotations]]
