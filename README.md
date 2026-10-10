@@ -187,20 +187,24 @@ To run it from a checkout with GitHub CLI access:
 
 ```shell
 gh workflow run windows-release.yml \
-  -f upstream_ref=v6.9.3 \
+  -f upstream_ref=v7.2.8 \
   -f architecture=x64 \
   -f configuration=Release \
   -f devel=false \
   -f use_dependency_cache=false \
-  -f release_tag=v6.9.3.0
+  -f release_tag=v7.2.8.0-rc.1
 ```
 
-The default toolchain check expects the upstream-documented
+The current patchset targets Telegram Desktop `v7.2.8`.
+Its dependency preparation includes the libvpx fix for NASM 3.x.
+Keep `upstream_ref` aligned with the patchset when updating from upstream.
+
+The default toolchain check expects
 Windows SDK `10.0.26100.0` and MSVC toolset `14.44`.
 If the hosted runner does not provide them,
 the workflow should fail early before preparing dependencies.
 When run from a tag ref, `release_tag` may be left empty and the current
-tag is used.
+tag is used. The release tag is checked before cloning or building.
 
 ### on Nura or Alpine
 
