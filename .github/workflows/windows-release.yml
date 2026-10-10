@@ -223,17 +223,30 @@ jobs:
           toolset: ${{ inputs.msvc_toolset }}
 
       - name: Verify requested MSVC toolchain
+        shell: pwsh
+        env:
+          EXPECTED_MSVC_TOOLSET: ${{ inputs.msvc_toolset }}
+          EXPECTED_WINDOWS_SDK: ${{ inputs.windows_sdk }}
         run: |
-          where cl
-          cl
-          where msbuild
-          where ninja
-          where cmake
-          cmake --version
-          where python
-          python --version
-          where git
-          git --version
+          $toolset = "$env:VCToolsVersion".TrimEnd('\')
+          if ($toolset -ne $env:EXPECTED_MSVC_TOOLSET -and !$toolset.StartsWith("$env:EXPECTED_MSVC_TOOLSET.")) {
+            throw "Requested MSVC $env:EXPECTED_MSVC_TOOLSET, but selected $toolset."
+          }
+          $sdk = "$env:WindowsSDKVersion".TrimEnd('\')
+          if ($sdk -ne $env:EXPECTED_WINDOWS_SDK) {
+            throw "Requested Windows SDK $env:EXPECTED_WINDOWS_SDK, but selected $sdk."
+          }
+          foreach ($tool in @("cl", "msbuild", "ninja", "cmake", "python", "git")) {
+            $command = Get-Command $tool -CommandType Application -ErrorAction Stop
+            Write-Host "$tool`: $($command.Source)"
+          }
+          Write-Host "MSVC toolset: $toolset; Windows SDK: $sdk"
+          foreach ($tool in @("cmake", "python", "git")) {
+            & $tool --version
+            if ($LASTEXITCODE -ne 0) {
+              throw "$tool --version failed with exit code $LASTEXITCODE."
+            }
+          }
 
       - name: NuGet sources.
         run: |
