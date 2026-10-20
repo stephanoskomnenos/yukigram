@@ -48,6 +48,18 @@ index 2556fcbe47..e02325295a 100644
  	}
  }
 -
+diff --git a/Telegram/SourceFiles/core/update_checker.cpp b/Telegram/SourceFiles/core/update_checker.cpp
+index 271d0cbdf6..128a13f3aa 100644
+--- a/Telegram/SourceFiles/core/update_checker.cpp
++++ b/Telegram/SourceFiles/core/update_checker.cpp
+@@ -2388,6 +2388,7 @@ bool checkReadyUpdate() {
+ void UpdateApplication() {
+ 	if (UpdaterDisabled()) {
+ 		const auto url = [&] {
++			return "https://t.me/yukigram";
+ #ifdef OS_WIN_STORE
+ 			return "https://www.microsoft.com/en-us/store/p/telegram-desktop/9nztwsqntd0s";
+ #elif defined OS_MAC_STORE // OS_WIN_STORE
 diff --git a/Telegram/SourceFiles/history/history_item_helpers.cpp b/Telegram/SourceFiles/history/history_item_helpers.cpp
 index f834bb2ffd..9371cf73f2 100644
 --- a/Telegram/SourceFiles/history/history_item_helpers.cpp
