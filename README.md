@@ -159,21 +159,9 @@ in yukigram.packages.default;
 
 ### on PostmarketOS
 
-#### repository installation
-
-```shell
-wget https://yukigram.github.io/yukigram/pmaports/yukigram-key/yukigram.github.io.rsa.pub -O /etc/apk/keys/yukigram.github.io.rsa.pub
-echo https://yukigram.github.io/yukigram/packages/edge >> /etc/apk/repositories
-apk update
-apk add yukigram yukigram-key
-```
-
-#### direct .apk downloads
-
-Download `yukigram-$ARCH.apk` from releases.
-
-Not really recommended unless for quick checks,
-as automatic updates are unsupported with bare `.apk` files.
+Temporarily disabled due to build issues.
+They will be restored later, but in a separate repo.
+Past versions can be installed from released `.apk` files.
 
 ### distro packages
 

@@ -21,9 +21,6 @@ on:
       disable_nixos:
         description: 'Disable nix build'
         type: boolean
-      disable_pmos:
-        description: 'Disable postmarketOS build'
-        type: boolean
       prerelease:
         description: 'Mark as pre-release'
         type: boolean
@@ -180,178 +177,6 @@ jobs:
           name: flatpak-${{ matrix.arch }}
           path: yukigram/flatpak/repo
 
-  postmarketos:
-    timeout-minutes: ${{ inputs.short_run && 10 || 360 }}
-    if: ${{ ! inputs.disable_pmos }}
-    name: PostmarketOS build
-    runs-on: ubuntu-24.04-arm
-    strategy:
-      matrix:
-        arch: [x86_64, aarch64, armv7]
-
-    steps:
-      - name: Clone
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Install pmbootstrap
-        run: |
-          set -exuo pipefail
-
-          sudo apt-get install python3-pip python3-virtualenv
-          virtualenv .
-          . bin/activate
-          pip3 install tomli
-          pip3 install https://gitlab.postmarketos.org/postmarketOS/pmbootstrap/-/archive/main.tar.gz
-
-          # Use github aports mirror to avoid being ratelimited
-          sed -i s,https://gitlab.alpinelinux.org/alpine/aports.git,https://github.com/alpinelinux/aports.git, lib/python*/site-packages/pmb/config/__init__.py
-
-      - name: pmbootstrap init
-        run: |
-          set -exuo pipefail
-
-          . bin/activate
-          yes '' | pmbootstrap init || true
-          pmbootstrap config service_manager openrc
-          pmbootstrap config mirrors.systemd none
-
-      - name: Prepare private key
-        env:
-          ABUILD_PRIVATE_KEY: ${{ secrets.ABUILD_PRIVATE_KEY }}
-        run: |
-          set -exuo pipefail
-
-          sudo rm -rf ~/.local/var/pmbootstrap/config_abuild
-          mkdir ~/.local/var/pmbootstrap/config_abuild
-          echo "$ABUILD_PRIVATE_KEY" > ~/.local/var/pmbootstrap/config_abuild/yukigram.github.io.rsa
-          openssl rsa -in ~/.local/var/pmbootstrap/config_abuild/yukigram.github.io.rsa -pubout > ~/.local/var/pmbootstrap/config_abuild/yukigram.github.io.rsa.pub
-          echo 'PACKAGER_PRIVKEY="/home/pmos/.abuild/yukigram.github.io.rsa"' > ~/.local/var/pmbootstrap/config_abuild/abuild.conf
-          mkdir -p ~/.local/var/pmbootstrap/config_apk_keys
-          sudo cp ~/.local/var/pmbootstrap/config_abuild/yukigram.github.io.rsa.pub ~/.local/var/pmbootstrap/config_apk_keys
-
-      - name: Prepare ports tree
-        run: |
-          set -exuo pipefail
-
-          . bin/activate
-          pmbootstrap pull
-          ln -s ~/.local/var/pmbootstrap/cache_git/pmaports pmaports
-
-      - name: Prepare package yukigram-key
-        run: |
-          set -exuo pipefail
-
-          mkdir pmaports/temp/yukigram-key
-          cat > pmaports/temp/yukigram-key/APKBUILD << EOF
-          pkgname=yukigram-key
-          pkgver=2
-          pkgrel=0
-          pkgdesc="Public key for the Yukigram repository"
-          url="https://yukigram.github.io"
-          arch="noarch"
-          license="MIT"
-          source="yukigram.github.io.rsa.pub"
-          options="!check"
-
-          package() {
-              install -Dm644 "\$srcdir"/yukigram.github.io.rsa.pub "\$pkgdir"/etc/apk/keys/yukigram.github.io.rsa.pub
-              install -Dm644 "\$srcdir"/yukigram.github.io.rsa.pub "\$pkgdir"/usr/share/apk/keys/yukigram.github.io.rsa.pub
-          }
-          EOF
-          cp ~/.local/var/pmbootstrap/config_abuild/yukigram.github.io.rsa.pub pmaports/temp/yukigram-key/
-
-      - name: Get package version
-        run: |
-          set -exuo pipefail
-
-          if git describe --exact-match HEAD; then
-            # tagged version
-            pkgver=$(git describe HEAD)
-            pkgver=${pkgver/-beta/_beta}
-            pkgver=${pkgver/-rc./_rc}
-            pkgrel=0
-          else
-            # git version
-            date=$(git show --pretty='%cs' --no-patch)
-            date=${date//-/}
-            tag=$(git describe --abbrev=0 HEAD)
-            pkgver=${tag/-*/}_git${date} # replace semver suffixes
-            pkgrel=$(git rev-list --count $tag..)
-          fi
-          pkgver=${pkgver/v/} # strip tag prefix (v6.8.2.2 -> 6.8.2.2)
-
-          echo pkgver=$pkgver >> $GITHUB_ENV
-          echo pkgrel=$pkgrel >> $GITHUB_ENV
-
-      - name: Prepare package yukigram
-        run: |
-          set -exuo pipefail
-
-          . bin/activate
-          pmbootstrap aportgen --fork-alpine telegram-desktop
-          mv pmaports/temp/telegram-desktop pmaports/temp/yukigram
-
-          additional_sources=$(printf 'source="$source %s"\n' tdesktop/cur/*.patch)
-          additional_sha512sums=$(sha512sum tdesktop/cur/*.patch)
-          cp -r tdesktop pmaports/temp/yukigram/
-
-          # Remove libdispatch fix (6.9.4)
-          sed -i '/fix-dispatch-desktop_app_skip_libs.patch/d' pmaports/temp/yukigram/APKBUILD
-
-          cat >> pmaports/temp/yukigram/APKBUILD << EOF
-
-          pkgname=yukigram
-          builddir="\${builddir/\$pkgver/__pkgver__}"
-          pkgver=7.2.8 # Upstream version
-          pkgdesc="Yukigram (Telegram Desktop fork) messaging app"
-          makedepends="\$makedepends pango-dev cairo-dev"
-          source="\${source/https:*-full.tar.gz/https://github.com/telegramdesktop/tdesktop/releases/download/v\$pkgver/tdesktop-\$pkgver-full.tar.gz}"
-          builddir="\${builddir/__pkgver__/\$pkgver}"
-          pkgver=$pkgver # Yukigram version
-          pkgrel=$pkgrel
-          $additional_sources
-          sha512sums="\$sha512sums
-          $additional_sha512sums"
-          unset maintainer
-          EOF
-
-      - name: Build package yukigram
-        run: |
-          set -exuo pipefail
-          . bin/activate
-          pmbootstrap --details-to-stdout checksum yukigram
-          pmbootstrap --details-to-stdout build --arch=${{ matrix.arch }} yukigram
-
-      - name: Build package yukigram-key
-        run: |
-          set -exuo pipefail
-          . bin/activate
-          pmbootstrap --details-to-stdout checksum yukigram-key
-          pmbootstrap --details-to-stdout build --arch=${{ matrix.arch }} yukigram-key
-
-      - name: Save APKBUILD files
-        run: |
-          set -exuo pipefail
-          cd ~/.local/var/pmbootstrap
-          mkdir pmaports
-          mv ~/.local/var/pmbootstrap/cache_git/pmaports/temp/yukigram* pmaports/
-
-      - name: Create unversioned .apk symlinks
-        run: |
-          set -exuo pipefail
-          cd ~/.local/var/pmbootstrap/packages/edge/${{ matrix.arch }}
-          echo yukigram-$pkgver-r$pkgrel.apk | sudo tee yukigram.apk.link
-
-      - uses: actions/upload-artifact@v7
-        name: Upload artifact
-        with:
-          name: postmarketos-${{ matrix.arch }}
-          path: |
-            ~/.local/var/pmbootstrap/pmaports
-            ~/.local/var/pmbootstrap/packages
-
   nixos:
     timeout-minutes: ${{ inputs.short_run && 10 || 360 }}
     if: ${{ ! inputs.disable_nixos }}
@@ -446,7 +271,7 @@ jobs:
   website:
     if: github.event_name != 'workflow_dispatch' || inputs.override_github_pages
     name: Website for hosting the repositories
-    needs: [flatpak, postmarketos, nixos]
+    needs: [flatpak, nixos]
     runs-on: ubuntu-latest
 
     steps:
@@ -458,7 +283,7 @@ jobs:
           set -exuo pipefail
 
           mkdir website
-          for i in nixos-{x86_64,aarch64} flatpak-x86_64 postmarketos-{x86_64,aarch64,armv7}; do
+          for i in nixos-{x86_64,aarch64} flatpak-x86_64; do
             cp -r $i/. website/
           done
           for p in website/packages/edge/*/; do
@@ -540,7 +365,7 @@ jobs:
   release:
     name: Release artifacts
     if: github.ref_type == 'tag'
-    needs: [binary, flatpak, postmarketos, nixos]
+    needs: [binary, flatpak, nixos]
     runs-on: ubuntu-latest
 
     steps:
@@ -562,20 +387,11 @@ jobs:
           set -exuo pipefail
           mkdir out
 
-      - name: Extract postmarketOS apk files
-        run: |
-          set -exuo pipefail
-
-          for arch in x86_64 aarch64 armv7; do
-            p=postmarketos-$arch/packages/edge/$arch/
-            cp $p/$(< $p/yukigram.apk.link) out/yukigram-$arch.apk
-          done
-
       - name: Pack artifacts
         run: |
           set -exuo pipefail
           shopt -s dotglob # to pack hidden top-level files
-          for a in nixos-{x86_64,aarch64} {binary,flatpak}-x86_64 postmarketos-{x86_64,aarch64,armv7}; do
+          for a in nixos-{x86_64,aarch64} {binary,flatpak}-x86_64; do
             pushd $a
               tar czf ../out/$a.tar.gz *
             popd
