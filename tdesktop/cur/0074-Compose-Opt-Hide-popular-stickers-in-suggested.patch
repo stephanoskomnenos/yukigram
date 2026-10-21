@@ -5,18 +5,18 @@ Subject: [PATCH] (Compose)(Opt) Hide popular stickers in suggested
 
 
 diff --git a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp b/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
-index 730f5bf3dc..b48a4d265b 100644
+index d2f8a9f99e..9a7c80d532 100644
 --- a/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
 +++ b/Telegram/SourceFiles/chat_helpers/field_autocomplete.cpp
-@@ -29,6 +29,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
- #include "api/api_chat_participants.h"
- #include "main/main_session.h"
- #include "storage/storage_account.h"
+@@ -33,6 +33,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "data/data_peer_values.h"
+ #include "data/data_session.h"
+ #include "data/data_user.h"
 +#include "yukigram/settings/hide_popular_sticker_suggest.h"
- #include "core/application.h"
- #include "core/core_settings.h"
  #include "lang/lang_keys.h"
-@@ -451,6 +452,10 @@ FieldAutocomplete::StickerRows FieldAutocomplete::getStickerSuggestions() {
+ #include "lottie/lottie_single_player.h"
+ #include "main/main_session.h"
+@@ -464,6 +465,10 @@ FieldAutocomplete::StickerRows FieldAutocomplete::getStickerSuggestions() {
  	const auto list = data->getListByEmoji({ _emoji }, _stickersSeed);
  	auto result = ranges::views::all(
  		list

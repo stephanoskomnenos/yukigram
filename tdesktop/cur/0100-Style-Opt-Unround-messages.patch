@@ -5,7 +5,7 @@ Subject: [PATCH] (Style)(Opt) Unround messages
 
 
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
-index 9579cb766c..99471ef0d6 100644
+index 8aa18d0a9a..8c0e4126c0 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_gif.cpp
 @@ -40,6 +40,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -16,7 +16,7 @@ index 9579cb766c..99471ef0d6 100644
  #include "core/application.h" // Application::showDocument.
  #include "core/core_settings.h"
  #include "ui/chat/attach/attach_prepare.h"
-@@ -753,8 +754,10 @@ void Gif::draw(Painter &p, const PaintContext &context) const {
+@@ -760,8 +761,10 @@ void Gif::draw(Painter &p, const PaintContext &context) const {
  			} else {
  				displayMute = true;
  			}
@@ -27,7 +27,7 @@ index 9579cb766c..99471ef0d6 100644
  		} else {
  			request.rounding = MediaRoundingMask(rounding);
  		}
-@@ -811,7 +814,11 @@ void Gif::draw(Painter &p, const PaintContext &context) const {
+@@ -818,7 +821,11 @@ void Gif::draw(Painter &p, const PaintContext &context) const {
  				auto q = QPainter(&frame);
  				fillImageSpoiler(q, _spoiler.get(), rthumb, context);
  			}
@@ -39,7 +39,7 @@ index 9579cb766c..99471ef0d6 100644
  		}
  		p.setOpacity(1.);
  	}
-@@ -1248,9 +1255,13 @@ void Gif::validateThumbCache(
+@@ -1257,9 +1264,13 @@ void Gif::validateThumbCache(
  		return;
  	}
  	auto cache = prepareThumbCache(scaled);
@@ -54,7 +54,7 @@ index 9579cb766c..99471ef0d6 100644
  	_thumbCacheBlurred = blurred;
  }
 diff --git a/Telegram/SourceFiles/media/player/media_player_float.cpp b/Telegram/SourceFiles/media/player/media_player_float.cpp
-index 2fa095e364..cb534f839e 100644
+index 60364958e2..7a036d0c0a 100644
 --- a/Telegram/SourceFiles/media/player/media_player_float.cpp
 +++ b/Telegram/SourceFiles/media/player/media_player_float.cpp
 @@ -17,6 +17,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL

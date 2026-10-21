@@ -70,7 +70,7 @@ index 329fee5713..16c7fbb4c8 100644
  	}
  
 diff --git a/Telegram/SourceFiles/window/main_window.cpp b/Telegram/SourceFiles/window/main_window.cpp
-index f3b79a1fd5..f88b928937 100644
+index 921cc0de37..34d67a807e 100644
 --- a/Telegram/SourceFiles/window/main_window.cpp
 +++ b/Telegram/SourceFiles/window/main_window.cpp
 @@ -137,7 +137,7 @@ const char kOptionNewWindowsSizeAsFirst[] = "new-windows-size-as-first";

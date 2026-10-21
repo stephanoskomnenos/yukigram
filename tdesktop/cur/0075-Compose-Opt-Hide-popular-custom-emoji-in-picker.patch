@@ -5,7 +5,7 @@ Subject: [PATCH] (Compose)(Opt) Hide popular custom emoji in picker
 
 
 diff --git a/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp b/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
-index 7185af0aed..cb96ca0df5 100644
+index fb433361e1..1aeb934559 100644
 --- a/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
 +++ b/Telegram/SourceFiles/chat_helpers/emoji_list_widget.cpp
 @@ -54,6 +54,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -16,7 +16,7 @@ index 7185af0aed..cb96ca0df5 100644
  #include "core/core_settings.h"
  #include "core/application.h"
  #include "settings/sections/settings_premium.h"
-@@ -3524,6 +3525,9 @@ void EmojiListWidget::refreshCustom() {
+@@ -3514,6 +3515,9 @@ void EmojiListWidget::refreshCustom() {
  	const auto push = [&](uint64 setId, bool installed) {
  		const auto megagroup = _megagroupSet
  			&& (setId == Data::Stickers::MegagroupSetId);

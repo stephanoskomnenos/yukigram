@@ -7,10 +7,10 @@ This patch is adapted from 64Gram.
 Original author: c0re100 <corehusky@gmail.com>
 
 diff --git a/Telegram/SourceFiles/boxes/sticker_set_box.cpp b/Telegram/SourceFiles/boxes/sticker_set_box.cpp
-index 9e1423384a..4ef1241961 100644
+index b16a7d8f1f..637ebea29f 100644
 --- a/Telegram/SourceFiles/boxes/sticker_set_box.cpp
 +++ b/Telegram/SourceFiles/boxes/sticker_set_box.cpp
-@@ -32,6 +32,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -34,6 +34,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "info/channel_statistics/boosts/giveaway/boost_badge.h" // InfiniteRadialAnimationWidget.
  #include "inline_bots/inline_bot_result.h"
  #include "lang/lang_keys.h"
@@ -18,15 +18,15 @@ index 9e1423384a..4ef1241961 100644
  #include "lottie/lottie_animation.h"
  #include "lottie/lottie_multi_player.h"
  #include "main/main_session.h"
-@@ -79,6 +80,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
- #include "styles/style_info.h"
+@@ -75,6 +76,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "styles/style_menu_icons.h"
  #include "styles/style_premium.h"
+ #include "styles/style_window.h"
 +#include "window/window_session_controller.h"
  
  #include <QtWidgets/QApplication>
- #include <QtGui/QClipboard>
-@@ -1020,6 +1022,24 @@ void StickerSetBox::updateButtons() {
+ #include <QtSvg/QSvgRenderer>
+@@ -1000,6 +1002,24 @@ void StickerSetBox::updateButtons() {
  				menu->addAction(std::move(item));
  			});
  		}();
@@ -51,7 +51,7 @@ index 9e1423384a..4ef1241961 100644
  		if (_inner->notInstalled()) {
  			if (!_session->premium()
  				&& _session->premiumPossible()
-@@ -1115,6 +1135,7 @@ void StickerSetBox::updateButtons() {
+@@ -1097,6 +1117,7 @@ void StickerSetBox::updateButtons() {
  					tr::lng_context_copy_link(tr::now),
  					copyLink,
  					&st::menuIconCopy);

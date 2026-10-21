@@ -5,7 +5,7 @@ Subject: [PATCH] (Interface)(Opt) Single-column layout
 
 
 diff --git a/Telegram/SourceFiles/mainwidget.cpp b/Telegram/SourceFiles/mainwidget.cpp
-index 5358858efb..0c044b58ca 100644
+index c6405cb08d..093e21dd80 100644
 --- a/Telegram/SourceFiles/mainwidget.cpp
 +++ b/Telegram/SourceFiles/mainwidget.cpp
 @@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -16,7 +16,7 @@ index 5358858efb..0c044b58ca 100644
  #include "window/window_connecting_widget.h"
  #include "window/window_top_bar_wrap.h"
  #include "window/notifications_manager.h"
-@@ -351,6 +352,7 @@ MainWidget::MainWidget(
+@@ -350,6 +351,7 @@ MainWidget::MainWidget(
  		});
  	};
  	rpl::merge(
@@ -24,7 +24,7 @@ index 5358858efb..0c044b58ca 100644
  		Core::App().settings().dialogsWithChatWidthRatioChanges(
  		) | filter(true) | rpl::to_empty,
  		Core::App().settings().dialogsNoChatWidthRatioChanges(
-@@ -3164,7 +3166,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
+@@ -3163,7 +3165,7 @@ void MainWidget::updateWindowAdaptiveLayout() {
  
  	// Check if we are in a single-column layout in a wide enough window
  	// for the normal layout. If so, switch to the normal layout.
@@ -46,7 +46,7 @@ index 784164db99..198efb8f88 100644
  #include "data/data_session.h"
  #include "core/application.h"
 diff --git a/Telegram/SourceFiles/window/window_session_controller.cpp b/Telegram/SourceFiles/window/window_session_controller.cpp
-index 64f31495e8..3976118ee4 100644
+index dfab5e8dfb..357122a081 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.cpp
 +++ b/Telegram/SourceFiles/window/window_session_controller.cpp
 @@ -90,6 +90,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL

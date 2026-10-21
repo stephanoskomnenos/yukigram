@@ -5,7 +5,7 @@ Subject: [PATCH] (Compose)(Opt) Replace preview links
 
 
 diff --git a/Telegram/SourceFiles/apiwrap.cpp b/Telegram/SourceFiles/apiwrap.cpp
-index cdde6f26ae..61ad884b3f 100644
+index 3fa575388a..1b3a2404a1 100644
 --- a/Telegram/SourceFiles/apiwrap.cpp
 +++ b/Telegram/SourceFiles/apiwrap.cpp
 @@ -4774,7 +4774,7 @@ void ApiWrap::sendMessage(

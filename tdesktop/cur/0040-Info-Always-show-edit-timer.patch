@@ -7,7 +7,7 @@ This patch is adapted from Kotatogram.
 Original author: RadRussianRus <radrussianrus@gmail.com>
 
 diff --git a/Telegram/SourceFiles/history/history_widget.cpp b/Telegram/SourceFiles/history/history_widget.cpp
-index 2dc2c7fd12..09af36ac0b 100644
+index 183b1c0761..c88cd47e98 100644
 --- a/Telegram/SourceFiles/history/history_widget.cpp
 +++ b/Telegram/SourceFiles/history/history_widget.cpp
 @@ -11350,10 +11350,6 @@ void HistoryWidget::paintEditHeader(
@@ -15,7 +15,7 @@ index 2dc2c7fd12..09af36ac0b 100644
  	if (editTimeLeft < 2) {
  		editTimeLeftText = u"0:00"_q;
 -	} else if (editTimeLeft > kDisplayEditTimeWarningMs) {
--		updateIn = static_cast<int>(qMin(
+-		updateIn = static_cast<int>(std::min(
 -			editTimeLeft - kDisplayEditTimeWarningMs,
 -			qint64(kFullDayInMs)));
  	} else {
@@ -34,3 +34,31 @@ index 2dc2c7fd12..09af36ac0b 100644
  	}
  
  	// Restart timer only if we are sure that we've painted the whole timer.
+diff --git a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+index 57eb78edb3..bdf71ad746 100644
+--- a/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
++++ b/Telegram/SourceFiles/history/view/controls/history_view_compose_controls.cpp
+@@ -867,10 +867,6 @@ void FieldHeader::paintEditTimeLeft(
+ 		* 1000LL) - timeSinceMessage;
+ 	if (editTimeLeft < 2) {
+ 		editTimeLeftText = u"0:00"_q;
+-	} else if (editTimeLeft > kDisplayEditTimeWarningMs) {
+-		updateIn = static_cast<int>(std::min(
+-			editTimeLeft - kDisplayEditTimeWarningMs,
+-			qint64(kFullDayInMs)));
+ 	} else {
+ 		updateIn = static_cast<int>(editTimeLeft % 1000);
+ 		if (!updateIn) {
+@@ -879,9 +875,9 @@ void FieldHeader::paintEditTimeLeft(
+ 		++updateIn;
+ 
+ 		editTimeLeft = (editTimeLeft - 1) / 1000; // seconds
+-		editTimeLeftText = u"%1:%2"_q
+-			.arg(editTimeLeft / 60)
+-			.arg(editTimeLeft % 60, 2, 10, QChar('0'));
++		editTimeLeftText = (editTimeLeft >= 3600
++			? u"%1:%2:%3"_q.arg(editTimeLeft / 3600).arg(editTimeLeft % 3600 / 60, 2, 10, QChar('0')).arg(editTimeLeft % 60, 2, 10, QChar('0'))
++			: u"%1:%2"_q.arg(editTimeLeft / 60).arg(editTimeLeft % 60, 2, 10, QChar('0')));
+ 	}
+ 	if (updateIn > 0) {
+ 		_updateEditTimeLeftDisplay.callOnce(updateIn);

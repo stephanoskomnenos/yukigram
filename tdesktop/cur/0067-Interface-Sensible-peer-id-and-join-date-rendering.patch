@@ -5,7 +5,7 @@ Subject: [PATCH] (Interface) Sensible peer id and join date rendering
 
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index 3a2745e617..158f7a4ce7 100644
+index 01b277f29a..874e2350a2 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 @@ -72,6 +72,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -86,7 +86,7 @@ index 3a2745e617..158f7a4ce7 100644
  [[nodiscard]] bool AreNonTrivialHours(const Data::WorkingHours &hours) {
  	if (!hours) {
  		return false;
-@@ -1644,6 +1582,48 @@ Section DetailsFiller::makeInfo() {
+@@ -1671,6 +1609,48 @@ Section DetailsFiller::makeInfo() {
  				}
  			});
  	};
@@ -135,19 +135,19 @@ index 3a2745e617..158f7a4ce7 100644
  	if (const auto user = _peer->asUser()) {
  		if (user->session().supportMode()) {
  			addInfoLineGeneric(
-@@ -1680,9 +1660,8 @@ Section DetailsFiller::makeInfo() {
+@@ -1707,9 +1687,8 @@ Section DetailsFiller::makeInfo() {
  			: tr::lng_info_bio_label();
  		const auto about = addInfoLine(
  			std::move(label),
 -			AboutWithAdvancedValue(user));
--		addTranslateToMenu(about.text, AboutWithAdvancedValue(user));
+-		setupAboutContextMenu(about.text, AboutWithAdvancedValue(user));
 -		SetupAboutPeerIdDrag(about.text, user);
 +			AboutValue(user));
-+		addTranslateToMenu(about.text, AboutValue(user));
++		setupAboutContextMenu(about.text, AboutValue(user));
  
  		const auto usernameLine = addInfoOneLine(
  			UsernamesSubtext(_peer, tr::lng_info_username_label()),
-@@ -1730,6 +1709,8 @@ Section DetailsFiller::makeInfo() {
+@@ -1757,6 +1736,8 @@ Section DetailsFiller::makeInfo() {
  			return false;
  		});
  
@@ -156,16 +156,16 @@ index 3a2745e617..158f7a4ce7 100644
  		if (!user->isBot()) {
  			tracker.track(result->add(
  				CreateBirthday(result, controller, user),
-@@ -1844,11 +1825,13 @@ Section DetailsFiller::makeInfo() {
+@@ -1871,11 +1852,13 @@ Section DetailsFiller::makeInfo() {
  
  		const auto about = addInfoLine(tr::lng_info_about_label(), _topic
  			? rpl::single(TextWithEntities())
 -			: AboutWithAdvancedValue(_peer));
 +			: AboutValue(_peer));
  		if (!_topic) {
--			addTranslateToMenu(about.text, AboutWithAdvancedValue(_peer));
+-			setupAboutContextMenu(about.text, AboutWithAdvancedValue(_peer));
 -			SetupAboutPeerIdDrag(about.text, _peer);
-+			addTranslateToMenu(about.text, AboutValue(_peer));
++			setupAboutContextMenu(about.text, AboutValue(_peer));
  		}
 +
 +		setupPeerId();
