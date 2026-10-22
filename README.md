@@ -157,9 +157,9 @@ let
 in yukigram.packages.default;
 ```
 
-### on PostmarketOS
+### on Nura or Alpine
 
-Temporarily disabled due to build issues.
+Temporarily disabled due to build issues (last version v7.1.5.0).
 They will be restored later, but in a separate repo.
 Past versions can be installed from released `.apk` files.
 
@@ -257,12 +257,15 @@ Recent previous and development versions are cached at Cachix.
 > Running those without `customNixpakConfig` or `appId`
 > is *not* supported.
 
-### with postmarketOS
+### with Nura
+
+> [!NOTE]
+> 7.1.5.0 was the last version to have .apk files bundled.
 
 Install .apk files from selected release.
 
 > [!CAUTION]
-> postmarketOS builds are NOT devel-aware
+> Nura builds are NOT devel-aware
 > and *will* corrupt your tdata.
 > Running those without backing up tdata
 > is *not* supported.
