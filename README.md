@@ -168,9 +168,11 @@ Past versions can be installed from released `.apk` files.
 Unofficial packages that seem correct and maintained:
 
 - AUR package [`yukigram-desktop`][aur-yukigram-desktop] (from source, releases)
+- AUR package [`yukigram-desktop-clang`][aur-yukigram-desktop-clang] (from source, releases, with clang)
 - AUR package [`yukigram-bin`][aur-yukigram-bin] (binary, releases, x86_64-only)
 
 [aur-yukigram-desktop]: https://aur.archlinux.org/packages/yukigram-desktop
+[aur-yukigram-desktop-clang]: https://aur.archlinux.org/packages/yukigram-desktop-clang
 [aur-yukigram-bin]: https://aur.archlinux.org/packages/yukigram-bin
 
 ### manual installation

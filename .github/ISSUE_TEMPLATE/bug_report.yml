@@ -25,6 +25,7 @@ body:
         - .apk files from releases
         - AUR package yukigram-bin
         - AUR package yukigram-desktop
+        - AUR package yukigram-desktop-clang
         - Other
     validations:
       required: true
