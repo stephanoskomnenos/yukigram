@@ -41,7 +41,7 @@ Do not blindly trust our binary caches.
 They are built by GitHub Actions,
 and are supposed to be reproducible, though.
 
-Windows and macOS are *not* supported.
+Windows and macOS are *not* supported yet.
 
 Consider using isolated packages
 and reviewing and refining their permissions
