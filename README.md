@@ -7,11 +7,13 @@ Minus the bullshit, plus the features.
 - [Full feature/bug list]
 - [Contributing notes]
 - [LLM usage policy (tldr: NO.)][LLM usage policy]
+- [Past versions and migration guides]
 - [Telegram channel]
 
 [Full feature/bug list]: ./FEATURES.md
 [Contributing notes]: ./CONTRIBUTING.md
 [LLM usage policy]: ./CONTRIBUTING.md#fuck-off-with-your-llms
+[Past versions and migration guides]: ./ARCHEOLOGY.md
 [Telegram channel]: https://telegram.me/yukigram
 
 ## Patches?
@@ -198,96 +200,6 @@ See [#applying-with-patch]
 in contributing notes for details.
 
 [#applying-with-patch]: CONTRIBUTING.md#applying-with-patch
-
-## Previous versions
-
-Make a backup of your data!
-Downgrading versions is not supported.
-
-> [!IMPORTANT]
-> Pre-release versions prior to 6.8.3.2
-> had a fallback to these paths
-> and could corrupt production tdata.
->
-> Versions prior to 6.7.8.1 are NOT devel-aware.
-> Running devel-oblivious development versions
-> *will* corrupt production version's tdata.
->
-> Installations of Yukigram prior to that version
-> should migrate their data directory as follows.
->
-> 1. Close Yukigram.
-> 1. Update Yukigram to a recent enough version.
-> 1. Rename `~/.TelegramDesktop` folder
->   to `${XDG_DATA_HOME:-~/.local/share}/io.github.yukigram`
->   (nonisolated package that was used for a dozen years).
-> 1. Go to `${XDG_DATA_HOME:-~/.local/share}` (nonisolated package).
->   and rename `Yukigram` folder to `io.github.yukigram`.
-> 1. Go to `~/.var/app/io.github.yukigram/data` (flatpak or nixpak)
->   and rename `Yukigram` folder to `io.github.yukigram`.
-> 1. Go to `~/.var/app/io.github.yukigram.devel/data` (devel, flatpak or nixpak)
->   and rename `Yukigram` folder to `io.github.yukigram.devel`.
-> 1. Go to `~/.var/app/io.github.yukigram.devel/data` (old nixpak with customNixpakConfig)
->   and rename `io.github.yukigram` folder to `io.github.yukigram.devel` if that folder doesn't yet exist.
-> 1. Run Yukigram again.
-
-### with flatpak
-
-Download `flatpak-$ARCH` release asset and unpack it.
-
-```shell
-flatpak install --user .../flatpak-$ARCH io.github.yukigram
-```
-
-Substitute `io.github.yukigram`
-with `io.github.yukigram.devel`
-for development builds.
-
-### with nix
-
-Recent previous and development versions are cached at Cachix.
-
-> [!NOTE]
-> Versions prior to 6.8.2.1 are cached only on Cachix
-> and may become inaccessible.
-
-> [!CAUTION]
-> Versions prior to 6.8.3.1 are NOT devel-aware
-> and *will* corrupt your tdata.
-> Running those without `customNixpakConfig` or `appId`
-> is *not* supported.
-
-### with Nura
-
-> [!NOTE]
-> 7.1.5.0 was the last version to have .apk files bundled.
-
-Install .apk files from selected release.
-
-> [!CAUTION]
-> Nura builds are NOT devel-aware
-> and *will* corrupt your tdata.
-> Running those without backing up tdata
-> is *not* supported.
-
-### 64Gram-based
-
-> [!CAUTION]
->
-> Versions of Yukigram up to (and including) 6.4.1.1
-> are deprecated and should no longer be used.
-> They were based on 64Gram
-> and developed in a downstream merge-based workflow.
-
-"Enhanced settings" from 64Gram and Yukigram
-are converted to native "Experimental settings" (in Advanced).
-Users of past Yukigram should make a note of their enhanced settings
-and toggle them on new versions,
-because of different settings backends.
-
-Past versions can be found at [yukigram-legacy] repo.
-
-[yukigram-legacy]: https://github.com/yukigram/yukigram-legacy
 
 ## Licensing
 
