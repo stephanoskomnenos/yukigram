@@ -37,6 +37,21 @@ Some more information can be found in [Contributing notes].
 
 ## Installation
 
+> Jump to
+> [Flatpak][with-flatpak],
+> [Nix][with-nix],
+> [Nura][on-nura],
+> [your favorite distro][distro-packages],
+> [prebuilt binaries][from-binaries],
+> [building from source][from-source].
+
+[with-flatpak]: #with-flatpak
+[with-nix]: #with-nix
+[on-nura]: #on-nura-or-alpine
+[distro-packages]: #distro-packages
+[from-binaries]: #from-binaries
+[from-source]: #from-source
+
 Do not blindly trust our binary caches.
 They are built by GitHub Actions,
 and are supposed to be reproducible, though.
