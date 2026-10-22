@@ -286,9 +286,6 @@ jobs:
           for i in nixos-{x86_64,aarch64} flatpak-x86_64; do
             cp -r $i/. website/
           done
-          for p in website/packages/edge/*/; do
-            cp $p/$(< $p/yukigram.apk.link) $p/yukigram.apk
-          done
 
           cat > website/index.html << EOF
           <html>
