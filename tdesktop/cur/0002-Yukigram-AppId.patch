@@ -5,10 +5,10 @@ Subject: [PATCH] (Yukigram) AppId
 
 
 diff --git a/Telegram/CMakeLists.txt b/Telegram/CMakeLists.txt
-index 8b9b6c5a09..b2a57213a6 100644
+index 5ca41f944f..1ed69158d4 100644
 --- a/Telegram/CMakeLists.txt
 +++ b/Telegram/CMakeLists.txt
-@@ -2197,6 +2197,21 @@ PRIVATE
+@@ -2467,6 +2467,21 @@ PRIVATE
  file(GLOB_RECURSE yuki_src CONFIGURE_DEPENDS "${src_loc}/yukigram/*.cpp" "${src_loc}/yukigram/*.h")
  target_sources(Telegram PRIVATE ${yuki_src})
  
@@ -30,7 +30,7 @@ index 8b9b6c5a09..b2a57213a6 100644
  if (APPLE)
      nice_target_sources(Telegram ${src_loc}
      PRIVATE
-@@ -2396,7 +2411,7 @@ else()
+@@ -2693,7 +2708,7 @@ else()
          set(bundle_identifier "com.tdesktop.Telegram")
      endif()
      set(bundle_entitlements "Telegram.entitlements")
@@ -39,7 +39,7 @@ index 8b9b6c5a09..b2a57213a6 100644
  endif()
  
  if (CMAKE_GENERATOR STREQUAL Xcode)
-@@ -2442,7 +2457,7 @@ get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+@@ -2739,7 +2754,7 @@ get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
  if (APPLE
      OR is_multi_config
      OR NOT CMAKE_EXECUTABLE_SUFFIX STREQUAL ""
@@ -48,7 +48,7 @@ index 8b9b6c5a09..b2a57213a6 100644
      set(output_folder ${CMAKE_BINARY_DIR})
  else()
      set(output_folder ${CMAKE_BINARY_DIR}/bin)
-@@ -2620,30 +2635,37 @@ elseif (build_winstore)
+@@ -2933,30 +2948,37 @@ elseif (build_winstore)
      )
  endif()
  
@@ -110,10 +110,10 @@ index 8b9b6c5a09..b2a57213a6 100644
 +    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${YUKIGRAM_APP_ID}.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
  endif()
 diff --git a/Telegram/Resources/qrc/telegram/telegram.qrc b/Telegram/Resources/qrc/telegram/telegram.qrc
-index 6c966a19f3..632fb2c2d5 100644
+index 5799e6664e..b4f32ce533 100644
 --- a/Telegram/Resources/qrc/telegram/telegram.qrc
 +++ b/Telegram/Resources/qrc/telegram/telegram.qrc
-@@ -87,6 +87,5 @@
+@@ -96,6 +96,5 @@
    </qresource>
    <qresource prefix="/misc">
      <file alias="default_shortcuts-custom.json">../../default_shortcuts-custom.json</file>
@@ -132,7 +132,7 @@ index 0000000000..9efde8c043
 +  </qresource>
 +</RCC>
 diff --git a/Telegram/SourceFiles/core/launcher.cpp b/Telegram/SourceFiles/core/launcher.cpp
-index b3b76e088f..ed1b6ceae9 100644
+index 3e436f7087..ae310052ea 100644
 --- a/Telegram/SourceFiles/core/launcher.cpp
 +++ b/Telegram/SourceFiles/core/launcher.cpp
 @@ -19,6 +19,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -143,7 +143,7 @@ index b3b76e088f..ed1b6ceae9 100644
  
  #include <QtCore/QLoggingCategory>
  #include <QtCore/QStandardPaths>
-@@ -340,7 +341,7 @@ void Launcher::init() {
+@@ -343,7 +344,7 @@ void Launcher::init() {
  	prepareSettings();
  	initQtMessageLogging();
  
@@ -153,7 +153,7 @@ index b3b76e088f..ed1b6ceae9 100644
  #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
  	// fallback session management is useless for tdesktop since it doesn't have
 diff --git a/Telegram/SourceFiles/platform/linux/specific_linux.cpp b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
-index e9f4e5b07e..329fee5713 100644
+index 8faa6d9051..5779a5ffdf 100644
 --- a/Telegram/SourceFiles/platform/linux/specific_linux.cpp
 +++ b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
 @@ -22,6 +22,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -258,10 +258,10 @@ index 0a2b177d0e..75c6474b91 100755
      -D TDESKTOP_API_ID=611335 \
      -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c
 diff --git a/lib/xdg/org.telegram.desktop.desktop b/lib/xdg/io.github.yukigram.desktop
-similarity index 70%
+similarity index 71%
 rename from lib/xdg/org.telegram.desktop.desktop
 rename to lib/xdg/io.github.yukigram.desktop
-index 73ca5cc2d5..7e77a820fa 100644
+index 573648491b..ce6450dbea 100644
 --- a/lib/xdg/org.telegram.desktop.desktop
 +++ b/lib/xdg/io.github.yukigram.desktop
 @@ -1,11 +1,11 @@
@@ -280,7 +280,7 @@ index 73ca5cc2d5..7e77a820fa 100644
 +StartupWMClass=@YUKIGRAM_APP_ID@
  Type=Application
  Categories=Chat;Network;InstantMessaging;Qt;
- MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+ MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;x-scheme-handler/ton;
 @@ -17,6 +17,6 @@ X-GNOME-UsesNotifications=true
  X-GNOME-SingleWindow=true
  
@@ -293,7 +293,7 @@ diff --git a/lib/xdg/org.telegram.desktop.metainfo.xml b/lib/xdg/io.github.yukig
 similarity index 97%
 rename from lib/xdg/org.telegram.desktop.metainfo.xml
 rename to lib/xdg/io.github.yukigram.metainfo.xml
-index 0fec02f170..c65e2f02c4 100644
+index c8b26f262b..f65e698336 100644
 --- a/lib/xdg/org.telegram.desktop.metainfo.xml
 +++ b/lib/xdg/io.github.yukigram.metainfo.xml
 @@ -1,6 +1,6 @@
@@ -317,7 +317,7 @@ index 0fec02f170..c65e2f02c4 100644
 +        <dbus type="session">@YUKIGRAM_APP_ID@</dbus>
          <mediatype>x-scheme-handler/tg</mediatype>
          <mediatype>x-scheme-handler/tonsite</mediatype>
-     </provides>
+         <mediatype>x-scheme-handler/ton</mediatype>
 diff --git a/lib/xdg/io.github.yukigram.service b/lib/xdg/io.github.yukigram.service
 new file mode 100644
 index 0000000000..11e4c9f6c6

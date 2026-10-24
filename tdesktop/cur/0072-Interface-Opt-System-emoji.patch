@@ -40,7 +40,7 @@ index 0000000000..1bce51908a
 +extern const char kOptionSystemEmoji[];
 +}
 diff --git a/Telegram/lib_ui/ui/emoji_config.cpp b/Telegram/lib_ui/ui/emoji_config.cpp
-index f92235f536..b49358ea46 100644
+index 3cf3f2f568..cfc6aaef39 100644
 --- a/Telegram/lib_ui/ui/emoji_config.cpp
 +++ b/Telegram/lib_ui/ui/emoji_config.cpp
 @@ -71,6 +71,7 @@ private:

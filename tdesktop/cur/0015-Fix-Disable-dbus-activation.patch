@@ -5,11 +5,11 @@ Subject: [PATCH] (Fix) Disable dbus activation
 
 
 diff --git a/lib/xdg/io.github.yukigram.desktop b/lib/xdg/io.github.yukigram.desktop
-index f74bdddddc..1d287b45d8 100644
+index 5bf8a53abe..226b910999 100644
 --- a/lib/xdg/io.github.yukigram.desktop
 +++ b/lib/xdg/io.github.yukigram.desktop
 @@ -11,7 +11,7 @@ Categories=Chat;Network;InstantMessaging;Qt;
- MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+ MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;x-scheme-handler/ton;
  Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;telegram;
  Actions=quit;
 -DBusActivatable=true

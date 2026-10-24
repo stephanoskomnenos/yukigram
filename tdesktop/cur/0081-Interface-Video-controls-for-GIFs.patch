@@ -7,10 +7,10 @@ This patch is adapted from Kotatogram.
 Original author: RadRussianRus <radrussianrus@gmail.com>
 
 diff --git a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
-index d6a6a060fd..22d244cf44 100644
+index 9a3b99d3d4..ab711a857f 100644
 --- a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
 +++ b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
-@@ -1484,9 +1484,7 @@ QSize OverlayWidget::videoSize() const {
+@@ -1508,9 +1508,7 @@ QSize OverlayWidget::videoSize() const {
  }
  
  bool OverlayWidget::streamingRequiresControls() const {

@@ -5,7 +5,7 @@ Subject: [PATCH] (Fix) Support xdg-data/Yukigram as compat datadir
 
 
 diff --git a/Telegram/SourceFiles/platform/linux/specific_linux.cpp b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
-index 16c7fbb4c8..183e97d031 100644
+index b9f2373e8e..ba61d9a814 100644
 --- a/Telegram/SourceFiles/platform/linux/specific_linux.cpp
 +++ b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
 @@ -687,19 +687,34 @@ QString ExecutablePathForShortcuts() {

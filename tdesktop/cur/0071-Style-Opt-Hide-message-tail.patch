@@ -5,10 +5,10 @@ Subject: [PATCH] (Style)(Opt) Hide message tail
 
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 95b6f8bbf8..f3ba042af5 100644
+index 9909dfb04c..a127b51032 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
-@@ -36,6 +36,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -37,6 +37,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "iv/markdown/iv_markdown_prepare_links.h"
  #include "iv/iv_instance.h"
  #include "iv/iv_rich_page.h"
@@ -16,14 +16,14 @@ index 95b6f8bbf8..f3ba042af5 100644
  #include "boxes/premium_preview_box.h"
  #include "boxes/share_box.h"
  #include "boxes/peers/tag_info_box.h"
-@@ -6586,6 +6587,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
- 	const auto item = data();
- 	const auto keyboard = item->inlineReplyKeyboard();
+@@ -6668,6 +6669,7 @@ Ui::BubbleRounding Message::countMessageRounding() const {
+ 			&& (rich->article.edgeBlocks().bottom == Block::VisualMedia);
+ 	};
  	const auto skipTail = smallBottom
 +		|| Yukigram::Settings::HideMessageTail->current()
  		|| (media && media->skipBubbleTail())
+ 		|| (rich && richMediaAtBottom())
  		|| (keyboard != nullptr)
- 		|| item->isFakeAboutView()
 diff --git a/Telegram/SourceFiles/yukigram/settings/hide_message_tail.cpp b/Telegram/SourceFiles/yukigram/settings/hide_message_tail.cpp
 new file mode 100644
 index 0000000000..abe190b827

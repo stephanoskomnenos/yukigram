@@ -5,13 +5,13 @@ Subject: [PATCH] (Yukigram) Keywords
 
 
 diff --git a/lib/xdg/io.github.yukigram.desktop b/lib/xdg/io.github.yukigram.desktop
-index 7e77a820fa..b9926b14b8 100644
+index ce6450dbea..4351d652ab 100644
 --- a/lib/xdg/io.github.yukigram.desktop
 +++ b/lib/xdg/io.github.yukigram.desktop
 @@ -9,7 +9,7 @@ StartupWMClass=@YUKIGRAM_APP_ID@
  Type=Application
  Categories=Chat;Network;InstantMessaging;Qt;
- MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+ MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;x-scheme-handler/ton;
 -Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
 +Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;telegram;
  Actions=quit;

@@ -5,7 +5,7 @@ Subject: [PATCH] (Style)(Opt) Old-style spoilers
 
 
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_media.cpp b/Telegram/SourceFiles/history/view/media/history_view_media.cpp
-index 74e88d3cda..17ddc28a74 100644
+index 485adea6f9..e6151ef6c0 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_media.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_media.cpp
 @@ -24,6 +24,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -125,7 +125,7 @@ index 61edbb2345..6a06670438 100644
  	const auto source = frame.source;
  	const auto ratio = style::DevicePixelRatio();
 diff --git a/Telegram/lib_ui/ui/text/text_renderer.cpp b/Telegram/lib_ui/ui/text/text_renderer.cpp
-index 4618eac2f7..b152d4d2c5 100644
+index 8ad5f61731..daae091709 100644
 --- a/Telegram/lib_ui/ui/text/text_renderer.cpp
 +++ b/Telegram/lib_ui/ui/text/text_renderer.cpp
 @@ -14,6 +14,10 @@
@@ -139,7 +139,7 @@ index 4618eac2f7..b152d4d2c5 100644
  namespace Ui::Text {
  namespace {
  
-@@ -1588,7 +1592,7 @@ void Renderer::paintSpoilerRects(
+@@ -1896,7 +1900,7 @@ void Renderer::paintSpoilerRects(
  	if (_spoilerCache) {
  		const auto frame = _spoilerCache->lookup(color->c)->frame(index);
  		for (const auto &rect : rects) {

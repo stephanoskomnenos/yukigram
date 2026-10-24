@@ -5,7 +5,7 @@ Subject: [PATCH] (Yukigram) Options framework
 
 
 diff --git a/Telegram/SourceFiles/core/launcher.cpp b/Telegram/SourceFiles/core/launcher.cpp
-index ed1b6ceae9..2343f1a265 100644
+index ae310052ea..61c32520cf 100644
 --- a/Telegram/SourceFiles/core/launcher.cpp
 +++ b/Telegram/SourceFiles/core/launcher.cpp
 @@ -20,6 +20,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -16,7 +16,7 @@ index ed1b6ceae9..2343f1a265 100644
  
  #include <QtCore/QLoggingCategory>
  #include <QtCore/QStandardPaths>
-@@ -397,6 +398,7 @@ int Launcher::exec() {
+@@ -400,6 +401,7 @@ int Launcher::exec() {
  	// Must be started before Platform is started.
  	Logs::start();
  	base::options::init(cWorkingDir() + "tdata/experimental_options.json");
@@ -24,7 +24,7 @@ index ed1b6ceae9..2343f1a265 100644
  
  	// Must be called after options are inited.
  	initHighDpi();
-@@ -676,6 +678,7 @@ void Launcher::processArguments() {
+@@ -679,6 +681,7 @@ void Launcher::processArguments() {
  int Launcher::executeApplication() {
  	FilteredCommandLineArguments arguments(_argc, _argv);
  	Sandbox sandbox(arguments.count(), arguments.values());
@@ -33,7 +33,7 @@ index ed1b6ceae9..2343f1a265 100644
  	base::ConcurrentTimerEnvironment environment;
  	return sandbox.start();
 diff --git a/Telegram/SourceFiles/settings/settings_experimental.cpp b/Telegram/SourceFiles/settings/settings_experimental.cpp
-index 34c0357984..f49a6bc0a2 100644
+index f165369e71..33a303e893 100644
 --- a/Telegram/SourceFiles/settings/settings_experimental.cpp
 +++ b/Telegram/SourceFiles/settings/settings_experimental.cpp
 @@ -6,6 +6,7 @@ For license and copyright information please follow this link:

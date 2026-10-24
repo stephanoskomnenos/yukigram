@@ -5,10 +5,10 @@ Subject: [PATCH] (Annoyances) Hide "Pasted as plain text" toast
 
 
 diff --git a/Telegram/SourceFiles/chat_helpers/rich_paste_toast.cpp b/Telegram/SourceFiles/chat_helpers/rich_paste_toast.cpp
-index 344965be02..cd51c0c240 100644
+index 51e3411ea4..f3ec5056bc 100644
 --- a/Telegram/SourceFiles/chat_helpers/rich_paste_toast.cpp
 +++ b/Telegram/SourceFiles/chat_helpers/rich_paste_toast.cpp
-@@ -21,6 +21,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -23,6 +23,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "ui/widgets/buttons.h"
  #include "styles/style_chat.h"
  #include "styles/style_chat_helpers.h"
@@ -16,7 +16,7 @@ index 344965be02..cd51c0c240 100644
  
  #include <QtCore/QMimeData>
  
-@@ -94,6 +95,7 @@ std::shared_ptr<QMimeData> CloneMimeData(not_null<const QMimeData*> data) {
+@@ -109,6 +110,7 @@ bool RichPasteOfferThrottle::take() {
  }
  
  void ShowRichPasteToast(RichPasteToastArgs &&args) {

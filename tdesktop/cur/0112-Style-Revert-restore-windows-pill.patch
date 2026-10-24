@@ -5,7 +5,7 @@ Subject: [PATCH] (Style) Revert restore windows pill
 
 
 diff --git a/Telegram/SourceFiles/dialogs/ui/restore_windows_offer.cpp b/Telegram/SourceFiles/dialogs/ui/restore_windows_offer.cpp
-index 37b53d74c6..6409e2081e 100644
+index d457d7595d..6409e2081e 100644
 --- a/Telegram/SourceFiles/dialogs/ui/restore_windows_offer.cpp
 +++ b/Telegram/SourceFiles/dialogs/ui/restore_windows_offer.cpp
 @@ -97,7 +97,7 @@ Ui::Text::GeometryDescriptor RestoreWindowsOffer::questionGeometry() const {
@@ -17,7 +17,7 @@ index 37b53d74c6..6409e2081e 100644
  	const auto &padding = st::restoreWindowsOfferPadding;
  	const auto textMargin = ButtonTextMargin();
  	const auto buttonSkip = st::restoreWindowsOfferButtonSkip;
-@@ -190,20 +190,10 @@ void RestoreWindowsOffer::relayout() {
+@@ -190,13 +190,10 @@ void RestoreWindowsOffer::relayout() {
  
  void RestoreWindowsOffer::paintEvent(QPaintEvent *e) {
  	auto p = QPainter(this);
@@ -27,14 +27,7 @@ index 37b53d74c6..6409e2081e 100644
 -		pill.width() / 2,
 -		pill.height() / 2,
 -	});
--	_shadow.paint(p, pill, radius);
--	{
--		auto hq = PainterHighQualityEnabler(p);
--		p.setBrush(st::dialogsBg);
--		p.setPen(Qt::NoPen);
--		p.drawRoundedRect(pill, radius, radius);
--	}
--	PaintPillOutline(p, pill, radius);
+-	PaintPillBackground(p, _shadow, pill, radius);
 +	const auto pill = rect();
 +	p.setBrush(st::dialogsBg);
 +	p.setPen(Qt::NoPen);

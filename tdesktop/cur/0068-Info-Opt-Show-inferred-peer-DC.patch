@@ -5,7 +5,7 @@ Subject: [PATCH] (Info)(Opt) Show inferred peer DC
 
 
 diff --git a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
-index 874e2350a2..b9d6360655 100644
+index 80175f9d65..5252e5f6b1 100644
 --- a/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 +++ b/Telegram/SourceFiles/info/profile/info_profile_actions.cpp
 @@ -44,6 +44,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -24,7 +24,7 @@ index 874e2350a2..b9d6360655 100644
  #include "styles/style_boxes.h"
  #include "styles/style_channel_earn.h" // st::channelEarnCurrencyCommonMargins
  #include "styles/style_chat_helpers.h"
-@@ -1632,6 +1634,22 @@ Section DetailsFiller::makeInfo() {
+@@ -1635,6 +1637,22 @@ Section DetailsFiller::makeInfo() {
  			);
  		}
  	};
@@ -47,15 +47,15 @@ index 874e2350a2..b9d6360655 100644
  	const auto setupJoinDate = [&] {
  		if (ShowChannelJoinedBelowAbout.value()) {
  			if (const auto channel = _peer->asChannel()) {
-@@ -1737,6 +1755,7 @@ Section DetailsFiller::makeInfo() {
- 		});
+@@ -1758,6 +1776,7 @@ Section DetailsFiller::makeInfo() {
+ 		qrButton->setClickedCallback(showQr);
  
  		setupPeerId();
 +		setupPeerDc();
  
  		if (!user->isBot()) {
  			tracker.track(result->add(
-@@ -1858,6 +1877,7 @@ Section DetailsFiller::makeInfo() {
+@@ -1879,6 +1898,7 @@ Section DetailsFiller::makeInfo() {
  		}
  
  		setupPeerId();

@@ -6,7 +6,7 @@ Subject: [PATCH] (Style) Revert "Added pill design to top bar suggestion."
 This reverts commit 5a7621eef9c201b84f8c7a178d17a59e645f426a.
 
 diff --git a/Telegram/SourceFiles/dialogs/ui/dialogs_top_bar_suggestion_content.cpp b/Telegram/SourceFiles/dialogs/ui/dialogs_top_bar_suggestion_content.cpp
-index edd25d571b..ba4dface1e 100644
+index 7b35ceb7b6..ed6fa49729 100644
 --- a/Telegram/SourceFiles/dialogs/ui/dialogs_top_bar_suggestion_content.cpp
 +++ b/Telegram/SourceFiles/dialogs/ui/dialogs_top_bar_suggestion_content.cpp
 @@ -111,6 +111,10 @@ int PaintSuggestionBubbleBackground(
@@ -20,7 +20,7 @@ index edd25d571b..ba4dface1e 100644
  	const auto &margins = st::dialogsTopBarSuggestionMargins;
  	const auto pill = outer - margins;
  	PaintTopFade(
-@@ -216,19 +220,12 @@ not_null<UnconfirmedAuthWrap*> CreateUnconfirmedAuthContent(
+@@ -211,19 +215,12 @@ not_null<UnconfirmedAuthWrap*> CreateUnconfirmedAuthContent(
  		object_ptr<Ui::VerticalLayout>(parent));
  	wrap->setCollapseProgress(std::move(collapseProgress));
  	const auto content = wrap->entity();
@@ -41,7 +41,7 @@ index edd25d571b..ba4dface1e 100644
  	Ui::AddSkip(content);
  
  	content->add(
-@@ -285,7 +282,7 @@ not_null<UnconfirmedAuthWrap*> CreateUnconfirmedAuthContent(
+@@ -280,7 +277,7 @@ not_null<UnconfirmedAuthWrap*> CreateUnconfirmedAuthContent(
  			0);
  	}, buttons->lifetime());
  	Ui::AddSkip(content);
@@ -50,7 +50,7 @@ index edd25d571b..ba4dface1e 100644
  
  	return wrap;
  }
-@@ -328,7 +325,6 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
+@@ -323,7 +320,6 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
  	_rightHide = nullptr;
  	_rightArrow = nullptr;
  	_rightIcon = icon;
@@ -58,7 +58,7 @@ index edd25d571b..ba4dface1e 100644
  	if (icon == RightIcon::Close) {
  		_rightHide = base::make_unique_q<Ui::IconButton>(
  			this,
-@@ -336,15 +332,7 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
+@@ -331,15 +327,7 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
  		const auto rightHide = _rightHide.get();
  		sizeValue() | rpl::filter_size(
  		) | rpl::on_next([=](const QSize &s) {
@@ -75,7 +75,7 @@ index edd25d571b..ba4dface1e 100644
  		}, rightHide->lifetime());
  		rightHide->show();
  	} else if (icon == RightIcon::Arrow) {
-@@ -359,13 +347,9 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
+@@ -354,13 +342,9 @@ void TopBarSuggestionContent::setRightIcon(RightIcon icon) {
  		sizeValue() | rpl::filter_size(
  		) | rpl::on_next([=](const QSize &s) {
  			const auto &point = st::settingsPremiumArrowShift;
@@ -91,7 +91,7 @@ index edd25d571b..ba4dface1e 100644
  		}, arrow->lifetime());
  		arrow->show();
  	}
-@@ -388,22 +372,12 @@ void TopBarSuggestionContent::setRightButton(
+@@ -383,22 +367,12 @@ void TopBarSuggestionContent::setRightButton(
  		rpl::single(QString()),
  		st::dialogsTopBarRightButton);
  	_rightButton->setText(std::move(text));
@@ -116,7 +116,7 @@ index edd25d571b..ba4dface1e 100644
  	}, _rightButton->lifetime());
  	_rightButton->setFullRadius(true);
  	_rightButton->setClickedCallback(std::move(callback));
-@@ -446,21 +420,9 @@ void TopBarSuggestionContent::draw(QPainter &p) {
+@@ -441,21 +415,9 @@ void TopBarSuggestionContent::draw(QPainter &p) {
  	};
  	if (TopBarSuggestionNarrow(width())) {
  		setControlsVisible(false);
@@ -140,7 +140,7 @@ index edd25d571b..ba4dface1e 100644
  		const auto accentSide = st::dialogsRequestsBubbleIconSize;
  		const auto accent = QRect(
  			pill.x() + (pill.width() - accentSide) / 2,
-@@ -476,31 +438,17 @@ void TopBarSuggestionContent::draw(QPainter &p) {
+@@ -471,31 +433,17 @@ void TopBarSuggestionContent::draw(QPainter &p) {
  		return;
  	}
  	setControlsVisible(true);
@@ -182,7 +182,7 @@ index edd25d571b..ba4dface1e 100644
  	const auto availableWidthNoPhoto = outer.width()
  		- (_rightArrow
  			? (_rightArrow->width() / 4 * 3) // Takes full height.
-@@ -566,10 +514,10 @@ void TopBarSuggestionContent::draw(QPainter &p) {
+@@ -561,10 +509,10 @@ void TopBarSuggestionContent::draw(QPainter &p) {
  		auto st = Ui::UnreadBadgeStyle();
  		const auto rightInset = _geometry.rightInset
  			? _geometry.rightInset
@@ -195,7 +195,7 @@ index edd25d571b..ba4dface1e 100644
  			+ (_geometry.cardInnerHeight - st.size) / 2;
  		Ui::PaintUnreadBadge(p, _rightBadgeText, badgeRight, badgeTop, st);
  	}
-@@ -640,25 +588,21 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
+@@ -635,25 +583,21 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
  			fullHeight * (1. - _collapseProgress)));
  	}
  	if (TopBarSuggestionNarrow(newWidth)) {
@@ -223,7 +223,7 @@ index edd25d571b..ba4dface1e 100644
  		- (_rightArrow
  			? (_rightArrow->width() / 4 * 3) // Takes full height.
  			: 0)
-@@ -666,7 +610,7 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
+@@ -661,7 +605,7 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
  	const auto availableWidth = availableWidthNoPhoto
  		- (_rightHide ? _rightHide->width() : 0);
  	if (availableWidth <= 0) {
@@ -232,7 +232,7 @@ index edd25d571b..ba4dface1e 100644
  	}
  	const auto hasSecondLineTitle
  		= (availableWidth < _contentTitle.maxWidth());
-@@ -697,8 +641,7 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
+@@ -692,8 +636,7 @@ int TopBarSuggestionContent::resizeGetHeight(int newWidth) {
  	const auto capped = std::min(
  		natural,
  		st::sponsoredMessageBarMaxHeight);
@@ -242,7 +242,7 @@ index edd25d571b..ba4dface1e 100644
  }
  
  void TopBarSuggestionContent::setCollapseProgress(
-@@ -738,25 +681,15 @@ void TopBarSuggestionContent::setLeadingWidget(Ui::RpWidget *widget) {
+@@ -733,25 +676,15 @@ void TopBarSuggestionContent::setLeadingWidget(Ui::RpWidget *widget) {
  	}
  	widget->setParent(this);
  	widget->setAttribute(Qt::WA_TransparentForMouseEvents);

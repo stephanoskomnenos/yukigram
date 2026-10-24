@@ -5,7 +5,7 @@ Subject: [PATCH] (Interface)(Opt) Prevent delete history
 
 
 diff --git a/Telegram/SourceFiles/boxes/moderate_messages_box.cpp b/Telegram/SourceFiles/boxes/moderate_messages_box.cpp
-index 12d604d255..706a3af89a 100644
+index a0ca808611..52560e046e 100644
 --- a/Telegram/SourceFiles/boxes/moderate_messages_box.cpp
 +++ b/Telegram/SourceFiles/boxes/moderate_messages_box.cpp
 @@ -33,6 +33,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -24,10 +24,10 @@ index 12d604d255..706a3af89a 100644
  #include "ui/widgets/buttons.h"
  #include "ui/widgets/checkbox.h"
  #include "ui/widgets/expandable_peer_list.h"
-@@ -1571,6 +1573,11 @@ void SafeSubmitOnEnter(not_null<Ui::GenericBox*> box) {
- }
- 
- void DeleteChatBox(not_null<Ui::GenericBox*> box, not_null<PeerData*> peer) {
+@@ -1616,6 +1618,11 @@ void DeleteChatBox(
+ 		not_null<Ui::GenericBox*> box,
+ 		not_null<PeerData*> peer,
+ 		Fn<void(Fn<void()> leave)> leaveAsCreator) {
 +	if (Yukigram::Settings::PreventDelete->current()) {
 +		Ui::InformBox(box, { .text = ktr("box/prevent-delete/text") });
 +		return;
@@ -36,7 +36,7 @@ index 12d604d255..706a3af89a 100644
  	const auto container = box->verticalLayout();
  
  	const auto userpicPeer = peer->userpicPaintingPeer();
-@@ -1747,6 +1754,11 @@ void DeleteChatBox(not_null<Ui::GenericBox*> box, not_null<PeerData*> peer) {
+@@ -1771,6 +1778,11 @@ void DeleteChatBox(
  void DeleteSublistBox(
  		not_null<Ui::GenericBox*> box,
  		not_null<Data::SavedSublist*> sublist) {
@@ -49,7 +49,7 @@ index 12d604d255..706a3af89a 100644
  
  	const auto weak = base::make_weak(sublist.get());
 diff --git a/Telegram/SourceFiles/boxes/peers/edit_peer_info_box.cpp b/Telegram/SourceFiles/boxes/peers/edit_peer_info_box.cpp
-index 1f3189ad4b..0a39f57828 100644
+index dcc872a678..0db1ce5a50 100644
 --- a/Telegram/SourceFiles/boxes/peers/edit_peer_info_box.cpp
 +++ b/Telegram/SourceFiles/boxes/peers/edit_peer_info_box.cpp
 @@ -65,6 +65,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -68,10 +68,10 @@ index 1f3189ad4b..0a39f57828 100644
  #include "ui/wrap/vertical_layout.h"
  #include "ui/ui_utility.h"
  #include "window/window_session_controller.h"
-@@ -3067,6 +3069,11 @@ void Controller::deleteWithConfirmation() {
- 	const auto channel = _peer->asChannel();
- 	Assert(channel != nullptr);
+@@ -3068,6 +3070,11 @@ void Controller::savePhoto() {
+ }
  
+ void Controller::deleteWithConfirmation() {
 +	if (Yukigram::Settings::PreventDelete->current()) {
 +		_navigation->parentController()->show(Ui::MakeInformBox({ .text = ktr("box/prevent-delete/text") }));
 +		return;
@@ -80,19 +80,19 @@ index 1f3189ad4b..0a39f57828 100644
  	const auto text = (_isGroup
  		? tr::lng_sure_delete_group
  		: tr::lng_sure_delete_channel)(tr::now);
-@@ -3085,6 +3092,10 @@ void Controller::deleteWithConfirmation() {
- void Controller::deleteChannel() {
- 	Expects(_peer->isChannel());
+@@ -3086,6 +3093,10 @@ void Controller::deleteWithConfirmation() {
+ void Controller::deletePeer() {
+ 	Expects(_peer->isChat() || _peer->isChannel());
  
 +	if (Yukigram::Settings::PreventDelete->current()) {
 +		return;
 +	}
 +
- 	const auto channel = _peer->asChannel();
- 	const auto chat = channel->migrateFrom();
- 
+ 	const auto peer = _peer;
+ 	const auto chat = peer->asChat();
+ 	const auto channel = peer->asChannel();
 diff --git a/Telegram/SourceFiles/window/window_peer_menu.cpp b/Telegram/SourceFiles/window/window_peer_menu.cpp
-index e988d99ea2..50e5f7c1ff 100644
+index 25ee941737..e54680a686 100644
 --- a/Telegram/SourceFiles/window/window_peer_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_peer_menu.cpp
 @@ -50,6 +50,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -103,7 +103,7 @@ index e988d99ea2..50e5f7c1ff 100644
  #include "inline_bots/bot_attach_web_view.h" // InlineBots::PeerType.
  #include "ui/toast/toast.h"
  #include "ui/text/format_values.h"
-@@ -4331,6 +4332,10 @@ Fn<void()> ClearHistoryHandler(
+@@ -4349,6 +4350,10 @@ Fn<void()> ClearHistoryHandler(
  		not_null<PeerData*> peer) {
  	return [=] {
  		if (!controller->showFrozenError()) {

@@ -40,10 +40,10 @@ index 6c8c4ad8df..e3570634ad 100644
  
  bool WhoReadExists(not_null<HistoryItem*> item) {
 diff --git a/Telegram/SourceFiles/data/data_peer_values.cpp b/Telegram/SourceFiles/data/data_peer_values.cpp
-index fe008ba767..4bc10525f9 100644
+index d43652efde..b14f929fd1 100644
 --- a/Telegram/SourceFiles/data/data_peer_values.cpp
 +++ b/Telegram/SourceFiles/data/data_peer_values.cpp
-@@ -487,10 +487,10 @@ QString OnlineText(Data::LastseenStatus status, TimeId now) {
+@@ -505,10 +505,10 @@ QString OnlineText(Data::LastseenStatus status, TimeId now) {
  	const auto nowFull = base::unixtime::parse(now);
  	const auto locale = QLocale();
  	if (onlineFull.date() == nowFull.date()) {
@@ -56,7 +56,7 @@ index fe008ba767..4bc10525f9 100644
  		return tr::lng_status_lastseen_yesterday(tr::now, lt_time, onlineTime);
  	}
  	const auto date = locale.toString(onlineFull.date(), QLocale::ShortFormat);
-@@ -515,14 +515,14 @@ QString OnlineTextFull(not_null<UserData*> user, TimeId now) {
+@@ -533,14 +533,14 @@ QString OnlineTextFull(not_null<UserData*> user, TimeId now) {
  	const auto nowFull = base::unixtime::parse(now);
  	const auto locale = QLocale();
  	if (onlineFull.date() == nowFull.date()) {
@@ -75,10 +75,10 @@ index fe008ba767..4bc10525f9 100644
  }
  
 diff --git a/Telegram/SourceFiles/history/history_item.cpp b/Telegram/SourceFiles/history/history_item.cpp
-index 46cb954299..09673deeee 100644
+index 5f21392d75..8ccb6eb8c2 100644
 --- a/Telegram/SourceFiles/history/history_item.cpp
 +++ b/Telegram/SourceFiles/history/history_item.cpp
-@@ -1469,7 +1469,7 @@ void HistoryItem::setCommentsItemId(FullMsgId id) {
+@@ -1511,7 +1511,7 @@ void HistoryItem::setCommentsItemId(FullMsgId id) {
  
  QString GenerateServiceTime(TimeId date) {
  	if (date > 0) {
@@ -87,7 +87,7 @@ index 46cb954299..09673deeee 100644
  	}
  	return QString();
  }
-@@ -8556,7 +8556,7 @@ PreparedServiceText HistoryItem::prepareCallScheduledText(
+@@ -8951,7 +8951,7 @@ PreparedServiceText HistoryItem::prepareCallScheduledText(
  	};
  	const auto time = QLocale().toString(
  		scheduled.time(),
@@ -97,25 +97,25 @@ index 46cb954299..09673deeee 100644
  		prepareWithDate(tr::lng_group_call_starts_date(
  			tr::now,
 diff --git a/Telegram/SourceFiles/history/history_item_text.cpp b/Telegram/SourceFiles/history/history_item_text.cpp
-index 947b1f9d07..2b7b58b26c 100644
+index feace09174..db623ee6f6 100644
 --- a/Telegram/SourceFiles/history/history_item_text.cpp
 +++ b/Telegram/SourceFiles/history/history_item_text.cpp
-@@ -397,7 +397,7 @@ TextForMimeData HistorySelectedItemPlainWrappedText(
- 		TextForMimeData &&body) {
+@@ -498,7 +498,7 @@ HistorySelectedTextParts HistorySelectedItemPlainWrappedText(
+ 		HistorySelectedTextParts &&body) {
  	auto result = TextForMimeData();
  	const auto time = u"[%1] "_q.arg(
 -		QLocale().toString(ItemDateTime(item), QLocale::ShortFormat));
 +		QLocale().toString(ItemDateTime(item), Lang::DateTimeFormat()));
- 	const auto author = item->author()->name();
- 	const auto size = time.size() + author.size() + 2 + body.expanded.size();
- 	result.reserve(size);
+ 	const auto author = SelectedCopyAuthorName(item);
+ 	const auto size = time.size()
+ 		+ author.size()
 diff --git a/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp b/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp
-index 21ac2d0973..db7981db87 100644
+index 9971a38282..7b100f2bd6 100644
 --- a/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_bottom_info.cpp
-@@ -504,7 +504,7 @@ void BottomInfo::layoutDateText() {
- 		? FormatEditedDate(_data.date, _data.editedDate)
- 		: edited + ((_data.flags & Data::Flag::ForwardedDate)
+@@ -505,7 +505,7 @@ void BottomInfo::layoutDateText() {
+ 		: edited + ((_data.flags
+ 			& (Data::Flag::ForwardedDate | Data::Flag::FullDate))
  		? Ui::FormatDateTimeSavedFrom(_data.date)
 -		: QLocale().toString(_data.date.time(), QLocale::ShortFormat));
 +		: QLocale().toString(_data.date.time(), Lang::TimeFormat()));
@@ -234,7 +234,7 @@ index 6851dee06d..f4e23c02a0 100644
  		width(tr::lng_contacts_loading(tr::now)),
  		(width(tr::lng_context_read_hidden(tr::now))
 diff --git a/Telegram/SourceFiles/ui/text/format_values.cpp b/Telegram/SourceFiles/ui/text/format_values.cpp
-index 7b70065e1f..14d23593d9 100644
+index 96a776b01f..947a8befca 100644
 --- a/Telegram/SourceFiles/ui/text/format_values.cpp
 +++ b/Telegram/SourceFiles/ui/text/format_values.cpp
 @@ -83,23 +83,14 @@ QString FormatProgressText(qint64 ready, qint64 total) {
@@ -266,7 +266,7 @@ index 7b70065e1f..14d23593d9 100644
  	}
  }
  
-@@ -533,7 +524,7 @@ QString FormatDialogsDate(const QDateTime &lastTime) {
+@@ -716,7 +707,7 @@ QString FormatDialogsDate(const QDateTime &lastTime) {
  
  	if ((lastDate == nowDate)
  		|| (std::abs(lastTime.secsTo(now)) < kRecentlyInSeconds)) {

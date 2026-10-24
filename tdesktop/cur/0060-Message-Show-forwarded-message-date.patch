@@ -7,7 +7,7 @@ This patch is adapted from Forkgram.
 Original author: 23rd <23rd@vivaldi.net>
 
 diff --git a/Telegram/SourceFiles/history/history_item_components.cpp b/Telegram/SourceFiles/history/history_item_components.cpp
-index 7a13def380..624140dcba 100644
+index fb76cf37b4..a19969709a 100644
 --- a/Telegram/SourceFiles/history/history_item_components.cpp
 +++ b/Telegram/SourceFiles/history/history_item_components.cpp
 @@ -11,6 +11,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -15,16 +15,16 @@ index 7a13def380..624140dcba 100644
  #include "base/algorithm.h"
  #include "base/options.h"
 +#include "base/unixtime.h"
+ #include "iv/iv_rich_page.h"
  #include "lang/lang_keys.h"
  #include "ui/effects/ripple_animation.h"
- #include "ui/effects/spoiler_mess.h"
-@@ -384,6 +385,9 @@ void HistoryMessageForwarded::create(
+@@ -380,6 +381,9 @@ TextWithEntities HistoryMessageForwarded::phrase(
  				tr::marked);
  		}
  	}
 +	if (originalDate != TimeId(0)) {
-+		phrase.append(" " + Ui::kQBullet + u" \u2068" + Ui::FormatDateTime(base::unixtime::parse(originalDate)));
++		result.append(" " + Ui::kQBullet + u" \u2068" + Ui::FormatDateTime(base::unixtime::parse(originalDate)));
 +	}
- 	text.setMarkedText(st::fwdTextStyle, phrase, kMarkupTextOptions, context);
+ 	return result;
+ }
  
- 	text.setLink(1, fromChannel

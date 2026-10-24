@@ -5,7 +5,7 @@ Subject: [PATCH] (Interface)(Opt) Custom monospace font
 
 
 diff --git a/Telegram/SourceFiles/core/launcher.cpp b/Telegram/SourceFiles/core/launcher.cpp
-index 2343f1a265..baa6bd470d 100644
+index 61c32520cf..7e21330b7a 100644
 --- a/Telegram/SourceFiles/core/launcher.cpp
 +++ b/Telegram/SourceFiles/core/launcher.cpp
 @@ -30,6 +30,10 @@ extern "C" {
@@ -19,7 +19,7 @@ index 2343f1a265..baa6bd470d 100644
  namespace Core {
  namespace {
  
-@@ -399,6 +403,7 @@ int Launcher::exec() {
+@@ -402,6 +406,7 @@ int Launcher::exec() {
  	Logs::start();
  	base::options::init(cWorkingDir() + "tdata/experimental_options.json");
  	Yukigram::Options::init();
@@ -28,26 +28,26 @@ index 2343f1a265..baa6bd470d 100644
  	// Must be called after options are inited.
  	initHighDpi();
 diff --git a/Telegram/SourceFiles/settings/sections/settings_chat.cpp b/Telegram/SourceFiles/settings/sections/settings_chat.cpp
-index 0f48c2eaa8..b41d577bd0 100644
+index 6c34fac3f5..4652fbaced 100644
 --- a/Telegram/SourceFiles/settings/sections/settings_chat.cpp
 +++ b/Telegram/SourceFiles/settings/sections/settings_chat.cpp
-@@ -52,6 +52,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -48,6 +48,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "ui/widgets/menu/menu_add_action_callback.h"
  #include "history/view/history_view_quick_action.h"
  #include "lang/lang_keys.h"
 +#include "yukigram/lang.h"
  #include "lottie/lottie_icon.h"
- #include "export/export_manager.h"
  #include "window/themes/window_theme.h"
-@@ -78,6 +79,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
- #include "base/call_delayed.h"
+ #include "window/themes/window_themes_embedded.h"
+@@ -71,6 +72,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "base/platform/base_platform_info.h"
  #include "support/support_common.h"
  #include "support/support_templates.h"
 +#include "base/options.h"
  #include "main/main_session.h"
  #include "main/main_session_settings.h"
  #include "mainwidget.h"
-@@ -90,6 +92,15 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -83,6 +85,15 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  
  #include <QAction>
  
@@ -63,7 +63,7 @@ index 0f48c2eaa8..b41d577bd0 100644
  namespace Settings {
  namespace {
  
-@@ -863,6 +874,15 @@ void BuildThemeSettingsSection(SectionBuilder &builder) {
+@@ -791,6 +802,15 @@ void BuildThemeSettingsSection(SectionBuilder &builder) {
  			.icon = { &st::menuIconFont },
  		};
  	});
@@ -79,7 +79,7 @@ index 0f48c2eaa8..b41d577bd0 100644
  }
  
  void BuildCloudThemesSection(SectionBuilder &builder) {
-@@ -2822,7 +2842,7 @@ void SetupThemeSettings(
+@@ -2559,7 +2579,7 @@ void SetupThemeSettings(
  			return result;
  		};
  		controller->show(
@@ -88,7 +88,7 @@ index 0f48c2eaa8..b41d577bd0 100644
  	});
  	if (highlights) {
  		highlights->push_back({
-@@ -2831,6 +2851,59 @@ void SetupThemeSettings(
+@@ -2568,6 +2588,59 @@ void SetupThemeSettings(
  		});
  	}
  
@@ -198,7 +198,7 @@ index ed79f9bc40..14f0c56f07 100644
  
  } // namespace Ui
 diff --git a/Telegram/lib_ui/ui/style/style_core_font.cpp b/Telegram/lib_ui/ui/style/style_core_font.cpp
-index 46b65c4b52..5f0f92d188 100644
+index 0b12a6c425..8b3332a3ce 100644
 --- a/Telegram/lib_ui/ui/style/style_core_font.cpp
 +++ b/Telegram/lib_ui/ui/style/style_core_font.cpp
 @@ -56,6 +56,10 @@ void SetCustomFont(const QString &font) {
@@ -212,7 +212,7 @@ index 46b65c4b52..5f0f92d188 100644
  namespace internal {
  
  struct ResolvedFont {
-@@ -163,7 +167,11 @@ bool LoadCustomFont(const QString &filePath) {
+@@ -166,7 +170,11 @@ bool LoadCustomFont(const QString &filePath) {
  	return QString();
  }
  
@@ -225,7 +225,7 @@ index 46b65c4b52..5f0f92d188 100644
  	static const auto family = [&]() -> QString {
  		const auto manual = ManualMonospaceFont();
  		const auto system = SystemMonospaceFont();
-@@ -560,6 +568,14 @@ OwnedFont::OwnedFont(const QString &custom, FontFlags flags, int size)
+@@ -563,6 +571,14 @@ OwnedFont::OwnedFont(const QString &custom, FontFlags flags, int size)
  
  } // namespace internal
  

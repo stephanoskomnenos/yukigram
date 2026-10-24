@@ -5,7 +5,7 @@ Subject: [PATCH] (Style)(Opt) Large sticker preview
 
 
 diff --git a/Telegram/SourceFiles/window/window_media_preview.cpp b/Telegram/SourceFiles/window/window_media_preview.cpp
-index 4fe0e7f112..0252315a8e 100644
+index f66aa8ea3b..186410646c 100644
 --- a/Telegram/SourceFiles/window/window_media_preview.cpp
 +++ b/Telegram/SourceFiles/window/window_media_preview.cpp
 @@ -24,6 +24,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL

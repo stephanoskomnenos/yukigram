@@ -5,10 +5,10 @@ Subject: [PATCH] (Message)(Opt) Right action comments
 
 
 diff --git a/Telegram/SourceFiles/history/view/history_view_message.cpp b/Telegram/SourceFiles/history/view/history_view_message.cpp
-index 3e056eb2dd..ef17991bf4 100644
+index 790054daa8..c92b72f334 100644
 --- a/Telegram/SourceFiles/history/view/history_view_message.cpp
 +++ b/Telegram/SourceFiles/history/view/history_view_message.cpp
-@@ -38,6 +38,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+@@ -39,6 +39,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
  #include "boxes/premium_preview_box.h"
  #include "boxes/share_box.h"
  #include "boxes/peers/tag_info_box.h"
@@ -16,7 +16,7 @@ index 3e056eb2dd..ef17991bf4 100644
  #include "ui/chat/torn_edge.h"
  #include "ui/effects/reaction_fly_animation.h"
  #include "ui/effects/ripple_animation.h"
-@@ -1198,7 +1199,7 @@ void Message::animateReaction(Ui::ReactionFlyAnimationArgs &&args) {
+@@ -1270,7 +1271,7 @@ void Message::animateReaction(Ui::ReactionFlyAnimationArgs &&args) {
  	if (bubble) {
  		// Entry page is always a bubble bottom.
  		auto inner = g;
@@ -25,17 +25,17 @@ index 3e056eb2dd..ef17991bf4 100644
  			inner.setHeight(inner.height() - st::historyCommentsButtonHeight);
  		}
  		auto trect = inner.marginsRemoved(st::msgPadding);
-@@ -1797,7 +1798,7 @@ void Message::draw(Painter &p, const PaintContext &context) const {
+@@ -1873,7 +1874,7 @@ void Message::draw(Painter &p, const PaintContext &context) const {
  	const auto customHighlight = mediaDisplayed && media->customHighlight();
  	if (!mediaSelectionIntervals.empty() || customHighlight) {
  		auto localMediaBottom = gForIntervals.top() + gForIntervals.height();
--		if (data()->repliesAreComments() || data()->externalReply()) {
-+		if ((data()->repliesAreComments() || data()->externalReply()) && !displayRightActionComments()) {
+-		if (hasCommentsButton()) {
++		if (hasCommentsButton() && !displayRightActionComments()) {
  			localMediaBottom -= st::historyCommentsButtonHeight;
  		}
  		if (_viewButton) {
-@@ -2375,6 +2376,9 @@ void Message::paintCommentsButton(
- 	if (!data()->repliesAreComments() && !data()->externalReply()) {
+@@ -2379,6 +2380,9 @@ void Message::paintCommentsButton(
+ 	if (!hasCommentsButton()) {
  		return;
  	}
 +	if (displayRightActionComments()) {
@@ -44,16 +44,16 @@ index 3e056eb2dd..ef17991bf4 100644
  	if (!_comments) {
  		_comments = std::make_unique<CommentsButton>();
  		history()->owner().registerHeavyViewPart(const_cast<Message*>(this));
-@@ -3255,7 +3259,7 @@ PointState Message::pointState(QPoint point) const {
+@@ -3263,7 +3267,7 @@ PointState Message::pointState(QPoint point) const {
  			auto mediaOnBottom = (mediaDisplayed && media->isBubbleBottom()) || check || (entry/* && entry->isBubbleBottom()*/);
  			auto mediaOnTop = (mediaDisplayed && media->isBubbleTop()) || (entry && entry->isBubbleTop());
  
--			if (item->repliesAreComments() || item->externalReply()) {
-+			if ((item->repliesAreComments() || item->externalReply()) && !displayRightActionComments()) {
+-			if (hasCommentsButton()) {
++			if (hasCommentsButton() && !displayRightActionComments()) {
  				g.setHeight(g.height() - st::historyCommentsButtonHeight);
  			}
  
-@@ -3652,7 +3656,7 @@ BottomRippleMask Message::bottomRippleMask(int buttonHeight) const {
+@@ -3658,7 +3662,7 @@ BottomRippleMask Message::bottomRippleMask(int buttonHeight) const {
  }
  
  void Message::createCommentsButtonRipple() {
@@ -62,7 +62,7 @@ index 3e056eb2dd..ef17991bf4 100644
  	_comments->ripple = std::make_unique<Ui::RippleAnimation>(
  		st::defaultRippleAnimation,
  		std::move(mask.image),
-@@ -5967,9 +5971,10 @@ bool Message::displayRightActionComments() const {
+@@ -5980,9 +5984,10 @@ bool Message::displayRightActionComments() const {
  	return !isPinnedContext()
  		&& (context() != Context::SavedSublist)
  		&& data()->repliesAreComments()
@@ -74,12 +74,12 @@ index 3e056eb2dd..ef17991bf4 100644
  }
  
  std::optional<QSize> Message::rightActionSize() const {
-@@ -6798,7 +6803,7 @@ int Message::resizeContentGetHeight(int newWidth) {
+@@ -6884,7 +6889,7 @@ int Message::resizeContentGetHeight(int newWidth) {
  			newHeight += (bottomInfoHeight - st::msgDateFont->height);
  		}
  
--		if (item->repliesAreComments() || item->externalReply()) {
-+		if ((item->repliesAreComments() || item->externalReply()) && !displayRightActionComments()) {
+-		if (hasCommentsButton()) {
++		if (hasCommentsButton() && !displayRightActionComments()) {
  			newHeight += st::historyCommentsButtonHeight;
  		} else if (_comments) {
  			_comments = nullptr;

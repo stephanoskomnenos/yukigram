@@ -7,7 +7,7 @@ This patch is adapted from 64Gram.
 Original author: c0re100 <corehusky@gmail.com>
 
 diff --git a/Telegram/SourceFiles/window/window_main_menu.cpp b/Telegram/SourceFiles/window/window_main_menu.cpp
-index 0b337fab24..c36247fa14 100644
+index e687cde6d5..ea5a90832f 100644
 --- a/Telegram/SourceFiles/window/window_main_menu.cpp
 +++ b/Telegram/SourceFiles/window/window_main_menu.cpp
 @@ -33,6 +33,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
@@ -16,9 +16,9 @@ index 0b337fab24..c36247fa14 100644
  #include "lang/lang_keys.h"
 +#include "yukigram/lang.h"
  #include "main/main_account.h"
+ #include "main/main_app_config.h"
  #include "main/main_domain.h"
- #include "main/main_session.h"
-@@ -689,6 +690,15 @@ void MainMenu::setupMenu() {
+@@ -694,6 +695,15 @@ void MainMenu::setupMenu() {
  			}
  		});
  
@@ -35,10 +35,10 @@ index 0b337fab24..c36247fa14 100644
  			tr::lng_create_channel_title(),
  			{ &st::menuIconChannel }
 diff --git a/Telegram/SourceFiles/window/window_session_controller.cpp b/Telegram/SourceFiles/window/window_session_controller.cpp
-index 68d4020c2e..e72ccf145d 100644
+index b4c7a9e3ec..a6fa374559 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.cpp
 +++ b/Telegram/SourceFiles/window/window_session_controller.cpp
-@@ -3346,6 +3346,10 @@ void SessionController::showNewGroup() {
+@@ -3365,6 +3365,10 @@ void SessionController::showNewGroup() {
  	_window->show(Box<GroupInfoBox>(this, GroupInfoBox::Type::Group));
  }
  
@@ -50,10 +50,10 @@ index 68d4020c2e..e72ccf145d 100644
  	_window->show(Box<GroupInfoBox>(this, GroupInfoBox::Type::Channel));
  }
 diff --git a/Telegram/SourceFiles/window/window_session_controller.h b/Telegram/SourceFiles/window/window_session_controller.h
-index 591913b2d0..c4c9163d73 100644
+index 30650e7627..9a958e3a78 100644
 --- a/Telegram/SourceFiles/window/window_session_controller.h
 +++ b/Telegram/SourceFiles/window/window_session_controller.h
-@@ -581,6 +581,7 @@ public:
+@@ -586,6 +586,7 @@ public:
  
  	void showAddContact();
  	void showNewGroup();
