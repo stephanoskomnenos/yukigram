@@ -187,15 +187,15 @@ To run it from a checkout with GitHub CLI access:
 
 ```shell
 gh workflow run windows-release.yml \
-  -f upstream_ref=v7.2.8 \
+  -f upstream_ref=v7.3.3 \
   -f architecture=x64 \
   -f configuration=Release \
   -f devel=false \
   -f use_dependency_cache=false \
-  -f release_tag=v7.2.8.0-rc.1
+  -f release_tag=v7.3.3.0-windows.1
 ```
 
-The current patchset targets Telegram Desktop `v7.2.8`.
+The current patchset targets Telegram Desktop `v7.3.3`.
 Its dependency preparation includes the libvpx fix for NASM 3.x.
 Keep `upstream_ref` aligned with the patchset when updating from upstream.
 
