@@ -270,7 +270,7 @@ jobs:
           CRASH_REPORTS_DISABLED: ${{ inputs.disable_crash_reports && 'ON' || 'OFF' }}
         run: |
           cd /d "%TDESKTOP_WORKTREE%\Telegram"
-          call configure.bat ${{ inputs.architecture }} ${{ inputs.qt_argument }} ^
+          call configure.bat -G "Ninja Multi-Config" ${{ inputs.qt_argument }} ^
             -D TDESKTOP_API_ID=611335 ^
             -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c ^
             -D DEVEL=%DEVEL_FLAG% ^
@@ -280,7 +280,7 @@ jobs:
             -D DESKTOP_APP_DISABLE_AUTOUPDATE=%AUTOUPDATE_DISABLED% ^
             -D DESKTOP_APP_DISABLE_CRASH_REPORTS=%CRASH_REPORTS_DISABLED%
           if errorlevel 1 exit /b 1
-          cmake --build ..\out --config %CONFIGURATION% --parallel
+          cmake --build ..\out --config %CONFIGURATION% --parallel %NUMBER_OF_PROCESSORS%
 
       - name: Collect release artifact
         id: artifact
@@ -318,6 +318,7 @@ jobs:
           gitmodules_hash=${{ steps.metadata.outputs.gitmodules_hash }}
           architecture=${{ inputs.architecture }}
           configuration=${{ inputs.configuration }}
+          cmake_generator=Ninja Multi-Config
           qt_argument=${{ inputs.qt_argument }}
           windows_sdk=${{ inputs.windows_sdk }}
           msvc_toolset=${{ inputs.msvc_toolset }}
